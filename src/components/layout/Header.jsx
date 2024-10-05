@@ -1,30 +1,84 @@
+import React from 'react';
 import { Grid2 } from '@mui/material';
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import logo from '../../assets/logo.png';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const Header = ({ items }) => {
+const Header = ({ siderDisabled }) => {
+    const navigate = useNavigate();
+    
+    const onClick = () => {
+        siderDisabled(prev => !prev)
+    }
+    
+    const Items = [
+        <Button variant="outlined" sx={{
+            minWidth: 'auto', whiteSpace: 'nowrap', color: "#ffffff", borderColor: "#ffffff",
+            fontWeight: '600', fontFamily: 'Kumbh Sans'
+        }} onClick={() => navigate('/cadastro')}>Login</Button>,
+        <Button variant="contained" sx={{
+            minWidth: 'auto', whiteSpace: 'nowrap', backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600',
+            fontFamily: 'Kumbh Sans', ":hover": {
+                backgroundColor: "#170D1F",
+                color: "#ffffff",
+                border: '1px solid #0d99ff',
+            },
+        }} onClick={() => navigate('/login')}>Cadastre-se</Button>,
+    ]
     return (
         <Grid2>
-            <Box sx={{ height: '50px', backgroundColor: '#170D1F', display: 'flex', alignItems: 'center', position: 'relative' }}>
-                {/* Box centralizado para a logo */}
-                <Box sx={{ 
-                    position: 'absolute', 
-                    left: '50%', 
-                    transform: 'translateX(-50%)',  // Centraliza horizontalmente
-                    height: '100px', 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems: 'center' 
+            <Box sx={{
+                height: '50px',
+                backgroundColor: '#170D1F',
+                display: 'flex',
+                alignItems: 'center',
+                position: 'relative'
+            }}>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    paddingX: '10px', flexGrow: 1,
+                    position: 'relative'
                 }}>
-                    <img src={logo} alt="Logo do AdotePet" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                    {siderDisabled ?
+                        <MenuIcon style={{ color: '#ffffff' }} onClick={onClick} />
+                        :
+                        <MenuOpenIcon style={{ color: '#ffffff' }} onClick={onClick}/>}
                 </Box>
-
-                {/* Box para os itens à direita */}
-                <Box sx={{display: 'flex', justifyContent: 'flex-end', paddingX: '10px', flexGrow: 1, position: 'relative'}}>
-                    {items.map((item, index) => {
+                <Box sx={{
+                    position: 'absolute',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    height: '100px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <img src={logo} alt="Logo do AdotePet"
+                        style={{
+                            maxWidth: '100%',
+                            maxHeight: '100%',
+                            objectFit: 'contain'
+                        }} />
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    paddingX: '10px',
+                    flexGrow: 1,
+                    position: 'relative'
+                }}>
+                    {Items.map((item, index) => {
                         return (
-                            <Box key={index} sx={{ display: 'flex', flexDirection: 'row', paddingRight:'5px', alignItems: 'center' }}>
+                            <Box key={index} sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingRight: '5px',
+                                alignItems: 'center'
+                            }}>
                                 {item}
                             </Box>
                         );

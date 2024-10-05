@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/layout/Header';
-import { Button } from '@mui/material';
 
 const LandingPage = () => {
     const descricao = { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' };
@@ -25,21 +24,6 @@ const LandingPage = () => {
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
-
-    const Items = [
-        <Button variant="outlined" sx={{
-            minWidth: 'auto', whiteSpace: 'nowrap', color: "#ffffff", borderColor: "#ffffff",
-            fontWeight: '600', fontFamily: 'Kumbh Sans'
-        }} onClick={() => navigate('/cadastro')}>Login</Button>,
-        <Button variant="contained" sx={{
-            minWidth: 'auto', whiteSpace: 'nowrap', backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600',
-            fontFamily: 'Kumbh Sans', ":hover": {
-                backgroundColor: "#170D1F",
-                color: "#ffffff",
-                border: '1px solid #0d99ff', 
-            },
-        }} onClick={() => navigate('/login')}>Cadastre-se</Button>,
-    ]
 
     let theme = createTheme({
         typography: {
@@ -64,8 +48,7 @@ const LandingPage = () => {
     }, [showSearch])
     return (
         <ThemeProvider theme={theme}>
-            <Header items={Items} />
-            <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
+            <Box sx={{ flexGrow: 1, p: 2, maxWidth: '100%', overflow: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center" alignItems="center" textAlign="center">
                     <Grid item xs={12}>
                         <Typography gutterBottom variant="h1" component="div">
