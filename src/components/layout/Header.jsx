@@ -9,19 +9,21 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = ({ siderDisabled }) => {
     const navigate = useNavigate();
-    
+    const currentUrl = window.location.pathname;
+
     const onClick = () => {
         siderDisabled(prev => !prev)
     }
-    
+
     const Items = [
         <Button variant="outlined" sx={{
             minWidth: 'auto', whiteSpace: 'nowrap', color: "#ffffff", borderColor: "#ffffff",
-            fontWeight: '600', fontFamily: 'Kumbh Sans'
+            fontWeight: '600', fontFamily: 'Kumbh Sans', height: '70%', fontSize: { xs: '10px', md: '14px' },
         }} onClick={() => navigate('/cadastro')}>Login</Button>,
         <Button variant="contained" sx={{
-            minWidth: 'auto', whiteSpace: 'nowrap', backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600',
-            fontFamily: 'Kumbh Sans', ":hover": {
+            whiteSpace:  { xs:'wrap', md: 'nowrap' }, backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600',
+            fontFamily: 'Kumbh Sans', height: '70%', fontSize: { xs: '10px', md: '14px' },
+            ":hover": {
                 backgroundColor: "#170D1F",
                 color: "#ffffff",
                 border: '1px solid #0d99ff',
@@ -37,7 +39,7 @@ const Header = ({ siderDisabled }) => {
                 alignItems: 'center',
                 position: 'relative'
             }}>
-                <Box sx={{
+                {(currentUrl != '/') && <Box sx={{
                     display: 'flex',
                     justifyContent: 'flex-start',
                     paddingX: '10px', flexGrow: 1,
@@ -46,12 +48,12 @@ const Header = ({ siderDisabled }) => {
                     {siderDisabled ?
                         <MenuIcon style={{ color: '#ffffff' }} onClick={onClick} />
                         :
-                        <MenuOpenIcon style={{ color: '#ffffff' }} onClick={onClick}/>}
-                </Box>
+                        <MenuOpenIcon style={{ color: '#ffffff' }} onClick={onClick} />}
+                </Box>}
                 <Box sx={{
                     position: 'absolute',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
+                    left: {xs:'0%', md:'50%'},
+                    transform: {md:'translateX(-50%)'},
                     height: '100px',
                     display: 'flex',
                     justifyContent: 'center',

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Sider = ({ disabled }) => {
     const navigate = useNavigate();
+ 
 
     const items = [
         { icon: <AddCircleOutlineIcon sx={{ color: "#170D1F" }} />, label: "Publicar", path: "/" },

@@ -48,7 +48,7 @@ const LandingPage = () => {
     }, [showSearch])
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1, p: 2, maxWidth: '100%', overflow: 'hidden' }}>
+            <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center" alignItems="center" textAlign="center">
                     <Grid item xs={12}>
                         <Typography gutterBottom variant="h1" component="div">
