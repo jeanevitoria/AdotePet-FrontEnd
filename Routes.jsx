@@ -10,6 +10,10 @@ import Sider from './src/components/layout/Sider.jsx';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Layout from './src/components/layout/Layout.jsx';
+import Chat from './src/pages/user/chat.jsx';
+import CadastrarAnimal from './src/pages/user/CadastrarAnimal.jsx';
+import Home from './src/pages/user/home.jsx';
+import Perfil from './src/pages/user/perfil.jsx';
 
 function AppRoutes() {
 
@@ -22,6 +26,10 @@ function AppRoutes() {
           <Route path='/auth/cadastro' element={<SignUp />} />
           <Route path='/auth/recuperar-senha' element={<PasswordRecovery />} />
           <Route path='/auth/redefinir-senha' element={<PasswordReset />} />
+          <Route path='/cadastrar-animal' element={<CadastrarAnimal />} />
+          <Route path='/chat' element={<Chat />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/perfil' element={<Perfil />} />
         </Routes>
       </Layout>
     </Router >
