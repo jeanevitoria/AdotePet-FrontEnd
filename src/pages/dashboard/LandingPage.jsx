@@ -12,6 +12,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoginModal from '../../components/LoginModal';
 import Header from '../../components/layout/Header';
 
 const LandingPage = () => {
@@ -20,6 +21,10 @@ const LandingPage = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [alignment, setAlignment] = React.useState('sem filtro');
     const navigate = useNavigate();
+
+    const showLoginModal = () => {
+       return (<LoginModal/>)
+    }
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
@@ -30,14 +35,12 @@ const LandingPage = () => {
             h1: {
                 color: '#301F3E',
                 fontSize: '2em',
-                fontFamily: 'Kumbh Sans, Roboto, sans-serif',
                 fontWeight: '900',
                 letterSpacing: -1,
             },
             h2: {
                 color: '#301F3E',
                 fontSize: '1.2em',
-                fontFamily: 'Kumbh Sans, Roboto, sans-serif',
             },
         },
     });
@@ -51,13 +54,13 @@ const LandingPage = () => {
             <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center" alignItems="center" textAlign="center">
                     <Grid item xs={12}>
-                        <Typography gutterBottom variant="h1" component="div">
+                        <Typography gutterBottom variant="h1" component="div" sx={{fontFamily: 'Kumbh Sans, Roboto, sans-serif'}}>
                             ANIMAIS DISPONÍVEIS PARA ADOÇÃO
                         </Typography>
                     </Grid>
                     <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
                         <Box sx={{ width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' } }}>
-                            <Typography variant="h2" sx={{ fontSize: { xs: '1em', md: '1.2em' } }}>
+                            <Typography variant="h2" sx={{ fontSize: { xs: '1em', md: '1.2em' }, fontFamily: 'Kumbh Sans, Roboto, sans-serif'}}>
                                 Cada animal que espera por você carrega uma história. Venha escrever um novo capítulo juntos e experimente a felicidade de um amor incondicional.
                             </Typography>
                         </Box>
@@ -130,7 +133,7 @@ const LandingPage = () => {
                 <Grid container spacing={2} justifyContent="center" alignItems="center">
                     {data.map((value, index) => (
                         <Grid item xs={12} sm={3} md={3} width="250px" key={index}>
-                            <AnimalCard descricao={value} width="100%" />
+                            <AnimalCard descricao={value} onClick={showLoginModal} width="100%" />
                         </Grid>
                     ))}
                 </Grid>

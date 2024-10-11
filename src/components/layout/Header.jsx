@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid2 } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import logoAdote from '../../assets/logoAdote.png';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -24,23 +24,28 @@ const Header = ({ siderDisabled, buttons }) => {
     const Items = [
         <Button variant="outlined" sx={{
             minWidth: 'auto', whiteSpace: 'nowrap', color: "#ffffff", borderColor: "#ffffff",
-            fontWeight: '600', fontFamily: 'Kumbh Sans', height: '70%', fontSize: { xs: '10px', md: '14px' },
-        }} onClick={() => navigate('/auth/cadastro')}>Login</Button>,
+            fontWeight: '600', height: '70%', fontSize: { xs: '8px', md: '12px' }, fontFamily: 'Kumbh Sans, Roboto, sans-serif'
+        }} onClick={() => navigate('/auth/login')}>Login</Button>,
         <Button variant="contained" sx={{
-            whiteSpace: { xs: 'wrap', md: 'nowrap' }, backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600',
-            fontFamily: 'Kumbh Sans', height: '70%', fontSize: { xs: '10px', md: '14px' },
+            whiteSpace: { xs: 'wrap', md: 'nowrap' }, backgroundColor: "#ffffff", color: "#170D1F", fontWeight: '600'
+            , height: '70%', fontSize: { xs: '8px', md: '12px' },
             ":hover": {
                 backgroundColor: "#170D1F",
                 color: "#ffffff",
                 border: '1px solid #0d99ff',
-            },
-        }} onClick={() => navigate('/auth/login')}>Cadastre-se</Button>,
+            }, fontFamily: 'Kumbh Sans, Roboto, sans-serif'
+        }} onClick={() => navigate('/auth/cadastro')}>Cadastre-se</Button>,
     ]
 
     return (
-        <Grid2>
+        <Grid2 container sx={{
+            width: '100%',
+
+        }}>
+
             <Box sx={{
                 height: '50px',
+                width: '100%',  // Alterado de 100vw para 100%
                 backgroundColor: '#170D1F',
                 display: 'flex',
                 alignItems: 'center',
@@ -57,11 +62,11 @@ const Header = ({ siderDisabled, buttons }) => {
                         :
                         <MenuOpenIcon style={{ color: '#ffffff' }} onClick={onClick} />}
                 </Box>}
-                <Box 
+                <Box
                     sx={{
                         position: 'absolute',
-                        left: { xs: '0%', md: '50%' },
-                        transform: { md: 'translateX(-50%)' },
+                        left: { xs: location.pathname == '/' ? '0%' : '50%', md: '50%' },
+                        transform: { xs: location.pathname == '/' ? 'translateX(0%)' : 'translateX(-50%)', md: 'translateX(-50%)' },
                         height: '100px',
                         display: 'flex',
                         justifyContent: 'center',
@@ -69,10 +74,12 @@ const Header = ({ siderDisabled, buttons }) => {
                     }}>
                     <img src={logoAdote} alt="Logo do AdotePet"
                         style={{
-                            maxWidth: '45%',
+                            maxWidth: '25%',
                             maxHeight: '100%',
                             objectFit: 'contain'
                         }} />
+                    <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '14px' } }}>ADOTE</Typography>
+                    <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '14px' } }}>PET</Typography>
                 </Box>
                 {location.pathname == '/' && <Box sx={{
                     display: 'flex',
