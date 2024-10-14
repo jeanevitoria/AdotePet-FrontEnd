@@ -44,8 +44,8 @@ const SignUp = () => {
             justifyContent: 'flex-start',
             backgroundColor: '#e2e2e2'
         }}>
-            <Box sx={{ marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', cursor: 'pointer' }} onClick={() => navigate('/')}>
-                <ArrowBackIosNewIcon />
+            <Box sx={{ marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
+                <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
             </Box>
             <Box sx={{
                 height: '85%',

@@ -48,12 +48,10 @@ const PasswordReset = () => {
                 color: '#301F3E',
                 justifyContent: 'flex-start',
                 display: 'flex',
-                cursor: 'pointer',
                 padding: '2%'
-            }}
-                onClick={() => navigate('/auth/login')}>
-                <ArrowBackIosNewIcon />
-            </Box>
+            }}>
+                <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
+                </Box>
             <Box sx={{
                 justifyContent: 'center',
                 alignContent: 'center',

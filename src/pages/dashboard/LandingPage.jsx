@@ -12,7 +12,6 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from '../../components/LoginModal';
 import Header from '../../components/layout/Header';
 
 const LandingPage = () => {

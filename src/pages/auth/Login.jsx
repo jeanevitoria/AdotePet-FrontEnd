@@ -114,8 +114,8 @@ const Login = () => {
                     display: 'flex',
                     flexDirection: 'column',
                 }}>
-                    <Box sx={{ margin: '2.5%', justifyContent: 'flex-start', display: 'flex', color: '#301F3E', cursor: 'pointer' }} onClick={() => navigate('/')}>
-                        <ArrowBackIosNewIcon />
+                    <Box sx={{ margin: '2.5%', justifyContent: 'flex-start', display: 'flex', color: '#301F3E' }}>
+                    <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
                     </Box>
 
                     <Paper elevation={3} sx={{ height: '100%', width: { xs: '90vw', md: '30vw' }, margin: '5% auto', padding: '0' }}>
