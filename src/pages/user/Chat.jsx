@@ -143,7 +143,7 @@ const Chat = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     flexGrow: 1,
-                    paddingX:'1%',
+                    paddingX: '1%',
                     overflowY: 'auto',
                     paddingBottom: '1%'
                 }}>
@@ -176,15 +176,26 @@ const Chat = () => {
                     ))}
                 </Box>
                 <Box sx={{
-                    width: '100%',
+                    width: '97%',
                     height: '20%',
+                    margin: 'auto',
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
                     alignItems: 'center',
                     position: 'static'
                 }} >
-                    <TextField placeholder="Digite sua mensagem" sx={{ width: '95%' }} value={message} onChange={(e) => setMessage(e.target.value)} />
+                    <TextField
+                        placeholder="Digite sua mensagem"
+                        sx={{ width: '95%' }}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault(); // Evita que o comportamento padrão do Enter ocorra (como uma nova linha)
+                                handleSendMessage(); // Envia a mensagem
+                            }
+                        }} />
                     <SendIcon sx={{ width: '5%', height: '60%' }} onClick={handleSendMessage} />
                 </Box>
             </Box>
