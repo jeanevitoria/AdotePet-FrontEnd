@@ -59,17 +59,18 @@ const Perfil = () => {
     return (
         <Grid2 container sx={{
             width: '100vw',
-            height: 'auto',
+            height: 'screen',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
         }}>
-            <Box sx={{ marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
+            <Box sx={{  color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
                 <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
             </Box>
             <Box sx={{
                 width: '100%',
                 justifyContent: 'center',
+                height:'auto',
                 display: 'flex',
             }}>
                 <Paper elevation={3} sx={{ width: { sx: '100%', sm: '100%', md: '70%', lg: '50%' }, marginY: '0%', display: 'flex', flexDirection: 'column', padding: '16px' }}>

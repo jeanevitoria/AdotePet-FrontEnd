@@ -39,17 +39,17 @@ const Header = ({ siderDisabled, buttons }) => {
 
     return (
         <Grid2 container sx={{
-            width: '100%',
+            width: '100vw',
 
         }}>
 
             <Box sx={{
                 height: '50px',
-                width: '100%',  // Alterado de 100vw para 100%
+                width: '100%',
                 backgroundColor: '#170D1F',
                 display: 'flex',
                 alignItems: 'center',
-                position: 'relative'
+                zIndex:'1000'
             }}>
                 {shouldShowSider && <Box sx={{
                     display: 'flex',
@@ -84,7 +84,7 @@ const Header = ({ siderDisabled, buttons }) => {
                 {location.pathname == '/' && <Box sx={{
                     display: 'flex',
                     justifyContent: 'flex-end',
-                    paddingX: '10px',
+                    paddingRight: {xs:'10px', md:'20px'},
                     flexGrow: 1,
                     position: 'relative'
                 }}>

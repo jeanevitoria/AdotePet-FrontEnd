@@ -4,17 +4,19 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ChatIcon from '@mui/icons-material/Chat';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 
 const Sider = ({ disabled }) => {
     const navigate = useNavigate();
- 
+
 
     const items = [
-        { icon: <AddCircleOutlineIcon sx={{ color: "#170D1F" }} />, label: "Publicar", path: "/" },
+        { icon: <HomeIcon sx={{ color: "#170D1F" }} />, label: "Home", path: "/home" },
+        { icon: <AddCircleOutlineIcon sx={{ color: "#170D1F" }} />, label: "Publicar", path: "/cadastrar-animal" },
         { icon: <ChatIcon sx={{ color: "#170D1F" }} />, label: "Chat", path: "/chat" },
-        { icon: <AccountBoxIcon sx={{ color: "#170D1F" }} />, label: "Conta", path: "/account" },
-        { icon: <LogoutIcon sx={{ color: "#170D1F" }} />, label: "Logout", path: "/logout" },
+        { icon: <AccountBoxIcon sx={{ color: "#170D1F" }} />, label: "Perfil", path: "/perfil" },
+        { icon: <LogoutIcon sx={{ color: "#170D1F" }} />, label: "Logout", path: "/" },
     ];
 
     return (
@@ -22,18 +24,19 @@ const Sider = ({ disabled }) => {
             container
             sx={{
                 width: {
-                    xs: disabled ? '0' : '100%',
-                    md: disabled ? '125px' : '650px',
+                    xs: disabled ? '0%' : '100%',
+                    md: disabled ? '50px' : '200px',
                 },
                 transition: 'width 0.3s ease',
                 flexGrow: 1,
                 borderRight: '1px solid #f0f0f0',
-                height: 'screen', 
-                display: {xs: disabled ? 'none' : 'flex', md: 'flex'},
+                height: '100%',
+                display: { xs: disabled ? 'none' : 'flex', md: 'flex' },
                 flexDirection: 'column',
-                alignItems: 'flex-start',
-                        margin: 0, // Adicione isso para remover margens
-        padding: 0 // Adicione isso para remover paddings
+                position: 'fixed',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
             }}
         >
             {items && items.map((item, index) => (
@@ -44,7 +47,7 @@ const Sider = ({ disabled }) => {
                         display: 'flex',
                         alignItems: 'center',
                         cursor: 'pointer',
-                        paddingY:'10px',
+                        paddingY: '10px',
                         color: '#170D1F',
                         ":hover": {
                             backgroundColor: "#e0e0e0"
@@ -53,8 +56,8 @@ const Sider = ({ disabled }) => {
                         transition: 'background-color 0.3s ease',
                     }}
                 >
-                    <Box sx={{paddingLeft:'10px'}}>{item.icon}</Box>
-                    {!disabled && <Box sx={{ marginLeft: '10px' }}>{item.label}</Box>}
+                    <Box sx={{ paddingLeft: '10px' }}>{item.icon}</Box>
+                    {!disabled && <Box sx={{ paddingLeft: '10px' }} hov>{item.label}</Box>}
                 </Box>
             ))}
         </Grid2>

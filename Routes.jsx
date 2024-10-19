@@ -10,10 +10,10 @@ import Sider from './src/components/layout/Sider.jsx';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Layout from './src/components/layout/Layout.jsx';
-import Chat from './src/pages/user/chat.jsx';
+import Chat from './src/pages/user/Chat.jsx';
 import CadastrarAnimal from './src/pages/user/CadastrarAnimal.jsx';
 import Home from './src/pages/user/home.jsx';
-import Perfil from './src/pages/user/perfil.jsx';
+import Perfil from './src/pages/user/Perfil.jsx';
 
 function AppRoutes() {
 

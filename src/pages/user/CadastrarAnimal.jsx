@@ -109,7 +109,7 @@ const CadastrarAnimal = () => {
             flexDirection: 'column',
             justifyContent: 'flex-start',
         }}>
-            <Box sx={{ marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
+            <Box sx={{ color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
                 <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
             </Box>
             <Box sx={{
@@ -142,7 +142,7 @@ const CadastrarAnimal = () => {
                             />
                         </FormControl>
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight: '5%' }}>
+                            <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight:'5%' }}>
                                 <FormLabel id="tipo-animal">Tipo de animal</FormLabel>
                                 <Select
                                     labelId="tipo"
