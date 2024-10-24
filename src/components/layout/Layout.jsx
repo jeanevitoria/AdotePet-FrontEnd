@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
                         <Header siderDisabled={setSiderDisabled} />
                     </Box>
                 }
-                <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: '50px' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: shouldShowHeader ? '50px' : '0px' }}>
                     {shouldShowSider &&
                         (<>
                             <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', md: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
