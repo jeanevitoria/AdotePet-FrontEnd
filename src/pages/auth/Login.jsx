@@ -110,22 +110,22 @@ const Login = () => {
 
             <Grid2 item xs={12} md={6} sx={{ height: '100%', width: { xs: '100vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#ffffff' } }}>
                 <Box sx={{
-                    height: '100%',
+                    height: 'auto',
                     display: 'flex',
                     flexDirection: 'column',
                 }}>
                     <Box sx={{ margin: '2.5%', justifyContent: 'flex-start', display: 'flex', color: '#301F3E' }}>
-                    <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
+                        <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
                     </Box>
 
-                    <Paper elevation={3} sx={{ height: '100%', width: { xs: '90vw', md: '30vw' }, margin: '5% auto', padding: '0' }}>
+                    <Paper elevation={3} sx={{ height: 'auto', width: { xs: '90vw', md: '30vw' }, margin: '5% auto', padding: '0' }}>
                         {/* Logo */}
                         <Box sx={{
                             width: '100%',
-                            display: {xs:'flex', md:'none'},
+                            display: { xs: 'flex', md: 'none' },
                             maxWidth: { xs: '20%', lg: '15%' },
-                            marginX:'auto',
-                            marginY:'5%',
+                            marginX: 'auto',
+                            marginY: '5%',
                             justifyContent: 'center',
                         }}>
                             <img src={logoAdote} style={{
@@ -134,21 +134,21 @@ const Login = () => {
                                 objectFit: 'contain'
                             }} />
                         </Box>
-                        <Box sx={{ height: {xs:'10%', md:'25%'}, paddingTop:{xs:'0%', md:'7.5%'}, textAlign: 'center' }}>
+                        <Box sx={{ height: { xs: '10%', md: '25%' }, paddingTop: { xs: '0%', md: '7.5%' }, textAlign: 'center' }}>
                             <Typography variant="body1" sx={{
                                 fontSize: { xs: '20px', md: '20px', lg: '30px', xl: '60px' },
                                 textAlign: 'center',
                                 fontWeight: '900',
                                 color: '#301F3E',
                                 height: '60%',
-                                marginBottom:'2.5%',
-                                width: '100%', 
+                                marginBottom: '2.5%',
+                                width: '100%',
                                 fontFamily: 'Kumbh Sans, Roboto, sans-serif'
                             }}>
                                 LOGIN
                             </Typography>
                             <Box sx={{
-                                width: '100%', height: '40%', display:{sx:'none', md:'flex'}, justifyContent:'center'
+                                width: '100%', marginY:'2%', display: { sx: 'none', md: 'flex' }, justifyContent: 'center'
                             }}>
                                 <Typography variant="subtitle2" sx={{ display: 'inline-block', marginRight: '2px' }}>
                                     Não possui uma conta?
@@ -158,14 +158,14 @@ const Login = () => {
                                 </Typography>
                             </Box>
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '40%', width: '100%', margin: 'auto' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', marginX: 'auto', marginY:'5%' }}>
                             <TextField size='small' id="email" label="E-mail" required sx={{ width: '80%', marginBottom: '2%' }} />
                             <TextField size='small' id="senha" label="Senha" type="password" sx={{ width: '80%' }} />
                             <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '80%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
+                            <Button variant="contained" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY:'2%', backgroundColor: '#301F3E' }}>Entrar</Button>
                         </Box>
-                        <Button variant="contained" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', margin: 'auto', backgroundColor: '#301F3E' }}>Entrar</Button>
                         <Divider sx={{ color: '#8e8e8e', marginY: '2%' }}>ou</Divider>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
+                        <Box sx={{ display: 'flex', flexDirection: 'row', marginY:'2%', justifyContent: 'center' }} >
                             <FacebookIcon sx={{ color: '#3C5A9A', border: '1px solid #cccac9', fontSize: 40, borderRadius: '10%' }} />
                             <GoogleIcon sx={{ color: '#EA4335', border: '1px solid #cccac9', marginX: '10%', fontSize: 40, borderRadius: '10%' }} />
                             <XIcon sx={{ border: '1px solid #cccac9', fontSize: 40, borderRadius: '10%' }} />
