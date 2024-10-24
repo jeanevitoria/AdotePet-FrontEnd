@@ -14,8 +14,11 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Home = () => {
+    const { sm, md, lg } = useWindowSize();
+
     const data = [
         { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' },
         { nome: 'Rex', raca: 'Labrador', sexo: 'Macho', local: 'São Paulo, São Paulo' },
@@ -45,7 +48,9 @@ const Home = () => {
     ];
 
     const [nextElement, setNextElement] = useState(0);
-    const publicacoes = data.slice(0 + nextElement, 4 + nextElement);
+    // Defina quantos itens exibir com base no tamanho da tela
+    const [itemsPerPage, setItemsPerPage] = useState(lg ? 3 : md ? 2 : sm ? 1 : 4);
+    const [publicacoes, setPublicacoes] = useState(data.slice(nextElement, nextElement + itemsPerPage));
     const [showSearch, setShowSearch] = useState(false);
     const [alignment, setAlignment] = React.useState('sem filtro');
     const navigate = useNavigate();
@@ -57,6 +62,30 @@ const Home = () => {
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
+
+    const handlePrev = () => {
+        setNextElement(prev => (prev - itemsPerPage < 0) ? 0 : prev - itemsPerPage);
+    };
+
+    const handleNext = () => {
+        setNextElement(prev => (prev + itemsPerPage >= data.length) ? prev : prev + itemsPerPage);
+    };
+
+    useEffect(() => {
+        console.table({sm, md, lg})
+        console.table(publicacoes)
+        if (lg){
+            setItemsPerPage(3)
+        } else if (md) {
+            setItemsPerPage(2)
+        } else {
+            setItemsPerPage(1)
+        }
+
+        setNextElement(0)
+        setPublicacoes(data.slice(nextElement, nextElement + itemsPerPage));
+        console.log(nextElement, publicacoes)
+    }, [sm, md, lg])
 
     let theme = createTheme({
         typography: {
@@ -93,21 +122,22 @@ const Home = () => {
                     </Typography>
                 </Grid2>
                 <Grid2 container paddingX={4} paddingY={2} spacing={0} justifyContent="space-between" alignItems="center" overflow={'inherit'}>
-                    {publicacoes && (
-                        <ArrowBackIosNewIcon onClick={() => setNextElement(prevs => (prevs - 1 < 0) ? prevs : prevs - 1)} sx={{ height: '100%', color: '#170d1f', width: '5%' }} />
-                    )}
-                    {
-                        data.slice(0 + nextElement, 3 + nextElement).map((value, index) => {
-                            return (
-                                <Box item sx={{ display: 'flex', flexDirection: 'row' }} width="250px" key={index}>
-                                    <AnimalCard descricao={value} onClick={showLoginModal} />
-                                </Box>
-                            )
-                        })
-                    }
-                    {publicacoes && (
-                        <ArrowForwardIosIcon onClick={() => setNextElement(prevs => (prevs + 1 >= data.length - 3) ? prevs : prevs + 1)} sx={{ height: '100%', color: '#170d1f', width: '5%' }} />
-                    )}
+                    {/* Seta para voltar */}
+                    <ArrowBackIosNewIcon
+                        onClick={handlePrev}
+                        sx={{ height: '100%', color: '#170d1f', width: '5%' }}
+                    />
+                    {/* Publicações do usuário */}
+                    {publicacoes.map((value, index) => (
+                        <Box item sx={{ display: 'flex', flexDirection: 'row' }} width="250px" key={index}>
+                            <AnimalCard descricao={value} onClick={showLoginModal} />
+                        </Box>
+                    ))}
+                    {/* Seta para avançar */}
+                    <ArrowForwardIosIcon
+                        onClick={handleNext}
+                        sx={{ height: '100%', color: '#170d1f', width: '5%' }}
+                    />
                 </Grid2>
                 <Grid2 item xs={12} display="flex" justifyContent="flex-end" paddingX={10} paddingY={6}>
                     <Stack spacing={2} sx={{

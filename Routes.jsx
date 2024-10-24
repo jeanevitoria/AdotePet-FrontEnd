@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from './src/components/layout/Layout.jsx';
 import Chat from './src/pages/user/Chat.jsx';
 import CadastrarAnimal from './src/pages/user/CadastrarAnimal.jsx';
-import Home from './src/pages/user/home.jsx';
+import Home from './src/pages/user/Home.jsx';
 import Perfil from './src/pages/user/Perfil.jsx';
 
 function AppRoutes() {
