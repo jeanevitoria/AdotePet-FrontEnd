@@ -48,16 +48,15 @@ const SignUp = () => {
                 <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
             </Box>
             <Box sx={{
-                height: '85%',
                 width: '100%',
                 justifyContent: 'center',
                 alignContent: 'center',
                 display: 'flex',
             }}>
-                <Paper elevation={5} sx={{ height: '95%', width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' }, marginY: '0%', display: 'flex', flexDirection: 'column' }}>
+                <Paper elevation={5} sx={{ height: 'auto', width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' }, marginY: '1%', display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ textAlign: 'center', margin: '5%' }}>
                         <Typography variant="body1" sx={{
-                            fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                            fontSize: { xs: '23px', md: '30px', lg: '30px', xl: '60px' },
                             textAlign: 'center',
                             fontWeight: '900',
                             color: '#301F3E',
@@ -67,7 +66,7 @@ const SignUp = () => {
                             CADASTRO
                         </Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70%', width: '100%', marginX: 'auto' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap:'20px', marginY: '1%', width: '100%', marginX: 'auto', }}>
                         <TextField size='small' required id="email" label="E-mail" sx={{ width: '70%', height: '17%' }} />
                         <TextField size='small' required id="nome" label="Nome completo" sx={{ width: '70%', height: '17%' }} />
                         <TextField size='small' required id="celular" label="Número do celular" type="number" sx={{ width: '70%', height: '17%' }} />
@@ -117,7 +116,7 @@ const SignUp = () => {
                             />
                                 {error && <FormHelperText sx={{color:'#D32F2F', marginLeft:'0'}}>As senhas não coincidem</FormHelperText>}
                         </FormControl>
-                        <Button variant="contained" sx={{ alignItems: 'center', justifyContent: 'center', height: '12%', margin: 'auto', width: '70%', backgroundColor: '#301F3E' }}>Cadastrar</Button>
+                        <Button variant="contained" sx={{ alignItems: 'center', justifyContent: 'center', width: '70%', marginBottom:'10px', backgroundColor: '#301F3E' }}>Cadastrar</Button>
                     </Box>
                 </Paper>
             </Box>
