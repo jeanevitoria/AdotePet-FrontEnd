@@ -10,14 +10,16 @@ const PasswordRecovery = () => {
 
     return (
         <Grid2 container sx={{
-            height: '100vh', // Preenche toda a altura da tela
+            height: 'calc(100vh - 50px)', // Preenche toda a altura da tela
             width: '100vw',
             backgroundColor: '#e2e2e2',
             display: 'flex',
+            position:'relative',
             flexDirection: 'column',
         }}>
             <Box sx={{
                 width:'5%',
+                position:'absolute',
                 color: '#301F3E',
                 justifyContent: 'flex-start',
                 display: 'flex',
@@ -31,7 +33,8 @@ const PasswordRecovery = () => {
                 alignContent: 'center',
                 width:'95%',
                 display: 'flex',
-                height: 'auto', // Faz com que o Paper ocupe a altura necessária
+                margin:'auto',
+                height:'auto'
             }}>
                 <Paper elevation={5} sx={{
                     width: { sx: '85%', md: '60%', lg: '40%' },
