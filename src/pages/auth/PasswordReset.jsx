@@ -37,8 +37,9 @@ const PasswordReset = () => {
 
     return (
         <Grid2 container sx={{
-            height: '100vh', // Preenche toda a altura da tela
+            height: 'calc(100vh - 50px)',
             width: '100vw',
+            overflowY:'hidden',
             backgroundColor: '#e2e2e2',
             display: 'flex',
             flexDirection: 'column',
@@ -55,6 +56,7 @@ const PasswordReset = () => {
             <Box sx={{
                 justifyContent: 'center',
                 alignContent: 'center',
+                margin:'auto',
                 width: '95%',
                 display: 'flex',
                 height: 'auto', // Faz com que o Paper ocupe a altura necessária
@@ -68,8 +70,8 @@ const PasswordReset = () => {
                     alignItems: 'center',
                 }}>
                     <Box sx={{ textAlign: 'center', marginBottom: '1%' }}>
-                        <Typography variant="body1" sx={{
-                            fontSize: { md: '18px', lg: '28px', xl: '58px' },
+                        <Typography noWrap={false} variant="body1" sx={{
+                            fontSize: { xs:'20px', md: '25px', lg: '30px', xl: '60px' },
                             textAlign: 'center',
                             fontWeight: '900',
                             color: '#301F3E',
@@ -77,7 +79,7 @@ const PasswordReset = () => {
                             width: '100%',
                             fontFamily: 'Kumbh Sans, Roboto, sans-serif'
                         }}>
-                            REDEFINIÇÃO DE SENHA
+                            REDEFINIR SENHA
                         </Typography>
                     </Box>
                     <Box sx={{
