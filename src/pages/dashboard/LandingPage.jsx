@@ -12,17 +12,19 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/layout/Header';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const LandingPage = () => {
     const descricao = { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' };
     const data = Array(12).fill(descricao); // Apenas uma maneira de criar o array de dados
     const [showSearch, setShowSearch] = useState(false);
     const [alignment, setAlignment] = React.useState('sem filtro');
+    const { sm, md, lg } = useWindowSize();
+
     const navigate = useNavigate();
 
     const showLoginModal = () => {
-       return (<LoginModal/>)
+        return (<LoginModal />)
     }
 
     const handleChange = (event, newAlignment) => {
@@ -53,13 +55,13 @@ const LandingPage = () => {
             <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center" alignItems="center" textAlign="center">
                     <Grid item xs={12}>
-                        <Typography gutterBottom variant="h1" component="div" sx={{fontFamily: 'Kumbh Sans, Roboto, sans-serif'}}>
+                        <Typography gutterBottom variant="h1" component="div" sx={{ fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>
                             ANIMAIS DISPONÍVEIS PARA ADOÇÃO
                         </Typography>
                     </Grid>
                     <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
                         <Box sx={{ width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' } }}>
-                            <Typography variant="h2" sx={{ fontSize: { xs: '1em', md: '1.2em' }, fontFamily: 'Kumbh Sans, Roboto, sans-serif'}}>
+                            <Typography variant="h2" sx={{ fontSize: { xs: '1em', md: '1.2em' }, fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>
                                 Cada animal que espera por você carrega uma história. Venha escrever um novo capítulo juntos e experimente a felicidade de um amor incondicional.
                             </Typography>
                         </Box>
@@ -77,34 +79,27 @@ const LandingPage = () => {
                                 <Box
                                     sx={{
                                         display: 'flex',
-                                        flexDirection: { xs: showSearch ? 'column' : 'row', sm: showSearch ? 'column' : 'row', md: 'row' },
-                                        alignItems: 'center',
-                                        justifyContent: 'flex-end',
-                                        width: '100%',
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-end',
+                                        gap: { xs: '5px', md: '10px' },
+                                        justifySelf: 'flex-end',
+                                        width: { xs: '100%', md: '80%' },
+                                        margin:'auto'
                                     }}
                                 >
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            alignItems: 'center',
-                                            justifyContent: 'flex-end',
-                                            width: '100%',
-                                        }}
-                                    >
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', width: sm ? '100%' : '60%'}}>
                                         <SearchIcon
-                                            onClick={() => setShowSearch(!showSearch)}
                                             sx={{ marginRight: 1 }}
-                                            fontSize="large"
+                                            fontSize='medium'
                                         />
                                         <TextField
                                             {...params}
                                             placeholder="Raça, nome ou localidade"
                                             sx={{
-                                                display: showSearch ? 'block' : 'none',
+                                                display: 'block',
                                                 '& .MuiInputBase-root': {
-                                                    height: { xs: '25px', sm: '20px', md: '50px' },
-                                                    width: '95%',
+                                                    height: { xs: '25px', sm: '20px', md: '35px' },
+                                                    marginRight: '1px',
                                                 },
                                                 '& input::placeholder': {
                                                     fontSize: { xs: '0.7rem', sm: '0.85rem', md: '1rem' }, // Define o tamanho do placeholder para xs, sm, e md
@@ -118,11 +113,11 @@ const LandingPage = () => {
                                         value={alignment}
                                         exclusive
                                         onChange={handleChange}
-                                        size="small"
+                                        size='small'
                                         aria-label="Small sizes"
                                     >
-                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="android">Gatos</ToggleButton>
-                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="ios">Cachorros</ToggleButton>
+                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="gatos">Gatos</ToggleButton>
+                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="cachorros">Cachorros</ToggleButton>
                                     </ToggleButtonGroup>
                                 </Box>
                             )}
