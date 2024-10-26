@@ -110,12 +110,12 @@ const CadastrarAnimal = () => {
             alignContent: 'center',
             marginY: {xs:'0%', md:'1%'},
         }}>
-            <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: {xs:'30px', sm:'16px',  md:'16px'} }}>
+            <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding:'16px' }}>
                 <Box sx={{
                     textAlign: 'center', marginBottom: '16px', marginX: 'auto'
                 }}>
                     <Typography variant="body1" sx={{
-                        fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                        fontSize: { xs:'21px', md: '19px', lg: '30px', xl: '60px' },
                         textAlign: 'center',
                         fontWeight: '900',
                         color: '#301F3E',
