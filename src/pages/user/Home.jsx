@@ -170,8 +170,8 @@ const Home = () => {
                                         <Box sx={{ display: 'flex', flexDirection: 'row', width: "100%" }}>
                                             <SearchIcon
                                                 sx={{ marginRight: 1 }}
-                                                fontSize="large"
-                                            />
+                                                fontSize='medium'
+                                                />
                                             <TextField
                                                 {...params}
                                                 placeholder="Raça, nome ou localidade"
