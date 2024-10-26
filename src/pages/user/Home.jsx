@@ -48,11 +48,9 @@ const Home = () => {
     ];
 
     const [nextElement, setNextElement] = useState(0);
-    // Defina quantos itens exibir com base no tamanho da tela
     const [itemsPerPage, setItemsPerPage] = useState(lg ? 3 : md ? 2 : sm ? 1 : 4);
-    const [publicacoes, setPublicacoes] = useState(data.slice(nextElement, nextElement + itemsPerPage));
-    const [showSearch, setShowSearch] = useState(false);
-    const [alignment, setAlignment] = React.useState('sem filtro');
+    const [publicacoes, setPublicacoes] = useState(data.slice(0, itemsPerPage));
+    const [alignment, setAlignment] = useState('sem filtro');
     const navigate = useNavigate();
 
     const showLoginModal = () => {
@@ -64,28 +62,23 @@ const Home = () => {
     };
 
     const handlePrev = () => {
-        setNextElement(prev => (prev - itemsPerPage < 0) ? 0 : prev - itemsPerPage);
+        const newNextElement = Math.max(nextElement - itemsPerPage, 0);
+        setNextElement(newNextElement);
+        setPublicacoes(data.slice(newNextElement, newNextElement + itemsPerPage));
     };
 
     const handleNext = () => {
-        setNextElement(prev => (prev + itemsPerPage >= data.length) ? prev : prev + itemsPerPage);
+        const newNextElement = Math.min(nextElement + itemsPerPage, data.length - itemsPerPage);
+        setNextElement(newNextElement);
+        setPublicacoes(data.slice(newNextElement, newNextElement + itemsPerPage));
     };
 
     useEffect(() => {
-        console.table({sm, md, lg})
-        console.table(publicacoes)
-        if (lg){
-            setItemsPerPage(3)
-        } else if (md) {
-            setItemsPerPage(2)
-        } else {
-            setItemsPerPage(1)
-        }
-
-        setNextElement(0)
-        setPublicacoes(data.slice(nextElement, nextElement + itemsPerPage));
-        console.log(nextElement, publicacoes)
-    }, [sm, md, lg])
+        const newItemsPerPage = lg ? 3 : md ? 2 : sm ? 1 : 4;
+        setItemsPerPage(newItemsPerPage);
+        setNextElement(0);
+        setPublicacoes(data.slice(0, newItemsPerPage));
+    }, [sm, md, lg]);
 
     let theme = createTheme({
         typography: {
@@ -103,29 +96,26 @@ const Home = () => {
     });
 
     theme = responsiveFontSizes(theme);
-    useEffect(() => {
-        console.log(showSearch)
-    }, [showSearch])
+
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
-                <Grid2 container spacing={2} paddingX={10} paddingY={2}>
-                    <Typography
-                        variant="h1"
-                        sx={{
-                            fontSize: { xs: '1em', md: '1.5em' },
-                            fontFamily: 'Kumbh Sans, Roboto, sans-serif',
-                            textWrap: 'nowrap',
-                            marginRight: '3%'
-                        }}>
-                        SUAS PUBLICAÇÕES
-                    </Typography>
-                </Grid2>
-                <Grid2 container paddingX={4} paddingY={2} spacing={0} justifyContent="space-between" alignItems="center" overflow={'inherit'}>
+            <Box sx={{ flexGrow: 1, p: 2, marginX: 'auto', maxWidth: '100%' }}>
+                <Typography
+                    variant="h1"
+                    sx={{
+                        fontSize: { xs: '1em', md: '1.5em' },
+                        maxWidth: '85%',
+                        marginX: 'auto',
+                        fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                        textWrap: 'nowrap',
+                    }}>
+                    SUAS PUBLICAÇÕES
+                </Typography>
+                <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginY: '20px', width: { sx: '100%', md: '85%' }, marginX: 'auto' }}>
                     {/* Seta para voltar */}
                     <ArrowBackIosNewIcon
                         onClick={handlePrev}
-                        sx={{ height: '100%', color: '#170d1f', width: '5%' }}
+                        sx={{ height: '100%', color: '#170d1', cursor: 'pointer' }}
                     />
                     {/* Publicações do usuário */}
                     {publicacoes.map((value, index) => (
@@ -136,10 +126,10 @@ const Home = () => {
                     {/* Seta para avançar */}
                     <ArrowForwardIosIcon
                         onClick={handleNext}
-                        sx={{ height: '100%', color: '#170d1f', width: '5%' }}
+                        sx={{ height: '100%', color: '#170d1f', cursor: 'pointer' }}
                     />
-                </Grid2>
-                <Grid2 item xs={12} display="flex" justifyContent="flex-end" paddingX={10} paddingY={6}>
+                </Box>
+                <Box sx={{ display: 'flex', maxWidth: { xs: '100%', md: '85%' }, marginX: 'auto', marginY: '30px' }}>
                     <Stack spacing={2} sx={{
                         width: '100%', margin: 'auto'
                     }}>
@@ -151,7 +141,8 @@ const Home = () => {
                                 <Box
                                     sx={{
                                         display: 'flex',
-                                        flexDirection: { xs: showSearch ? 'column' : 'row', sm: showSearch ? 'column' : 'row', md: 'row' },
+                                        flexDirection: sm ? 'column' : 'row',
+                                        justifyContent:'space-between',
                                         width: '100%',
                                     }}
                                 >
@@ -161,63 +152,65 @@ const Home = () => {
                                             fontSize: { xs: '1em', md: '1.5em' },
                                             fontFamily: 'Kumbh Sans, Roboto, sans-serif',
                                             textWrap: 'nowrap',
-                                            marginRight: '3%'
+                                            marginBottom:'10px',
+                                            width: '50%'
                                         }}>
                                         ANIMAIS DISPONÍVEIS PARA ADOÇÃO
                                     </Typography>
                                     <Box
                                         sx={{
                                             display: 'flex',
-                                            flexDirection: 'row',
+                                            flexDirection: 'column',
                                             alignItems: 'flex-end',
+                                            gap:{xs:'5px', md:'10px'},
                                             justifyContent: 'flex-end',
-                                            width: '100%',
-                                            marginRight: 1
+                                            width: {xs:'100%', md:'30%'},
                                         }}
                                     >
-                                        <SearchIcon
-                                            onClick={() => setShowSearch(!showSearch)}
-                                            sx={{ marginRight: 1 }}
-                                            fontSize="large"
-                                        />
-                                        <TextField
-                                            {...params}
-                                            placeholder="Raça, nome ou localidade"
-                                            sx={{
-                                                display: showSearch ? 'block' : 'none',
-                                                '& .MuiInputBase-root': {
-                                                    height: { xs: '25px', sm: '20px', md: '35px' },
-                                                    marginRight: '1px'
-                                                },
-                                                '& input::placeholder': {
-                                                    fontSize: { xs: '0.7rem', sm: '0.85rem', md: '1rem' }, // Define o tamanho do placeholder para xs, sm, e md
-                                                    marginBottom: '20px',
-                                                }
-                                            }}
-                                        />
+                                        <Box sx={{ display: 'flex', flexDirection: 'row', width: "100%" }}>
+                                            <SearchIcon
+                                                sx={{ marginRight: 1 }}
+                                                fontSize="large"
+                                            />
+                                            <TextField
+                                                {...params}
+                                                placeholder="Raça, nome ou localidade"
+                                                sx={{
+                                                    display: 'block',
+                                                    '& .MuiInputBase-root': {
+                                                        height: { xs: '25px', sm: '20px', md: '35px' },
+                                                        marginRight: '1px',
+                                                    },
+                                                    '& input::placeholder': {
+                                                        fontSize: { xs: '0.7rem', sm: '0.85rem', md: '1rem' }, // Define o tamanho do placeholder para xs, sm, e md
+                                                        marginBottom: '20px',
+                                                    }
+                                                }}
+                                            />
+                                        </Box>
+                                        <ToggleButtonGroup
+                                            color="primary"
+                                            value={alignment}
+                                            exclusive
+                                            onChange={handleChange}
+                                            size="small"
+                                            aria-label="Small sizes"
+                                        >
+                                            <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="gatos">Gatos</ToggleButton>
+                                            <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="cachorros">Cachorros</ToggleButton>
+                                        </ToggleButtonGroup>
                                     </Box>
-                                    <ToggleButtonGroup
-                                        color="primary"
-                                        value={alignment}
-                                        exclusive
-                                        onChange={handleChange}
-                                        size="small"
-                                        aria-label="Small sizes"
-                                    >
-                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="gatos">Gatos</ToggleButton>
-                                        <ToggleButton sx={{ fontSize: { xs: '0.55rem', sm: '0.7rem', md: '0.75rem' } }} value="cachorros">Cachorros</ToggleButton>
-                                    </ToggleButtonGroup>
                                 </Box>
                             )}
                         />
                     </Stack>
-                </Grid2>
-                <Grid2 container spacing={2} justifyContent="center" alignItems="center">
+                </Box>
+                <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { sx: '100%', md: '85%' }, marginX: 'auto' }}>
                     {data.map((value, index) => {
                         return (
-                            <Grid2 item xs={12} sm={3} md={3} width="250px" key={index}>
+                            <Box sx={{ width: { sm: '100%', md: '250px' } }} key={index}>
                                 <AnimalCard descricao={value} onClick={showLoginModal} width="100%" />
-                            </Grid2>
+                            </Box>
                         )
                     })}
                 </Grid2>

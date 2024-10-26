@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
                             <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', md: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
                                 <Sider disabled={siderDisabled} />
                             </Box>
-                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', md: 'flex' }, height: shouldShowHeader ? 'calc(100vh - 50px)': '100vh', width: siderDisabled ? 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
+                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', md: 'flex' }, width: siderDisabled ? 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
                                 {children}
                             </Box>
                         </>)
