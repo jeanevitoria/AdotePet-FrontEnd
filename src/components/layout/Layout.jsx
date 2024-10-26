@@ -3,8 +3,11 @@ import Header from './Header';
 import Sider from './Sider';
 import { Box, Grid2 } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Layout = ({ children }) => {
+    const {sm, md, lg} = useWindowSize();
+
     const [siderDisabled, setSiderDisabled] = useState(true);
     const location = useLocation();
 
@@ -31,7 +34,7 @@ const Layout = ({ children }) => {
                             <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', md: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
                                 <Sider disabled={siderDisabled} />
                             </Box>
-                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', md: 'flex' }, width: siderDisabled ? 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
+                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', md: 'flex' }, width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
                                 {children}
                             </Box>
                         </>)
