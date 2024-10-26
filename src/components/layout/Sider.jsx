@@ -25,13 +25,13 @@ const Sider = ({ disabled }) => {
             sx={{
                 width: {
                     xs: disabled ? '0%' : '100%',
-                    md: disabled ? '50px' : '200px',
+                    sm: disabled ? '50px' : '200px',
                 },
                 transition: 'width 0.3s ease',
                 flexGrow: 1,
                 borderRight: '1px solid #f0f0f0',
                 height: '100%',
-                display: { xs: disabled ? 'none' : 'flex', md: 'flex' },
+                display: { xs: disabled ? 'none' : 'flex', sm: 'flex' },
                 flexDirection: 'column',
                 position: 'fixed',
                 alignItems: 'center',

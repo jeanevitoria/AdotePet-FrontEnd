@@ -107,177 +107,171 @@ const CadastrarAnimal = () => {
             height: 'auto',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-start',
+            alignContent: 'center',
+            marginY: {xs:'0%', md:'1%'},
         }}>
-            <Box sx={{ color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
-                <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
-            </Box>
-            <Box sx={{
-                width: '100%',
-                justifyContent: 'center',
-                display: 'flex',
-            }}>
-                <Paper elevation={3} sx={{ width: { sx: '100%', sm: '100%', md: '70%', lg: '50%' }, marginY: '0%', display: 'flex', flexDirection: 'column', padding: '16px' }}>
-                    <Box sx={{ textAlign: 'center', marginBottom: '16px' }}>
-                        <Typography variant="body1" sx={{
-                            fontSize: { md: '20px', lg: '30px', xl: '60px' },
-                            textAlign: 'center',
-                            fontWeight: '900',
-                            color: '#301F3E',
-                            fontFamily: 'Kumbh Sans, Roboto, sans-serif'
-                        }}>
-                            CADASTRAR ANIMAL
-                        </Typography>
+            <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: {xs:'30px', sm:'16px',  md:'16px'} }}>
+                <Box sx={{
+                    textAlign: 'center', marginBottom: '16px', marginX: 'auto'
+                }}>
+                    <Typography variant="body1" sx={{
+                        fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                        textAlign: 'center',
+                        fontWeight: '900',
+                        color: '#301F3E',
+                        fontFamily: 'Kumbh Sans, Roboto, sans-serif'
+                    }}>
+                        CADASTRAR ANIMAL
+                    </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
+                        <FormLabel id="nome-animal">Nome do animal</FormLabel>
+                        <OutlinedInput
+                            id="nome-animal"
+                            type={'text'}
+                            placeholder='Digite o nome do animal'
+                            value={nomeAnimal} // Controlando o valor pelo estado
+                            onChange={(e) => setNomeAnimal(e.target.value)} // Atualizando o estado
+                            sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
+                        />
+                    </FormControl>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                        <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight: '5%' }}>
+                            <FormLabel id="tipo-animal">Tipo de animal</FormLabel>
+                            <Select
+                                labelId="tipo"
+                                id="tipo"
+                                value={tipoAnimal} // Controlando o valor pelo estado
+                                onChange={(e) => setTipoAnimal(e.target.value)} // Atualizando o estado
+                                label="Tipo"
+                            >
+                                <MenuItem value={'gato'}>Gato</MenuItem>
+                                <MenuItem value={'cachorro'}>Cachorro</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '65%' } }} variant="standard">
+                            <FormLabel id="raca">Raça</FormLabel>
+                            <Select
+                                disabled={!tipoAnimal}
+                                labelId="raca"
+                                id="raca"
+                                value={raca}
+                                onChange={(e) => setRaca(e.target.value)}
+                            >
+                                {tipoAnimal == 'gato' ? (
+                                    racasGatos.map((value) => {
+                                        return (<MenuItem key={value.title} value={value.nome}>{value.nome}</MenuItem>)
+                                    })
+                                ) : (
+                                    racasCachorros.map((value, index) => {
+                                        if (index == 0 || (index > 5 && index < 128)) {
+                                            return (<MenuItem key={value.title} value={value.title}>{value.title}</MenuItem>)
+                                        }
+                                    })
+                                )}
+                            </Select>
+                        </FormControl>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
-                            <FormLabel id="nome-animal">Nome do animal</FormLabel>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                        <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
+                            <FormLabel id="genero">Gênero</FormLabel>
+                            <RadioGroup row name="genero" value={genero} onChange={(e) => setGenero(e.target.value)}> {/* Controlando o valor pelo estado */}
+                                <FormControlLabel value="femea" control={<Radio />} label="Fêmea" />
+                                <FormControlLabel value="macho" control={<Radio />} label="Macho" />
+                            </RadioGroup>
+                        </FormControl>
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '30%' } }} variant="outlined">
+                            <FormLabel id="peso">Peso</FormLabel>
                             <OutlinedInput
-                                id="nome-animal"
-                                type={'text'}
-                                placeholder='Digite o nome do animal'
-                                value={nomeAnimal} // Controlando o valor pelo estado
-                                onChange={(e) => setNomeAnimal(e.target.value)} // Atualizando o estado
+                                error={true}
+                                id="peso"
+                                type={'number'}
+                                placeholder='Digite o peso do animal'
+                                value={peso} // Controlando o valor pelo estado
+                                onChange={(e) => setPeso(e.target.value)} // Atualizando o estado
                                 sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                             />
                         </FormControl>
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight:'5%' }}>
-                                <FormLabel id="tipo-animal">Tipo de animal</FormLabel>
-                                <Select
-                                    labelId="tipo"
-                                    id="tipo"
-                                    value={tipoAnimal} // Controlando o valor pelo estado
-                                    onChange={(e) => setTipoAnimal(e.target.value)} // Atualizando o estado
-                                    label="Tipo"
-                                >
-                                    <MenuItem value={'gato'}>Gato</MenuItem>
-                                    <MenuItem value={'cachorro'}>Cachorro</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <FormControl size='small' sx={{ width: { xs: '100%', md: '65%' } }} variant="standard">
-                                <FormLabel id="raca">Raça</FormLabel>
-                                <Select
-                                    disabled={!tipoAnimal}
-                                    labelId="raca"
-                                    id="raca"
-                                    value={raca}
-                                    onChange={(e) => setRaca(e.target.value)}
-                                >
-                                    {tipoAnimal == 'gato' ? (
-                                        racasGatos.map((value) => {
-                                            return (<MenuItem key={value.title} value={value.nome}>{value.nome}</MenuItem>)
-                                        })
-                                    ) : (
-                                        racasCachorros.map((value, index) => {
-                                            if (index == 0 || (index > 5 && index < 128)) {
-                                                return (<MenuItem key={value.title} value={value.title}>{value.title}</MenuItem>)
-                                            }
-                                        })
-                                    )}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
-                                <FormLabel id="genero">Gênero</FormLabel>
-                                <RadioGroup row name="genero" value={genero} onChange={(e) => setGenero(e.target.value)}> {/* Controlando o valor pelo estado */}
-                                    <FormControlLabel value="femea" control={<Radio />} label="Fêmea" />
-                                    <FormControlLabel value="macho" control={<Radio />} label="Macho" />
-                                </RadioGroup>
-                            </FormControl>
-                            <FormControl size='small' sx={{ width: { xs: '100%', md: '30%' } }} variant="outlined">
-                                <FormLabel id="peso">Peso</FormLabel>
-                                <OutlinedInput
-                                    error={true}
-                                    id="peso"
-                                    type={'number'}
-                                    placeholder='Digite o peso do animal'
-                                    value={peso} // Controlando o valor pelo estado
-                                    onChange={(e) => setPeso(e.target.value)} // Atualizando o estado
-                                    sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
-                                />
-                            </FormControl>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl size='small' variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight: '5%' }}>
-                                <FormLabel id="estado">Estado</FormLabel>
-                                <Select
-                                    labelId="estado"
-                                    id="estado"
-                                    value={estado}
-                                    onChange={(e) => setEstado(e.target.value)}
-                                >
-                                    {estados.map((value) => {
-                                        return (<MenuItem value={value.sigla}>{value.nome} ({value.sigla})</MenuItem>)
-                                    })}
-                                </Select>
-                            </FormControl>
-                            <FormControl size='small' variant="standard" sx={{ width: { xs: '100%', md: '65%' } }}>
-                                <FormLabel id="cidade">Cidade</FormLabel>
-                                <Select
-                                    disabled={!estado}
-                                    labelId="cidade"
-                                    id="cidade"
-                                    value={cidade}
-                                    onChange={(e) => setCidade(e.target.value)}
-                                >
-                                    {cidades.map((value) => {
-                                        return (<MenuItem value={value.nome}>{value.nome}</MenuItem>)
-                                    })}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
-                                <FormLabel id="vacinado">Vacinado</FormLabel>
-                                <RadioGroup row name="vacinado" value={vacinado} onChange={(e) => setVacinado(e.target.value)}> {/* Controlando o valor pelo estado */}
-                                    <FormControlLabel value="sim" control={<Radio />} label="Sim" />
-                                    <FormControlLabel value="nao" control={<Radio />} label="Não" />
-                                </RadioGroup>
-                            </FormControl>
-                            <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' } }}>
-                                <FormLabel id="idade">Idade</FormLabel>
-                                <Select
-                                    labelId="idade"
-                                    id="idade"
-                                    value={idade} // Controlando o valor pelo estado
-                                    onChange={(e) => setIdade(e.target.value)} // Atualizando o estado
-                                    label="Idade"
-                                >
-                                    <MenuItem value={'0-3 meses'}>0-3 meses</MenuItem>
-                                    <MenuItem value={'4-6 meses'}>4-6 meses</MenuItem>
-                                    <MenuItem value={'7-9 meses'}>7-9 meses</MenuItem>
-                                    <MenuItem value={'10-11 meses'}>10-11 meses</MenuItem>
-                                    {Array.from({ length: 10 }).map((_, index) => {
-                                        return (
-                                            <MenuItem value={index + 1}>{index + 1} ano{index == 0 ? '' : 's'}</MenuItem>
-                                        )
-                                    })}
-                                    <MenuItem value={'mais de 10'}>Mais de 10 anos</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
-                        <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
-                            <FormLabel id="descricao">Descrição</FormLabel>
-                            <OutlinedInput
-                                id="descricao"
-                                multiline
-                                rows={4}
-                                type={'text'}
-                                placeholder='Descrição'
-                                value={descricao} // Controlando o valor pelo estado
-                                onChange={(e) => setDescricao(e.target.value)} // Atualizando o estado
-                                sx={{ background: '#ebebeb', "& fieldset": { border: 'none' }, resize: 'vertical' }}
-                            />
-                        </FormControl>
-                        <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
-                            Cadastrar
-                        </Button>
                     </Box>
-                </Paper>
-            </Box>
-        </Grid2>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                        <FormControl size='small' variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight: '5%' }}>
+                            <FormLabel id="estado">Estado</FormLabel>
+                            <Select
+                                labelId="estado"
+                                id="estado"
+                                value={estado}
+                                onChange={(e) => setEstado(e.target.value)}
+                            >
+                                {estados.map((value) => {
+                                    return (<MenuItem value={value.sigla}>{value.nome} ({value.sigla})</MenuItem>)
+                                })}
+                            </Select>
+                        </FormControl>
+                        <FormControl size='small' variant="standard" sx={{ width: { xs: '100%', md: '65%' } }}>
+                            <FormLabel id="cidade">Cidade</FormLabel>
+                            <Select
+                                disabled={!estado}
+                                labelId="cidade"
+                                id="cidade"
+                                value={cidade}
+                                onChange={(e) => setCidade(e.target.value)}
+                            >
+                                {cidades.map((value) => {
+                                    return (<MenuItem value={value.nome}>{value.nome}</MenuItem>)
+                                })}
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                        <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
+                            <FormLabel id="vacinado">Vacinado</FormLabel>
+                            <RadioGroup row name="vacinado" value={vacinado} onChange={(e) => setVacinado(e.target.value)}> {/* Controlando o valor pelo estado */}
+                                <FormControlLabel value="sim" control={<Radio />} label="Sim" />
+                                <FormControlLabel value="nao" control={<Radio />} label="Não" />
+                            </RadioGroup>
+                        </FormControl>
+                        <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' } }}>
+                            <FormLabel id="idade">Idade</FormLabel>
+                            <Select
+                                labelId="idade"
+                                id="idade"
+                                value={idade} // Controlando o valor pelo estado
+                                onChange={(e) => setIdade(e.target.value)} // Atualizando o estado
+                                label="Idade"
+                            >
+                                <MenuItem value={'0-3 meses'}>0-3 meses</MenuItem>
+                                <MenuItem value={'4-6 meses'}>4-6 meses</MenuItem>
+                                <MenuItem value={'7-9 meses'}>7-9 meses</MenuItem>
+                                <MenuItem value={'10-11 meses'}>10-11 meses</MenuItem>
+                                {Array.from({ length: 10 }).map((_, index) => {
+                                    return (
+                                        <MenuItem value={index + 1}>{index + 1} ano{index == 0 ? '' : 's'}</MenuItem>
+                                    )
+                                })}
+                                <MenuItem value={'mais de 10'}>Mais de 10 anos</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
+                        <FormLabel id="descricao">Descrição</FormLabel>
+                        <OutlinedInput
+                            id="descricao"
+                            multiline
+                            rows={4}
+                            type={'text'}
+                            placeholder='Descrição'
+                            value={descricao} // Controlando o valor pelo estado
+                            onChange={(e) => setDescricao(e.target.value)} // Atualizando o estado
+                            sx={{ background: '#ebebeb', "& fieldset": { border: 'none' }, resize: 'vertical' }}
+                        />
+                    </FormControl>
+                    <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
+                        Cadastrar
+                    </Button>
+                </Box>
+            </Paper>
+        </Grid2 >
     );
 };
 

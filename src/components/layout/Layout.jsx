@@ -31,10 +31,10 @@ const Layout = ({ children }) => {
                 <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: shouldShowHeader ? '50px' : '0px' }}>
                     {shouldShowSider &&
                         (<>
-                            <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', md: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
+                            <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', sm: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
                                 <Sider disabled={siderDisabled} />
                             </Box>
-                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', md: 'flex' }, width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
+                            <Box sx={{ display: { xs: siderDisabled ? 'flex' : 'none', sm: 'flex' }, width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)' }}>
                                 {children}
                             </Box>
                         </>)
