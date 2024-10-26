@@ -208,7 +208,7 @@ const Home = () => {
                 <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { sx: '100%', md: '85%' }, marginX: 'auto' }}>
                     {data.map((value, index) => {
                         return (
-                            <Box sx={{ width: { sm: '100%', md: '250px' } }} key={index}>
+                            <Box sx={{ width: { sm: '100%', md: '250px' }, justifyContent:'center' }} key={index}>
                                 <AnimalCard descricao={value} onClick={showLoginModal} width="100%" />
                             </Box>
                         )
