@@ -99,12 +99,12 @@ const Home = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1, p: 2, marginX: 'auto', maxWidth: '100%' }}>
+            <Box sx={{ flexGrow: 1, p: 2, marginX: 'auto', width:'100vw' }}>
                 <Typography
                     variant="h1"
                     sx={{
                         fontSize: { xs: '1em', md: '1.5em' },
-                        maxWidth: '85%',
+                        width: {sm: '100vw', md:'85%'},
                         marginX: 'auto',
                         fontFamily: 'Kumbh Sans, Roboto, sans-serif',
                         textWrap: 'nowrap',
@@ -119,7 +119,7 @@ const Home = () => {
                     />
                     {/* Publicações do usuário */}
                     {publicacoes.map((value, index) => (
-                        <Box item sx={{ display: 'flex', flexDirection: 'row' }} width="250px" key={index}>
+                        <Box item sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center' }} width="250px" key={index}>
                             <AnimalCard descricao={value} onClick={showLoginModal} />
                         </Box>
                     ))}
