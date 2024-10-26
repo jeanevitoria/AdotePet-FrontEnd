@@ -173,7 +173,7 @@ const CadastrarAnimal = () => {
                             </Select>
                         </FormControl>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', width: '90%', marginBottom: '16px' }}>
                         <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
                             <FormLabel id="genero">Gênero</FormLabel>
                             <RadioGroup row name="genero" value={genero} onChange={(e) => setGenero(e.target.value)}> {/* Controlando o valor pelo estado */}
@@ -181,13 +181,13 @@ const CadastrarAnimal = () => {
                                 <FormControlLabel value="macho" control={<Radio />} label="Macho" />
                             </RadioGroup>
                         </FormControl>
-                        <FormControl size='small' sx={{ width: { xs: '100%', md: '30%' } }} variant="outlined">
-                            <FormLabel id="peso">Peso</FormLabel>
+                        <FormControl size='small' sx={{ width: '30%' }} variant="outlined">
+                            <FormLabel id="peso">Peso (kg)</FormLabel>
                             <OutlinedInput
                                 error={true}
                                 id="peso"
                                 type={'number'}
-                                placeholder='Digite o peso do animal'
+                                placeholder={'0'}
                                 value={peso} // Controlando o valor pelo estado
                                 onChange={(e) => setPeso(e.target.value)} // Atualizando o estado
                                 sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
