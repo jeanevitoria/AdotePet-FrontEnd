@@ -58,140 +58,135 @@ const Perfil = () => {
 
     return (
         <Grid2 container sx={{
-            width: '100vw',
-            height: 'screen',
+            width: { xs: '100vw', md: '100vw' },
+            height: 'calc(100vh - 50px)',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: 'auto'
         }}>
-            <Box sx={{  color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex' }}>
-                <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
-            </Box>
-            <Box sx={{
-                width: '100%',
-                justifyContent: 'center',
-                height:'auto',
-                display: 'flex',
+            <Paper elevation={3} sx={{
+                width: { xs: '100%', sm: '100%', md: '70%', lg: '50%' }, height:{xs:'100%', md:'auto'},justifyContent: 'center',
+                alignItems: 'center', display: 'flex', flexDirection: 'column', paddingY:'16px'
             }}>
-                <Paper elevation={3} sx={{ width: { sx: '100%', sm: '100%', md: '70%', lg: '50%' }, marginY: '0%', display: 'flex', flexDirection: 'column', padding: '16px' }}>
-                    <Box sx={{ textAlign: 'center', marginBottom: '16px' }}>
-                        <Typography variant="body1" sx={{
-                            fontSize: { md: '20px', lg: '30px', xl: '60px' },
-                            textAlign: 'center',
-                            fontWeight: '900',
-                            color: '#301F3E',
-                            fontFamily: 'Kumbh Sans, Roboto, sans-serif'
-                        }}>
-                            PERFIL
-                        </Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
-                            <FormLabel id="nome-animal">Nome completo</FormLabel>
+                <Box sx={{ textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{
+                        fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                        textAlign: 'center',
+                        fontWeight: '900',
+                        color: '#301F3E',
+                        fontFamily: 'Kumbh Sans, Roboto, sans-serif'
+                    }}>
+                        PERFIL
+                    </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <FormControl size='small' sx={{ width: '90%' }} variant="outlined">
+                        <FormLabel id="nome-animal">Nome completo</FormLabel>
+                        <OutlinedInput
+                            id="nome-animal"
+                            type={'text'}
+                            placeholder='Digite o seu nome completo'
+                            value={nome} // Controlando o valor pelo estado
+                            onChange={(e) => setNome(e.target.value)} // Atualizando o estado
+                            sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
+                        />
+                    </FormControl>
+                    <FormControl size='small' sx={{ width: '90%' }} variant="outlined">
+                        <FormLabel id="nome-animal">E-mail</FormLabel>
+                        <OutlinedInput
+                            id="nome-animal"
+                            type={'text'}
+                            placeholder='Digite o seu e-mail'
+                            value={email} // Controlando o valor pelo estado
+                            onChange={(e) => setEmail(e.target.value)} // Atualizando o estado
+                            sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
+                        />
+                    </FormControl>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%' }}>
+                        <FormControl variant="standard" size='small' sx={{ width: { xs: '100%', md: '45%' } }}>
+                            <FormLabel id="tipo-animal">Celular</FormLabel>
                             <OutlinedInput
                                 id="nome-animal"
-                                type={'text'}
-                                placeholder='Digite o seu nome completo'
-                                value={nome} // Controlando o valor pelo estado
-                                onChange={(e) => setNome(e.target.value)} // Atualizando o estado
+                                type={'number'}
+                                placeholder='Digite o seu número de celular'
+                                value={celular}
+                                onChange={(e) => setCelular(e.target.value)}
                                 sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                             />
                         </FormControl>
-                        <FormControl size='small' sx={{ width: '90%', marginBottom: '16px' }} variant="outlined">
-                            <FormLabel id="nome-animal">E-mail</FormLabel>
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
+                            <FormLabel id="raca">Data de nascimento</FormLabel>
                             <OutlinedInput
-                                id="nome-animal"
-                                type={'text'}
-                                placeholder='Digite o seu e-mail'
-                                value={email} // Controlando o valor pelo estado
-                                onChange={(e) => setEmail(e.target.value)} // Atualizando o estado
+                                id="nascimento"
+                                type={'number'}
+                                placeholder='Digite o seu número de celular'
+                                value={nascimento}
+                                onChange={handleDate}
                                 sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                             />
                         </FormControl>
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
-                            <FormControl variant="standard" size='small' sx={{ width: { xs: '100%', md: '45%' }, marginRight: '10%' }}>
-                                <FormLabel id="tipo-animal">Celular</FormLabel>
-                                <OutlinedInput
-                                    id="nome-animal"
-                                    type={'number'}
-                                    placeholder='Digite o seu número de celular'
-                                    value={celular}
-                                    onChange={(e) => setCelular(e.target.value)}
-                                    sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
-                                />
-                            </FormControl>
-                            <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
-                                <FormLabel id="raca">Data de nascimento</FormLabel>
-                                <OutlinedInput
-                                    id="nascimento"
-                                    type={'number'}
-                                    placeholder='Digite o seu número de celular'
-                                    value={nascimento}
-                                    onChange={handleDate}
-                                    sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
-                                />
-                            </FormControl>
-                        </Box>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            width: '90%'
-                        }}>
-                            <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' }, marginRight: '10%' }} variant="standard">
-                                <FormLabel htmlFor="senha" >Senha</FormLabel>
-                                <OutlinedInput
-                                    id="senha"
-                                    type={showPassword1 ? 'text' : 'password'}
-                                    onChange={(e) => setPassword1(e.target.value)}
-                                    placeholder='Digite a sua senha'
-                                    sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword1}
-                                                onMouseDown={handleMouseDownPassword}
-                                                onMouseUp={handleMouseUpPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword1 ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                            </FormControl>
-                            <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
-                                <FormLabel htmlFor="confirmar-senha" >Confimar senha</FormLabel>
-                                <OutlinedInput
-                                    id="confirmar-senha"
-                                    error={error}
-                                    type={showPassword2 ? 'text' : 'password'}
-                                    onChange={(e) => { setPassword2(e.target.value) }}
-                                    placeholder='Confirme a nova senha'
-                                    sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword2}
-                                                onMouseDown={handleMouseDownPassword}
-                                                onMouseUp={handleMouseUpPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword2 ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                                {error && <FormHelperText sx={{ color: '#D32F2F', marginLeft: '0' }}>As senhas não coincidem</FormHelperText>}
-                            </FormControl>
-                        </Box>
-                        <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
-                            ATUALIZAR DADOS
-                        </Button>
                     </Box>
-                </Paper>
-            </Box>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        width: '90%'
+                    }}>
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
+                            <FormLabel htmlFor="senha" >Senha</FormLabel>
+                            <OutlinedInput
+                                id="senha"
+                                type={showPassword1 ? 'text' : 'password'}
+                                onChange={(e) => setPassword1(e.target.value)}
+                                placeholder='Digite a sua senha'
+                                sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword1}
+                                            onMouseDown={handleMouseDownPassword}
+                                            onMouseUp={handleMouseUpPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword1 ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
+                            <FormLabel htmlFor="confirmar-senha" >Confimar senha</FormLabel>
+                            <OutlinedInput
+                                id="confirmar-senha"
+                                error={error}
+                                type={showPassword2 ? 'text' : 'password'}
+                                onChange={(e) => { setPassword2(e.target.value) }}
+                                placeholder='Confirme a nova senha'
+                                sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword2}
+                                            onMouseDown={handleMouseDownPassword}
+                                            onMouseUp={handleMouseUpPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                            {error && <FormHelperText sx={{ color: '#D32F2F', marginLeft: '0' }}>As senhas não coincidem</FormHelperText>}
+                        </FormControl>
+                    </Box>
+                    <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
+                        ATUALIZAR DADOS
+                    </Button>
+                </Box>
+            </Paper>
         </Grid2>
     );
 };

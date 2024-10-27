@@ -24,7 +24,7 @@ const Sider = ({ disabled }) => {
             container
             sx={{
                 width: {
-                    xs: disabled ? '0%' : '100%',
+                    xs: disabled ? '0px' : '200px',
                     sm: disabled ? '50px' : '200px',
                 },
                 transition: 'width 0.3s ease',
