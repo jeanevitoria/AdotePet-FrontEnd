@@ -32,9 +32,9 @@ const Layout = ({ children }) => {
                     {shouldShowSider &&
                         (<>
                             <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', sm: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
-                                <Sider disabled={siderDisabled} />
+                                <Sider disabled={siderDisabled} setDisabled={setSiderDisabled}/>
                             </Box>
-                            <Box sx={{ display: 'flex', width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)', opacity:{xs: !siderDisabled ? '50%' : '100%', md:'100%'} }}>
+                            <Box onClick={() => setSiderDisabled(prev => !prev)} sx={{ display: 'flex', width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)', opacity:{xs: !siderDisabled ? '50%' : '100%', md:'100%'} }}>
                                 {children}
                             </Box>
                         </>)

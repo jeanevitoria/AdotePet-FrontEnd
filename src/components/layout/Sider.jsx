@@ -7,7 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 
-const Sider = ({ disabled }) => {
+const Sider = ({ disabled, setDisabled }) => {
     const navigate = useNavigate();
 
 
@@ -42,7 +42,10 @@ const Sider = ({ disabled }) => {
             {items && items.map((item, index) => (
                 <Box
                     key={index}
-                    onClick={() => navigate(item.path)}
+                    onClick={() => {
+                        {/*caso a tela seja pequena, fecha o sider. Caso contrário, permanece a forma escolhida pelo usuário*/}
+                        setDisabled(prev => {return (window.innerWidth <= 768 ? true : prev)})
+                        navigate(item.path)}}
                     sx={{
                         display: 'flex',
                         alignItems: 'center',
