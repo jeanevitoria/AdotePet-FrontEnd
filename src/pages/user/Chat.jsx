@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Chat = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [message, setMessage] = useState('');
-    const [chatsVisible, setChatsVisible] = useState(false);
+    const [chatsVisible, setChatsVisible] = useState(true);
     const chatContainerRef = useRef(null); // Cria a referência para o container das mensagens
     const chatsData = [
         { nome: "Alice", mensagem: "Oi, tudo bem?" },
