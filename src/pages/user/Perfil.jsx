@@ -72,7 +72,7 @@ const Perfil = () => {
             }}>
                 <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="body1" sx={{
-                        fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                        fontSize: { xs:'22px', md: '22px', lg: '30px', xl: '60px' },
                         textAlign: 'center',
                         fontWeight: '900',
                         color: '#301F3E',
@@ -82,7 +82,7 @@ const Perfil = () => {
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <FormControl size='small' sx={{ width: '90%' }} variant="outlined">
+                    <FormControl size='small' sx={{ width: '100%' }} variant="outlined">
                         <FormLabel id="nome-animal">Nome completo</FormLabel>
                         <OutlinedInput
                             id="nome-animal"
@@ -93,7 +93,7 @@ const Perfil = () => {
                             sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                         />
                     </FormControl>
-                    <FormControl size='small' sx={{ width: '90%' }} variant="outlined">
+                    <FormControl size='small' sx={{ width: '100%' }} variant="outlined">
                         <FormLabel id="nome-animal">E-mail</FormLabel>
                         <OutlinedInput
                             id="nome-animal"
@@ -104,8 +104,8 @@ const Perfil = () => {
                             sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                         />
                     </FormControl>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%' }}>
-                        <FormControl variant="standard" size='small' sx={{ width: { xs: '100%', md: '45%' } }}>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '100%' }}>
+                        <FormControl variant="standard" size='small' sx={{ width: { xs: '100%', md: '45%' }, marginRight:'auto' }}>
                             <FormLabel id="tipo-animal">Celular</FormLabel>
                             <OutlinedInput
                                 id="nome-animal"
@@ -131,9 +131,9 @@ const Perfil = () => {
                     <Box sx={{
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
-                        width: '90%'
+                        width: '100%'
                     }}>
-                        <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' } }} variant="standard">
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '45%' }, marginRight:'auto' }} variant="standard">
                             <FormLabel htmlFor="senha" >Senha</FormLabel>
                             <OutlinedInput
                                 id="senha"
@@ -182,7 +182,7 @@ const Perfil = () => {
                             {error && <FormHelperText sx={{ color: '#D32F2F', marginLeft: '0' }}>As senhas não coincidem</FormHelperText>}
                         </FormControl>
                     </Box>
-                    <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
+                    <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '100%', background: '#301F3E', color: '#ffffff' }}>
                         ATUALIZAR DADOS
                     </Button>
                 </Box>
