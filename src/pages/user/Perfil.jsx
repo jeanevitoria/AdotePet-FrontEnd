@@ -70,7 +70,7 @@ const Perfil = () => {
                 width: { xs: '100%', sm: '100%', md: '70%', lg: '50%' }, height:{xs:'100%', md:'auto'},justifyContent: 'center',
                 alignItems: 'center', display: 'flex', flexDirection: 'column', paddingY:'16px'
             }}>
-                <Box sx={{ textAlign: 'center' }}>
+                <Box sx={{ textAlign: 'center', marginBottom:{xs:'20px', sm:'0px'} }}>
                     <Typography variant="body1" sx={{
                         fontSize: { xs:'22px', md: '22px', lg: '30px', xl: '60px' },
                         textAlign: 'center',
