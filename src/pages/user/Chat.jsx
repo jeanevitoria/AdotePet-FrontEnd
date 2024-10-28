@@ -64,7 +64,9 @@ const Chat = () => {
 
     // Desativa o scroll do body quando o componente é montado
     useEffect(() => {
-        document.body.style.overflow = 'hidden';
+        if (window.innerWidth > 768){
+            document.body.style.overflow = 'hidden';
+        }
 
         // Limpa a configuração quando o componente é desmontado
         return () => {
