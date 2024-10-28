@@ -52,7 +52,7 @@ const LandingPage = () => {
     }, [showSearch])
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, maxWidth: '100%', overflow: 'hidden' }}>
+            <Box sx={{ flexGrow: 1, p: 2, marginX: { xs: 0, md: 5 }, width:'85%', justifySelf:'center', overflow: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center" alignItems="center" textAlign="center">
                     <Grid item xs={12}>
                         <Typography gutterBottom variant="h1" component="div" sx={{ fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>
@@ -67,7 +67,7 @@ const LandingPage = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} display="flex" justifyContent="flex-end" paddingX={4} paddingY={6}>
+                <Grid item xs={12} display="flex" justifyContent="flex-end" paddingY={6}>
                     <Stack spacing={2} sx={{
                         width: { xs: '100%', sm: '50%' }
                     }}>
