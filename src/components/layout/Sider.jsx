@@ -44,7 +44,7 @@ const Sider = ({ disabled, setDisabled }) => {
                     key={index}
                     onClick={() => {
                         {/*caso a tela seja pequena, fecha o sider. Caso contrário, permanece a forma escolhida pelo usuário*/}
-                        setDisabled(prev => {return (window.innerWidth <= 768 ? true : prev)})
+                        setDisabled(prev => {return (window.innerWidth < 768 ? true : prev)})
                         navigate(item.path)}}
                     sx={{
                         display: 'flex',

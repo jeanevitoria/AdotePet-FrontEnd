@@ -104,14 +104,14 @@ const Home = () => {
                     variant="h1"
                     sx={{
                         fontSize: { xs: '1em', md: '1.5em' },
-                        width: {sm: '100vw', md:'85%'},
+                        width: {sx: '100vw', sm:'calc(100vw-50px)', md:'85%'},
                         marginX: 'auto',
                         fontFamily: 'Kumbh Sans, Roboto, sans-serif',
                         textWrap: 'nowrap',
                     }}>
                     SUAS PUBLICAÇÕES
                 </Typography>
-                <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginY: '20px', width: { sx: '100%', md: '85%' }, marginX: 'auto' }}>
+                <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginY: '20px', width: { sx: '100%', md: '85%', lg:'85%' }, marginX: 'auto' }}>
                     {/* Seta para voltar */}
                     <ArrowBackIosNewIcon
                         onClick={handlePrev}
@@ -205,10 +205,10 @@ const Home = () => {
                         />
                     </Stack>
                 </Box>
-                <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { sx: '100%', md: '85%' }, marginX: 'auto' }}>
+                <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { xs: '100%', md: '85%' }, marginX: 'auto' }}>
                     {data.map((value, index) => {
                         return (
-                            <Box sx={{ width: { sm: '100%', md: '250px' }, justifyContent:'center' }} key={index}>
+                            <Box sx={{ width: { sx: '100%', sm:'40%', md:'250px', lg:'20%' }, justifyContent:'center' }} key={index}>
                                 <AnimalCard descricao={value} onClick={showLoginModal} width="100%" />
                             </Box>
                         )
