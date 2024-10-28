@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Chat = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [message, setMessage] = useState('');
+    const [chatsVisible, setChatsVisible] = useState(false);
     const chatContainerRef = useRef(null); // Cria a referência para o container das mensagens
     const chatsData = [
         { nome: "Alice", mensagem: "Oi, tudo bem?" },
@@ -97,7 +98,8 @@ const Chat = () => {
         }}>
             {/* Sidebar do chat */}
             <Stack spacing={2} sx={{
-                width: '30%',
+                width: {xs:'100%', sm:'30%'},
+                display: {xs: chatsVisible ? 'flex' : 'none', sm:'flex'},
                 backgroundColor: 'rgba(191, 169, 212, 0.15)',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
@@ -106,9 +108,6 @@ const Chat = () => {
                 overflowY: 'auto',
                 paddingBottom: '1%'
             }}>
-                <Box sx={{ color: '#301F3E', justifyContent: 'flex-start', width: '100%', display: 'flex' }}>
-                    <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer', marginLeft: '5%' }} />
-                </Box>
                 <Typography variant="body1" sx={{
                     fontSize: { xs: '20px', md: '20px', lg: '30px', xl: '60px' },
                     fontWeight: '900',
@@ -125,13 +124,16 @@ const Chat = () => {
                         nome={item.nome}
                         mensagem={item.mensagem}
                         selected={selectedIndex === index}
-                        onClick={() => setSelectedIndex(index)}
+                        onClick={() => {
+                            setSelectedIndex(index)
+                            setChatsVisible(prev => !prev)
+                        }}
                     />
                 ))}
             </Stack>
             <Box sx={{
-                width: '70%',
-                display: 'flex',
+                width: {xs:'100%', sm:'70%'},
+                display: {xs: chatsVisible ? 'none' : 'flex', sm:'flex'},
                 flexDirection: 'column',
                 flexGrow: 1,
                 overflowY: 'auto',
@@ -140,44 +142,51 @@ const Chat = () => {
                 {/* Container das mensagens do chat */}
                 <Box ref={chatContainerRef} sx={{
                     width: '98%',
+                    height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     flexGrow: 1,
+                    position: 'relative',
                     paddingX: '1%',
                     overflowY: 'auto',
                     paddingBottom: '1%'
                 }}>
-                    <Box sx={{ width: '100%', paddingY: '2%', marginBottom: '2%', borderBottom: '#c5c2c7 solid 1px' }}>
+                    <Box sx={{ width: '100%', paddingY: '2%', position: 'fixed', zIndex: 1000, height: '40px', backgroundColor: '#ffffff', borderBottom: '#c5c2c7 solid 1px' }}>
                         <Stack direction="row" spacing={2}>
+                            <Box sx={{ color: '#301F3E', alignItems: 'center', display: {xs:'flex', sm:'none'} }}>
+                                <ArrowBackIosNewIcon onClick={() => setChatsVisible(prev => !prev)} sx={{ cursor: 'pointer', marginLeft: '5%' }} />
+                            </Box>
                             <Avatar>
                                 {chatsData.filter((_, index) => index == selectedIndex)[0].nome[0]}
                             </Avatar>
-                            <Typography variant="h4" sx={{ whiteSpace: 'nowrap', overflowX: 'hidden', textOverflow: 'ellipsis', fontWeight: '600' }}>
+                            <Typography sx={{ fontSize:{xs:'22px', sm:'28px'}, whiteSpace: 'nowrap', alignContent:'center', overflowX: 'hidden', textOverflow: 'ellipsis', fontWeight: '600' }}>
                                 {chatsData.filter((_, index) => index == selectedIndex)[0].nome}
                             </Typography>
                         </Stack>
                     </Box>
-                    {mensagensChat.map((text, index) => (
-                        <Box
-                            key={index}
-                            sx={{
-                                backgroundColor: text.recebido ? '#ffffff' : '#6c5f76',
-                                border: text.recebido ? '#c5c2c7 solid 1px' : 'none',
-                                color: text.recebido ? '#000000' : '#ffffff',
-                                padding: '10px',
-                                borderRadius: '10px',
-                                maxWidth: '50%',
-                                marginBottom: '1%',
-                                alignSelf: text.recebido ? 'flex-start' : 'flex-end',
-                            }}
-                        >
-                            {text.message}
-                        </Box>
-                    ))}
+                    <Box sx={{ height: 'calc(100% - 40px)', width: '100%', display: 'flex', flexDirection: 'column', marginTop: {xs:'60px' , sm:'100px'} }}>
+                        {mensagensChat.map((text, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    backgroundColor: text.recebido ? '#ffffff' : '#6c5f76',
+                                    border: text.recebido ? '#c5c2c7 solid 1px' : 'none',
+                                    color: text.recebido ? '#000000' : '#ffffff',
+                                    padding: '10px',
+                                    borderRadius: '10px',
+                                    maxWidth: '50%',
+                                    marginBottom: '1%',
+                                    alignSelf: text.recebido ? 'flex-start' : 'flex-end',
+                                }}
+                            >
+                                {text.message}
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
                 <Box sx={{
                     width: '97%',
-                    height: '20%',
+                    height: 'auto',
                     margin: 'auto',
                     display: 'flex',
                     flexDirection: 'row',
@@ -187,7 +196,7 @@ const Chat = () => {
                 }} >
                     <TextField
                         placeholder="Digite sua mensagem"
-                        sx={{ width: '95%' }}
+                        sx={{ width: {xs:'85%', sm:'95%', padding:'5px'} }}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={(e) => {
@@ -196,7 +205,7 @@ const Chat = () => {
                                 handleSendMessage(); // Envia a mensagem
                             }
                         }} />
-                    <SendIcon sx={{ width: '5%', height: '60%' }} onClick={handleSendMessage} />
+                    <SendIcon sx={{ width: {xs:'10%', sm:'5%'}, height: '60%', margin:'auto' }} onClick={handleSendMessage} />
                 </Box>
             </Box>
         </Box >
