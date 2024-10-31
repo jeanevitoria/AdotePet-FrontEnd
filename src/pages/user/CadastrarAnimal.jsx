@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid2, Button, Typography, Paper, InputLabel } from '@mui/material';
+import { Box, Grid2, Button, Typography, Paper, InputLabel, Stack } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate } from 'react-router-dom';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -10,13 +10,18 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { obterRacasCachorros, obterRacasGatos } from '../../services/animalService';
 import { obterMunicipios, obterEstados } from '../../services/estadosService';
+import { styled } from '@mui/material/styles';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const CadastrarAnimal = () => {
     const navigate = useNavigate();
 
     // Definindo estados para cada campo
+    const [picture, setPicture] = useState([])
     const [nomeAnimal, setNomeAnimal] = useState('');
     const [raca, setRaca] = useState('');
     const [peso, setPeso] = useState('');
@@ -50,6 +55,18 @@ const CadastrarAnimal = () => {
             setErro('Erro ao buscar raças');
         }
     };
+
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
 
     useEffect(() => {
         obterRacas();
@@ -108,14 +125,14 @@ const CadastrarAnimal = () => {
             display: 'flex',
             flexDirection: 'column',
             alignContent: 'center',
-            marginY: {xs:'0%', md:'1%'},
+            marginY: { xs: '0%', md: '1%' },
         }}>
-            <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding:'16px' }}>
+            <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: '16px' }}>
                 <Box sx={{
                     textAlign: 'center', marginBottom: '16px', marginX: 'auto'
                 }}>
                     <Typography variant="body1" sx={{
-                        fontSize: { xs:'21px', md: '19px', lg: '30px', xl: '60px' },
+                        fontSize: { xs: '21px', md: '19px', lg: '30px', xl: '60px' },
                         textAlign: 'center',
                         fontWeight: '900',
                         color: '#301F3E',
@@ -265,6 +282,38 @@ const CadastrarAnimal = () => {
                             onChange={(e) => setDescricao(e.target.value)} // Atualizando o estado
                             sx={{ background: '#ebebeb', "& fieldset": { border: 'none' }, resize: 'vertical' }}
                         />
+                    </FormControl>
+                    <FormControl sx={{ width: '90%', marginBottom: '16px', gap: '10px' }}>
+                        <FormLabel id="foto">Foto do animal</FormLabel>
+                        <Button
+                            size='small'
+                            component="label"
+                            role={undefined}
+                            sx={{ maxWidth: {xs:'60%', sm:'30%'} }}
+                            variant="contained"
+                            tabIndex={-1}
+                            startIcon={<CloudUploadIcon />}
+                        >
+                            Enviar foto
+                            <VisuallyHiddenInput
+                                type="file"
+                                onChange={(event) => {
+                                    const filesArray = Array.from(event.target.files);
+                                    setPicture(filesArray);
+                                }}
+                            />
+                        </Button>
+                        {Array.isArray(picture) && picture.map((file) => {
+                            return (
+                                <Stack direction={"row"} sx={{ borderRadius: '20px', fontSize: {xs:'13px', sm:'15px'}, justifyContent: 'space-between', paddingX: '5px' }} alignItems={'center'}>
+                                    <AttachFileIcon />
+                                    <Box sx={{color:'#4a91e8'}}>
+                                        {file.name}
+                                    </Box>
+                                    <DeleteIcon onClick={() => setPicture([])} sx={{ cursor: 'pointer' }} />
+                                </Stack>
+                            )
+                        })}
                     </FormControl>
                     <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
                         Cadastrar
