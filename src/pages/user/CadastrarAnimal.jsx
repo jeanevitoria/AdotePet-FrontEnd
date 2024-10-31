@@ -289,7 +289,7 @@ const CadastrarAnimal = () => {
                             size='small'
                             component="label"
                             role={undefined}
-                            sx={{ maxWidth: {xs:'60%', sm:'30%'} }}
+                            sx={{ maxWidth: { xs: '60%', sm: '30%' } }}
                             variant="contained"
                             tabIndex={-1}
                             startIcon={<CloudUploadIcon />}
@@ -305,9 +305,10 @@ const CadastrarAnimal = () => {
                         </Button>
                         {Array.isArray(picture) && picture.map((file) => {
                             return (
-                                <Stack direction={"row"} sx={{ borderRadius: '20px', fontSize: {xs:'13px', sm:'15px'}, justifyContent: 'space-between', paddingX: '5px' }} alignItems={'center'}>
+                                <Stack direction={"row"} sx={{ borderRadius: '20px', fontSize: { xs: '13px', sm: '15px' }, justifyContent: 'space-between', paddingX: '5px' }} alignItems={'center'}>
                                     <AttachFileIcon />
-                                    <Box sx={{color:'#4a91e8'}}>
+                                    <Box sx={{ color: '#4a91e8' }}>
+                                        {console.log(file)}
                                         {file.name}
                                     </Box>
                                     <DeleteIcon onClick={() => setPicture([])} sx={{ cursor: 'pointer' }} />
