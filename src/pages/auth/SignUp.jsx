@@ -69,9 +69,16 @@ const SignUp = () => {
         if (!nome || !email || !password1 || !celular) {
             setAlert({ type: 'warning' })
         } else {
-            cadastroService({nome, email, password1, celular: (celular.replace(/\D/g, ''))})
+            const data = {
+                nome: nome,
+                email: email,
+                senha: password1,
+                celular: (celular.replace(/\D/g, ''))
+            }
+            
+            cadastroService(data)
                 .then((result) => { result.status == 200 ? setAlert({ type: 'success' }) : setAlert({ typ: 'error', message: 'Cadastro não realizado.' }) })
-                .catch((error) => { setAlert({ type: 'error', message: error.message }) })
+                .catch((error) => { setAlert({ type: 'error', message: error }) })
         }
     }
 
