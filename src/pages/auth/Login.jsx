@@ -35,7 +35,8 @@ const Login = () => {
         const data = { email: email, senha: password }
 
         loginService(data)
-            .then(() => {
+            .then((result) => {
+                localStorage.setItem('token', result.data.token)
                 navigate('/home')
             })
             .catch((error) => {
