@@ -16,6 +16,8 @@ import { cadastrarAnimal, obterRacasCachorros, obterRacasGatos } from '../../ser
 import { obterMunicipios, obterEstados } from '../../services/estadosService';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { ActionAlerts } from '../../components/Alert';
+import AlertDialog from '../../components/AlertDialog';
 
 const CadastrarAnimal = () => {
     const navigate = useNavigate();
@@ -36,12 +38,35 @@ const CadastrarAnimal = () => {
     const [estados, setEstados] = useState([]);
     const [cidades, setCidades] = useState([]);
     const [estado, setEstado] = useState('');
+    const [alert, setAlert] = useState({ type: 'none', message: '' });
+    const [alertVisible, setAlertVisible] = useState(false);
     const [erro, setErro] = useState('');
 
     const sendData = () => {
-        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, {cidade, estado}, descricao, foto, peso)
-            .then((result) => {
-                setAlert
+        if (!nomeAnimal, !genero, !tipoAnimal, !raca, !cidade, !estado, !descricao, !picture, !peso, !idade, !vacinado) {
+            setAlert({ type: 'warning', message: 'Há campos vazios ou inválidos.' })
+            setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
+            return;
+        }
+
+        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, { cidade, estado }, descricao, picture, peso, idade, vacinado)
+            .then(() => {
+                setAlertVisible(true)
+                setNomeAnimal('');
+                setGenero('');
+                setTipoAnimal('');
+                setRaca('');
+                setCidade('');
+                setEstado('');
+                setDescricao('');
+                setPicture('');
+                setPeso('');
+                setIdade('');
+                setVacinado('');
+            })
+            .catch((err) => {
+                setAlert({ type: 'error', message: err.message })
+                setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)  
             })
     }
 
@@ -80,11 +105,6 @@ const CadastrarAnimal = () => {
     }, []);
 
     useEffect(() => {
-        console.log(racasCachorros);
-        console.log(racasGatos);
-    }, [racasCachorros, racasGatos]);
-
-    useEffect(() => {
         const getEstados = async () => {
             try {
                 const response = await obterEstados();
@@ -110,30 +130,21 @@ const CadastrarAnimal = () => {
         }
     }, [estado]);
 
-    const handleSubmit = () => {
-        console.log({
-            nomeAnimal,
-            raca,
-            peso,
-            genero,
-            tipoAnimal,
-            cidade,
-            estado,
-            vacinado,
-            idade,
-            descricao
-        });
-    };
-
     return (
         <Grid2 container sx={{
             width: '100vw',
             height: 'auto',
             display: 'flex',
+            position: 'relative',
             flexDirection: 'column',
             alignContent: 'center',
             marginY: { xs: '0%', md: '1%' },
         }}>
+            <Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: { xs: '2%', sm: '1%' }, width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert, setAlert)}</Box>
+            {alertVisible && (<Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: '50%', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>
+                {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible}/>}
+            </Box>
+            )}
             <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: '16px' }}>
                 <Box sx={{
                     textAlign: 'center', marginBottom: '16px', marginX: 'auto'
@@ -160,7 +171,7 @@ const CadastrarAnimal = () => {
                             sx={{ background: '#ebebeb', "& fieldset": { border: 'none' } }}
                         />
                     </FormControl>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '90%', marginBottom: '16px' }}>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, marginY: 'auto', width: '90%', marginBottom: '16px' }}>
                         <FormControl variant="standard" sx={{ width: { xs: '100%', md: '30%' }, marginRight: '5%' }}>
                             <FormLabel id="tipo-animal">Tipo de animal</FormLabel>
                             <Select
@@ -174,7 +185,7 @@ const CadastrarAnimal = () => {
                                 <MenuItem value={'cachorro'}>Cachorro</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl size='small' sx={{ width: { xs: '100%', md: '65%' } }} variant="standard">
+                        <FormControl size='small' sx={{ width: { xs: '100%', md: '65%' }, marginY: 'auto' }} variant="standard">
                             <FormLabel id="raca">Raça</FormLabel>
                             <Select
                                 disabled={!tipoAnimal}
@@ -305,8 +316,10 @@ const CadastrarAnimal = () => {
                             <VisuallyHiddenInput
                                 type="file"
                                 onChange={(event) => {
+                                    console.log(event.target.files)
                                     const filesArray = Array.from(event.target.files);
-                                    setPicture(filesArray);
+                                    setPicture(filesArray[0]);
+                                    console.log(filesArray)
                                 }}
                             />
                         </Button>
@@ -323,7 +336,7 @@ const CadastrarAnimal = () => {
                             )
                         })}
                     </FormControl>
-                    <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
+                    <Button variant="contained" onClick={sendData} sx={{ marginTop: '16px', width: '90%', background: '#301F3E', color: '#ffffff' }}>
                         Cadastrar
                     </Button>
                 </Box>
