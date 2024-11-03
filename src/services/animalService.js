@@ -29,10 +29,10 @@ export const obterRacasGatos = async () => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const tabela = doc.querySelector('table');
-    
+
     const racaGatos = [];
     const linhas = tabela.querySelectorAll('tr');
-    
+
     linhas.forEach((linha, index) => {
         if (index > 0) {
             const colunas = linha.querySelectorAll('td');
@@ -46,3 +46,14 @@ export const obterRacasGatos = async () => {
 
     return racaGatos;
 };
+
+export const cadastrarAnimal = async (nome, genero, tipo, raca, localizacao, descricao, foto, peso) => {
+    const data = { nome: nome, genero: genero, tipo: tipo, raca: raca, localizacao: localizacao, descricao: descricao, foto: foto, peso: peso }
+    return axios.post('https://adotepet-api.vercel.app/api/animal/cadastrar', data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.response.data.message) })
+}

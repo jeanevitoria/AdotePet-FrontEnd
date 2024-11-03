@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import { obterRacasCachorros, obterRacasGatos } from '../../services/animalService';
+import { cadastrarAnimal, obterRacasCachorros, obterRacasGatos } from '../../services/animalService';
 import { obterMunicipios, obterEstados } from '../../services/estadosService';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -37,6 +37,13 @@ const CadastrarAnimal = () => {
     const [cidades, setCidades] = useState([]);
     const [estado, setEstado] = useState('');
     const [erro, setErro] = useState('');
+
+    const sendData = () => {
+        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, {cidade, estado}, descricao, foto, peso)
+            .then((result) => {
+                setAlert
+            })
+    }
 
     const obterRacas = async () => {
         setErro('');

@@ -7,7 +7,7 @@ export const cadastroService = async (data) => {
         }
     })
     .then ((result) => { return result })
-    .catch((err) => { throw new Error(err.message) })
+    .catch((err) => { throw new Error(err.response.data.message) })
 }
 
 export const loginService = async (data) => {
@@ -17,5 +17,5 @@ export const loginService = async (data) => {
         }
     })
     .then((result) => { return result })
-    .catch((err) => { throw new Error(err.message) })
+    .catch((err) => { throw new Error(err.response.data.message) })
 }

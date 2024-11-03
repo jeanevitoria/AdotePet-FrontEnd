@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid2, Button, Divider, Typography, Paper } from '@mui/material';
 import logo from '../../assets/logo.png';
+import { ActionAlerts } from '../../components/Alert';
 import imgLogin2 from '../../assets/imgLogin2.png';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TextField from '@mui/material/TextField';
@@ -9,9 +10,13 @@ import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 import { useNavigate } from 'react-router-dom';
 import logoAdote from '../../assets/logoAdote.png';
+import { loginService } from '../../services/userService';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState({ type: 'none', message: '' });
 
     const providers = [
         { id: 'github', name: 'GitHub' },
@@ -20,6 +25,26 @@ const Login = () => {
         { id: 'twitter', name: 'Twitter' },
         { id: 'linkedin', name: 'LinkedIn' },
     ];
+
+    const sendData = () => {
+        if (!email || !password) {
+            setAlert({ type: 'warning', message: 'Informe o e-mail e senha.' })
+            setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
+            return;
+        }
+        const data = { email: email, senha: password }
+
+        loginService(data)
+            .then(() => {
+                navigate('/home')
+            })
+            .catch((error) => {
+                setAlert({ type: 'error', message: error.message });
+                setTimeout(() => {
+                    setAlert({ type: 'none', message: '' })
+                }, 3000);
+            })
+    }
 
     return (
         <Grid2 container sx={{
@@ -109,8 +134,10 @@ const Login = () => {
             </Grid2>
 
             <Grid2 item xs={12} md={6} sx={{ height: '100%', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#ffffff' } }}>
-                <Box sx={{ top: 0, left: 0, marginTop: '2.5%', marginLeft: '2.5%', justifyContent: 'flex-start', display: 'flex', color: '#301F3E' }}>
-                    < ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
+                <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', width: '100%' }}>
+                    <Box sx={{ position: 'absolute', width: '100%', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
+                        <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
+                    </Box>
                 </Box>
                 <Box sx={{
                     height: '100%',
@@ -119,6 +146,8 @@ const Login = () => {
                     justifySelf: 'center',
                     flexDirection: 'column',
                 }}>
+                    <Box sx={{ justifySelf: 'center', marginTop: 'auto', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert, setAlert)}</Box>
+
                     <Paper elevation={3} sx={{ height: 'auto', width: { xs: '90%', md: '50%' }, margin: 'auto', padding: '0' }}>
                         {/* Logo */}
                         <Box sx={{
@@ -159,10 +188,10 @@ const Login = () => {
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', marginX: 'auto', marginY: '5%' }}>
-                            <TextField size='small' id="email" label="E-mail" required sx={{ width: '80%', marginBottom: '2%' }} />
-                            <TextField size='small' id="senha" label="Senha" type="password" sx={{ width: '80%' }} />
+                            <TextField size='small' id="email" label="E-mail" onChange={(e) => setEmail(e.target.value)} required sx={{ width: '80%', marginBottom: '2%' }} />
+                            <TextField size='small' id="senha" label="Senha" onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '80%' }} />
                             <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '80%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
-                            <Button variant="contained" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
+                            <Button variant="contained" onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
                         </Box>
                         <Divider sx={{ color: '#8e8e8e', marginY: '2%' }}>ou</Divider>
                         <Box sx={{ display: 'flex', flexDirection: 'row', marginY: '2%', justifyContent: 'center' }} >
