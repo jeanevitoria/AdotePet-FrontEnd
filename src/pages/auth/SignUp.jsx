@@ -27,7 +27,7 @@ const SignUp = () => {
     const [showPassword1, setShowPassword1] = React.useState(false);
     const [showPassword2, setShowPassword2] = React.useState(false);
     const [array, setArray] = useState(['(', '_', '_', ')', ' ', '9', '_', '_', '_', '_', '-', '_', '_', '_', '_'])
-    const [alert, setAlert] = useState({ type: 'success', message: '' });
+    const [alert, setAlert] = useState({ type: 'none', message: '' });
     const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
     const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
 
@@ -78,7 +78,7 @@ const SignUp = () => {
             
             cadastroService(data)
                 .then((result) => { result.status == 200 ? setAlert({ type: 'success' }) : setAlert({ typ: 'error', message: 'Cadastro não realizado.' }) })
-                .catch((error) => { setAlert({ type: 'error', message: error }) })
+                .catch((error) => { setAlert({ type: 'error', message: error.message }) })
         }
     }
 
