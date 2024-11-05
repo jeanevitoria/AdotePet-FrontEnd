@@ -6,8 +6,8 @@ export const cadastroService = async (data) => {
             'Content-Type': 'application/json'
         }
     })
-    .then ((result) => { return result })
-    .catch((err) => { throw new Error(err.response.data.message) })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
 }
 
 export const loginService = async (data) => {
@@ -16,6 +16,9 @@ export const loginService = async (data) => {
             'Content-Type': 'application/json'
         }
     })
-    .then((result) => { return result })
-    .catch((err) => { throw new Error(err.response.data.message) })
+        .then((result) => {
+            console.log(result)
+            return result
+        })
+        .catch((err) => { throw new Error(err.message) })
 }

@@ -49,7 +49,7 @@ const CadastrarAnimal = () => {
             return;
         }
 
-        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, { cidade, estado }, descricao, picture, peso, idade, vacinado)
+        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, { cidade, estado }, descricao, picture[0], peso, idade, vacinado)
             .then(() => {
                 setAlertVisible(true)
                 setNomeAnimal('');
@@ -59,14 +59,14 @@ const CadastrarAnimal = () => {
                 setCidade('');
                 setEstado('');
                 setDescricao('');
-                setPicture('');
+                setPicture([]);
                 setPeso('');
                 setIdade('');
                 setVacinado('');
             })
             .catch((err) => {
                 setAlert({ type: 'error', message: err.message })
-                setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)  
+                setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
             })
     }
 
@@ -142,7 +142,7 @@ const CadastrarAnimal = () => {
         }}>
             <Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: { xs: '2%', sm: '1%' }, width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert, setAlert)}</Box>
             {alertVisible && (<Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: '50%', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>
-                {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible}/>}
+                {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible} />}
             </Box>
             )}
             <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: '16px' }}>
@@ -318,7 +318,7 @@ const CadastrarAnimal = () => {
                                 onChange={(event) => {
                                     console.log(event.target.files)
                                     const filesArray = Array.from(event.target.files);
-                                    setPicture(filesArray[0]);
+                                    setPicture(filesArray);
                                     console.log(filesArray)
                                 }}
                             />
@@ -328,7 +328,6 @@ const CadastrarAnimal = () => {
                                 <Stack direction={"row"} sx={{ borderRadius: '20px', fontSize: { xs: '13px', sm: '15px' }, justifyContent: 'space-between', paddingX: '5px' }} alignItems={'center'}>
                                     <AttachFileIcon />
                                     <Box sx={{ color: '#4a91e8' }}>
-                                        {console.log(file)}
                                         {file.name}
                                     </Box>
                                     <DeleteIcon onClick={() => setPicture([])} sx={{ cursor: 'pointer' }} />

@@ -58,5 +58,5 @@ export const cadastrarAnimal = async (nome, genero, tipo, raca, localizacao, des
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.response.data.message) })
+        .catch((err) => { throw new Error(err.message) })
 }
