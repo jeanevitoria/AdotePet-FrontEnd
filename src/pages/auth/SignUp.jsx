@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
@@ -26,6 +27,7 @@ const SignUp = () => {
     const [error, setError] = useState(false);
     const [showPassword1, setShowPassword1] = React.useState(false);
     const [showPassword2, setShowPassword2] = React.useState(false);
+    const [nascimento, setNascimento] = useState("__/__/____");
     const [array, setArray] = useState(['(', '_', '_', ')', ' ', '9', '_', '_', '_', '_', '-', '_', '_', '_', '_'])
     const [alert, setAlert] = useState({ type: 'none', message: '' });
     const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
@@ -66,16 +68,17 @@ const SignUp = () => {
     };
 
     const handleSignUp = async () => {
-        if (!nome || !email || !password1 || !celular) {
+        if (!nome || !email || !password1 || !celular || nascimento) {
             setAlert({ type: 'warning' })
         } else {
             const data = {
                 nome: nome,
                 email: email,
                 senha: password1,
-                celular: (celular.replace(/\D/g, ''))
+                celular: (celular.replace(/\D/g, '')),
+                nascimento: nascimento.replace(/\//g, '-')
             }
-            
+
             cadastroService(data)
                 .then((result) => { result.status == 200 ? setAlert({ type: 'success' }) : setAlert({ typ: 'error', message: 'Cadastro não realizado.' }) })
                 .catch((error) => { setAlert({ type: 'error', message: error.message }) })
@@ -85,6 +88,17 @@ const SignUp = () => {
     useEffect(() => {
         setError(password1 != password2)
     }, [password2])
+
+    const handlenascimentoChange = (e) => {
+        // Captura apenas valores numéricos
+        let input = e.target.value.replace(/\D/g, '');
+
+        // Insere as barras (/) na posição correta
+        if (input.length > 2) input = input.slice(0, 2) + '/' + input.slice(2);
+        if (input.length > 5) input = input.slice(0, 5) + '/' + input.slice(5);
+
+        setNascimento(input.slice(0, 10));
+    };
 
     const handleCelular = (e) => {
         // Separa os valores numéricos
@@ -140,10 +154,9 @@ const SignUp = () => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'center',
-            position:'relative',
-            backgroundColor: '#e2e2e2'
+            position: 'relative',
         }}>
-            <Box sx={{ position: 'relative', left:0, top:0, marginY: '5px', display: 'flex', flexDirection: {xs:'row', sm:'column'}, width: '100%' }}>
+            <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
                 <Box sx={{ position: 'absolute', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
                     <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
                 </Box>
@@ -158,7 +171,7 @@ const SignUp = () => {
                 display: 'flex',
                 flexDirection: 'column',
             }}>
-                <Paper elevation={5} sx={{ height: 'auto', margin: 'auto', width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' }, display: 'flex', flexDirection: 'column' }}>
+                <Paper elevation={2} sx={{ margin: 'auto', width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' }, display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ textAlign: 'center', margin: '5%' }}>
                         <Typography variant="body1" sx={{
                             fontSize: { xs: '23px', md: '30px', lg: '30px', xl: '60px' },
@@ -171,32 +184,44 @@ const SignUp = () => {
                             CADASTRO
                         </Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginY: '1%', width: '100%', marginX: 'auto', }}>
-                        <TextField size='small' onChange={(e) => setEmail(e.target.value)} required id="email" label="E-mail" sx={{ width: '70%', height: '17%' }} />
-                        <TextField size='small' onChange={(e) => setNome(e.target.value)} required id="nome" label="Nome completo" sx={{ width: '70%', height: '17%' }} />
-                        <TextField
-                            size="small"
-                            required
-                            id="celular"
-                            label="Número do celular"
-                            value={celular}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Backspace') {
-                                    e.preventDefault();
-                                    handleBackspace(e);
-                                } else {
-                                    e.preventDefault();
-                                    handleCelular(e);
-                                }
-                            }}
-                            placeholder="(__) 9____-____"
-                            sx={{ width: '70%', height: '17%' }}
-                        />
-                        <FormControl size='small' sx={{ width: '70%', height: '17%' }} variant="outlined">
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginY: '1%', width: '100%', marginX: 'auto' }}>
+                        <TextField size='small' onChange={(e) => setEmail(e.target.value)} required id="email" label="E-mail" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
+                        <TextField size='small' onChange={(e) => setNome(e.target.value)} required id="nome" label="Nome completo" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
+                        <Stack sx={{ width: '70%', height: '17%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <TextField
+                                size="small"
+                                required
+                                id="celular"
+                                value={celular}
+                                label="Celular"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Backspace') {
+                                        e.preventDefault();
+                                        handleBackspace(e);
+                                    } else {
+                                        e.preventDefault();
+                                        handleCelular(e);
+                                    }
+                                }}
+                                placeholder="(__) 9____-____"
+                                sx={{ width: { xs: '100%', md: '45%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
+                            />
+                            <TextField
+                                required
+                                size="small"
+                                placeholder='dd/mm/aaaa'
+                                label='Data de nascimento'
+                                value={nascimento}
+                                onChange={handlenascimentoChange}
+                                sx={{ width: { xs: '100%', md: '50%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
+                            />
+                        </Stack>
+                        <FormControl size='small' sx={{ width: '70%' }} variant="outlined">
                             <InputLabel htmlFor="senha" >Senha</InputLabel>
                             <OutlinedInput
                                 id="senha"
                                 type={showPassword1 ? 'text' : 'password'}
+                                sx={{ background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
                                 onChange={(e) => setPassword1(e.target.value)}
                                 endAdornment={
                                     <InputAdornment position="end">
@@ -214,12 +239,13 @@ const SignUp = () => {
                                 label="Senha"
                             />
                         </FormControl>
-                        <FormControl size='small' sx={{ width: '70%', height: '17%', marginBottom: '2%' }} variant="outlined">
+                        <FormControl size='small' sx={{ width: '70%', marginBottom: '2%' }} variant="outlined">
                             <InputLabel htmlFor="confirmar-senha" >Confimar senha</InputLabel>
                             <OutlinedInput
                                 id="confirmar-senha"
                                 error={error}
                                 type={showPassword2 ? 'text' : 'password'}
+                                sx={{ background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
                                 onChange={(e) => { setPassword2(e.target.value) }}
                                 endAdornment={
                                     <InputAdornment position="end">

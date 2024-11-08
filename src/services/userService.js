@@ -22,3 +22,15 @@ export const loginService = async (data) => {
         })
         .catch((err) => { throw new Error(err.message) })
 }
+
+export const getUserService = async () => {
+    const token = localStorage.getItem('token')
+    return axios.get(`https://adotepet-api.vercel.app/api/user/perfil`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => {return result})
+        .catch((err) => { throw new Error(err.message) })
+}
