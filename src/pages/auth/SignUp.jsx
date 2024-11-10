@@ -41,14 +41,7 @@ const SignUp = () => {
                         Todos os campos precisam ser preenchidos.
                     </Alert>}
                 {alert.type == 'success' &&
-                    <Alert
-                        severity="success"
-                        action={
-                            <Button color="inherit" size="small" onClick={() => navigate('/auth/login')}>
-                                Fazer login
-                            </Button>
-                        }
-                    >
+                    <Alert severity="success" >
                         Cadastro realizado com sucesso.
                     </Alert>}
                 {alert.type == 'error' &&
@@ -71,6 +64,7 @@ const SignUp = () => {
         console.log(nome, email, password1, celular, nascimento)
         if (!nome || !email || !password1 || !celular || !nascimento) {
             setAlert({ type: 'warning' })
+            setTimeout(() => setAlert({ type: 'none' }), 5000)
         } else {
             const data = {
                 nome: nome,
@@ -81,7 +75,15 @@ const SignUp = () => {
             }
 
             cadastroService(data)
-                .then((result) => { result.status == 200 ? setAlert({ type: 'success' }) : setAlert({ typ: 'error', message: 'Cadastro não realizado.' }) })
+                .then((result) => {
+                    if (result.status == 200) {
+                        setAlert({ type: 'success' })
+                        setTimeout(() => navigate('/auth/login'), 5000)
+                    } else {
+                        setAlert({ typ: 'error', message: 'Cadastro não realizado.' })
+                        setTimeout(() => setAlert({ type: 'none' }), 5000)
+                    }
+                })
                 .catch((error) => { setAlert({ type: 'error', message: error.message }) })
         }
     }
@@ -188,7 +190,7 @@ const SignUp = () => {
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginY: '1%', width: '100%', marginX: 'auto' }}>
                         <TextField size='small' onChange={(e) => setEmail(e.target.value)} required id="email" label="E-mail" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
                         <TextField size='small' onChange={(e) => setNome(e.target.value)} required id="nome" label="Nome completo" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
-                        <Stack sx={{  marginBottom:{xs:'20px', sm:'0px'}, width: '70%', height: '17%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between' }}>
+                        <Stack sx={{ marginBottom: { xs: '20px', sm: '0px' }, width: '70%', height: '17%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between' }}>
                             <TextField
                                 size="small"
                                 required
@@ -205,7 +207,7 @@ const SignUp = () => {
                                     }
                                 }}
                                 placeholder="(__) 9____-____"
-                                sx={{ marginBottom:{xs:'20px', sm:'0px'}, width: { xs: '100%', md: '45%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
+                                sx={{ marginBottom: { xs: '20px', sm: '0px' }, width: { xs: '100%', md: '45%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
                             />
                             <TextField
                                 required
