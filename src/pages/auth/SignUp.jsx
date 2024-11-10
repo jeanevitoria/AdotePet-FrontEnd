@@ -68,7 +68,8 @@ const SignUp = () => {
     };
 
     const handleSignUp = async () => {
-        if (!nome || !email || !password1 || !celular || nascimento) {
+        console.log(nome, email, password1, celular, nascimento)
+        if (!nome || !email || !password1 || !celular || !nascimento) {
             setAlert({ type: 'warning' })
         } else {
             const data = {
@@ -187,7 +188,7 @@ const SignUp = () => {
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginY: '1%', width: '100%', marginX: 'auto' }}>
                         <TextField size='small' onChange={(e) => setEmail(e.target.value)} required id="email" label="E-mail" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
                         <TextField size='small' onChange={(e) => setNome(e.target.value)} required id="nome" label="Nome completo" sx={{ width: '70%', background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }} />
-                        <Stack sx={{ width: '70%', height: '17%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Stack sx={{  marginBottom:{xs:'20px', sm:'0px'}, width: '70%', height: '17%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between' }}>
                             <TextField
                                 size="small"
                                 required
@@ -204,7 +205,7 @@ const SignUp = () => {
                                     }
                                 }}
                                 placeholder="(__) 9____-____"
-                                sx={{ width: { xs: '100%', md: '45%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
+                                sx={{ marginBottom:{xs:'20px', sm:'0px'}, width: { xs: '100%', md: '45%' }, background: '#ebebeb', "& fieldset": { border: 'none' }, borderRadius: '5px' }}
                             />
                             <TextField
                                 required
