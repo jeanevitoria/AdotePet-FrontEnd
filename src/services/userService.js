@@ -31,6 +31,18 @@ export const getUserService = async () => {
             'Authorization': `Bearer ${token}`,
         }
     })
-        .then((result) => {return result})
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}
+
+export const atualizarPerfilService = async (data) => {
+    const token = localStorage.getItem('token')
+    return axios.put(`https://adotepet-api.vercel.app/api/user/alterar-perfil`, data, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((result) => { return result })
         .catch((err) => { throw new Error(err.message) })
 }

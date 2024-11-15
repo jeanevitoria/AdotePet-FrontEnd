@@ -144,11 +144,12 @@ const Login = () => {
                     height: '100%',
                     width: '100%',
                     display: 'flex',
-                    justifySelf: 'center',
+                    justifyContent: { sm: 'center' },
+                    alignContent: 'center',
+                    alignItems: 'center',
                     flexDirection: 'column',
                 }}>
-                    <Box sx={{ justifySelf: 'center', marginTop: 'auto', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert, setAlert)}</Box>
-
+                    <Box sx={{ display: 'flex', flexDirection: 'column', position: 'fixed', height: '100%', alignContent: 'center', marginTop: { xs: '2%', sm: '5%' } }}><ActionAlerts alert={alert} setAlert={setAlert} /></Box>
                     <Paper elevation={3} sx={{ height: 'auto', width: { xs: '90%', md: '50%' }, margin: 'auto', padding: '0' }}>
                         {/* Logo */}
                         <Box sx={{
@@ -189,10 +190,25 @@ const Login = () => {
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', marginX: 'auto', marginY: '5%' }}>
-                            <TextField size='small' id="email" label="E-mail" onChange={(e) => setEmail(e.target.value)} required sx={{ width: '80%', marginBottom: '2%' }} />
-                            <TextField size='small' id="senha" label="Senha" onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '80%' }} />
+                            <TextField size='small' id="email" label="E-mail" onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault()
+                                    sendData()
+                                }
+                            }} onChange={(e) => setEmail(e.target.value)} required sx={{ width: '80%', marginBottom: '2%' }} />
+                            <TextField size='small' id="senha" label="Senha" onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault()
+                                    sendData()
+                                }
+                            }} onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '80%' }} />
                             <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '80%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
-                            <Button variant="contained" onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
+                            <Button variant="contained" onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault()
+                                    sendData()
+                                }
+                            }} onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
                         </Box>
                         <Divider sx={{ color: '#8e8e8e', marginY: '2%' }}>ou</Divider>
                         <Box sx={{ display: 'flex', flexDirection: 'row', marginY: '2%', justifyContent: 'center' }} >

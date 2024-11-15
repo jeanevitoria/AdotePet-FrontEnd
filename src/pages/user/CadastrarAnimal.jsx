@@ -137,10 +137,12 @@ const CadastrarAnimal = () => {
             display: 'flex',
             position: 'relative',
             flexDirection: 'column',
+            justifyContent: { sm: 'center' },
             alignContent: 'center',
+            alignItems: 'center',
             marginY: { xs: '0%', md: '1%' },
         }}>
-            <Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: { xs: '2%', sm: '1%' }, width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert, setAlert)}</Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', position: 'fixed', top:0, alignContent: 'center', marginTop: { xs: '2%', sm: '5%' } }}><ActionAlerts alert={alert} setAlert={setAlert} /></Box>
             {alertVisible && (<Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: '50%', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>
                 {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible} />}
             </Box>
