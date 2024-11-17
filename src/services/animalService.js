@@ -60,3 +60,51 @@ export const cadastrarAnimal = async (nome, genero, tipo, raca, localizacao, des
         .then((result) => { return result })
         .catch((err) => { throw new Error(err.message) })
 }
+
+export const getAnimal = async (id_animal) => {
+    const token = localStorage.getItem('token');
+    axios.get(`https://adotepet-api.vercel.app/api/animal/${id_animal}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}
+
+export const getPublicacoes = async (id_animal) => {
+    const token = localStorage.getItem('token');
+    axios.get(`https://adotepet-api.vercel.app/api/animal/publicacoes`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}
+
+export const getAnimaisDisponiveis = async () => {
+    const token = localStorage.getItem('token');
+    axios.get(`https://adotepet-api.vercel.app/api/animal/disponiveis`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}
+
+export const confirmarAdocao = async (id_animal) => {
+    const token = localStorage.getItem('token');
+    axios.get(`https://adotepet-api.vercel.app/api/animal/confirmar-adocao`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}

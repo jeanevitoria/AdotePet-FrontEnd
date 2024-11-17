@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import cachorro1 from '../assets/cachorro1.png';
 import cachorro2 from '../assets/cachorro2.jpg';
+
 // import cachorro3 from '../assets/cachorro3.png';
 // import cachorro4 from '../assets/cachorro4.png';
 // import cachorro5 from '../assets/cachorro5.png';
@@ -13,11 +14,11 @@ import cachorro2 from '../assets/cachorro2.jpg';
 
 
 
-function ActionAreaCard({descricao}) {
+function ActionAreaCard({descricao, onClick}) {
     const { nome, raca, sexo, local } = descricao;
 
     return (
-        <Card>
+        <Card onClick={onClick}>
             <CardActionArea>
                 <CardMedia
                     component="img"

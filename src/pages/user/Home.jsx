@@ -15,47 +15,53 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
+import { getAnimaisDisponiveis, getPublicacoes } from '../../services/animalService';
 
 const Home = () => {
     const { sm, md, lg } = useWindowSize();
 
-    const data = [
-        { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' },
-        { nome: 'Rex', raca: 'Labrador', sexo: 'Macho', local: 'São Paulo, São Paulo' },
-        { nome: 'Luna', raca: 'Golden Retriever', sexo: 'Fêmea', local: 'Curitiba, Paraná' },
-        { nome: 'Thor', raca: 'Pastor Alemão', sexo: 'Macho', local: 'Porto Alegre, Rio Grande do Sul' },
-        { nome: 'Mia', raca: 'Poodle', sexo: 'Fêmea', local: 'Salvador, Bahia' },
-        { nome: 'Bolt', raca: 'Husky Siberiano', sexo: 'Macho', local: 'Rio de Janeiro, Rio de Janeiro' },
-        { nome: 'Bella', raca: 'Beagle', sexo: 'Fêmea', local: 'Belo Horizonte, Minas Gerais' },
-        { nome: 'Max', raca: 'Dachshund', sexo: 'Macho', local: 'Fortaleza, Ceará' },
-        { nome: 'Zara', raca: 'Bulldog', sexo: 'Fêmea', local: 'Manaus, Amazonas' },
-        { nome: 'Simba', raca: 'Chow Chow', sexo: 'Macho', local: 'Florianópolis, Santa Catarina' },
-        { nome: 'Nina', raca: 'Shih Tzu', sexo: 'Fêmea', local: 'Vitória, Espírito Santo' },
-        { nome: 'Apollo', raca: 'Pit Bull', sexo: 'Macho', local: 'Brasília, Distrito Federal' },
-        { nome: 'Lola', raca: 'Basset Hound', sexo: 'Fêmea', local: 'Natal, Rio Grande do Norte' },
-        { nome: 'Zeus', raca: 'Rottweiler', sexo: 'Macho', local: 'Goiânia, Goiás' },
-        { nome: 'Daisy', raca: 'Cocker Spaniel', sexo: 'Fêmea', local: 'Campinas, São Paulo' },
-        { nome: 'Lucky', raca: 'Border Collie', sexo: 'Macho', local: 'Maceió, Alagoas' },
-        { nome: 'Chanel', raca: 'Yorkshire Terrier', sexo: 'Fêmea', local: 'Belém, Pará' },
-        { nome: 'Oscar', raca: 'Boxer', sexo: 'Macho', local: 'João Pessoa, Paraíba' },
-        { nome: 'Maggie', raca: 'Maltês', sexo: 'Fêmea', local: 'São Luís, Maranhão' },
-        { nome: 'Toby', raca: 'Jack Russell', sexo: 'Macho', local: 'Campo Grande, Mato Grosso do Sul' },
-        { nome: 'Lulu', raca: 'Spitz Alemão', sexo: 'Fêmea', local: 'Teresina, Piauí' },
-        { nome: 'Charlie', raca: 'Cavalier King Charles', sexo: 'Macho', local: 'Aracaju, Sergipe' },
-        { nome: 'Kira', raca: 'Bulldog Francês', sexo: 'Fêmea', local: 'Palmas, Tocantins' },
-        { nome: 'Rocky', raca: 'Doberman', sexo: 'Macho', local: 'Cuiabá, Mato Grosso' },
-        { nome: 'Bobby', raca: 'Akita', sexo: 'Macho', local: 'Macapá, Amapá' }
-    ];
+    // const data = [
+    //     { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' },
+    //     { nome: 'Rex', raca: 'Labrador', sexo: 'Macho', local: 'São Paulo, São Paulo' },
+    //     { nome: 'Luna', raca: 'Golden Retriever', sexo: 'Fêmea', local: 'Curitiba, Paraná' },
+    //     { nome: 'Thor', raca: 'Pastor Alemão', sexo: 'Macho', local: 'Porto Alegre, Rio Grande do Sul' },
+    //     { nome: 'Mia', raca: 'Poodle', sexo: 'Fêmea', local: 'Salvador, Bahia' },
+    //     { nome: 'Bolt', raca: 'Husky Siberiano', sexo: 'Macho', local: 'Rio de Janeiro, Rio de Janeiro' },
+    //     { nome: 'Bella', raca: 'Beagle', sexo: 'Fêmea', local: 'Belo Horizonte, Minas Gerais' },
+    //     { nome: 'Max', raca: 'Dachshund', sexo: 'Macho', local: 'Fortaleza, Ceará' },
+    //     { nome: 'Zara', raca: 'Bulldog', sexo: 'Fêmea', local: 'Manaus, Amazonas' },
+    //     { nome: 'Simba', raca: 'Chow Chow', sexo: 'Macho', local: 'Florianópolis, Santa Catarina' },
+    //     { nome: 'Nina', raca: 'Shih Tzu', sexo: 'Fêmea', local: 'Vitória, Espírito Santo' },
+    //     { nome: 'Apollo', raca: 'Pit Bull', sexo: 'Macho', local: 'Brasília, Distrito Federal' },
+    //     { nome: 'Lola', raca: 'Basset Hound', sexo: 'Fêmea', local: 'Natal, Rio Grande do Norte' },
+    //     { nome: 'Zeus', raca: 'Rottweiler', sexo: 'Macho', local: 'Goiânia, Goiás' },
+    //     { nome: 'Daisy', raca: 'Cocker Spaniel', sexo: 'Fêmea', local: 'Campinas, São Paulo' },
+    //     { nome: 'Lucky', raca: 'Border Collie', sexo: 'Macho', local: 'Maceió, Alagoas' },
+    //     { nome: 'Chanel', raca: 'Yorkshire Terrier', sexo: 'Fêmea', local: 'Belém, Pará' },
+    //     { nome: 'Oscar', raca: 'Boxer', sexo: 'Macho', local: 'João Pessoa, Paraíba' },
+    //     { nome: 'Maggie', raca: 'Maltês', sexo: 'Fêmea', local: 'São Luís, Maranhão' },
+    //     { nome: 'Toby', raca: 'Jack Russell', sexo: 'Macho', local: 'Campo Grande, Mato Grosso do Sul' },
+    //     { nome: 'Lulu', raca: 'Spitz Alemão', sexo: 'Fêmea', local: 'Teresina, Piauí' },
+    //     { nome: 'Charlie', raca: 'Cavalier King Charles', sexo: 'Macho', local: 'Aracaju, Sergipe' },
+    //     { nome: 'Kira', raca: 'Bulldog Francês', sexo: 'Fêmea', local: 'Palmas, Tocantins' },
+    //     { nome: 'Rocky', raca: 'Doberman', sexo: 'Macho', local: 'Cuiabá, Mato Grosso' },
+    //     { nome: 'Bobby', raca: 'Akita', sexo: 'Macho', local: 'Macapá, Amapá' }
+    // ];
 
     const [nextElement, setNextElement] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(lg ? 3 : md ? 2 : sm ? 1 : 4);
-    const [publicacoes, setPublicacoes] = useState(data.slice(0, itemsPerPage));
+    const [publicacoes, setPublicacoes] = useState([]);
     const [alignment, setAlignment] = useState('sem filtro');
     const navigate = useNavigate();
 
-    const showLoginModal = () => {
-        return (<LoginModal />)
-    }
+    useEffect(() => {
+        const getData = async () => {
+            const publicacoes = await getPublicacoes();
+            const dataAnimais = await getAnimaisDisponiveis()
+            console.table(publicacoes, dataAnimais)
+        }
+        getData();
+    }, [])
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
@@ -120,7 +126,7 @@ const Home = () => {
                     {/* Publicações do usuário */}
                     {publicacoes.map((value, index) => (
                         <Box item sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center' }} width="250px" key={index}>
-                            <AnimalCard descricao={value} onClick={showLoginModal} />
+                            <AnimalCard descricao={value} onClick={navigate(`/animal/${id}`)} />
                         </Box>
                     ))}
                     {/* Seta para avançar */}
@@ -209,7 +215,7 @@ const Home = () => {
                     {data.map((value, index) => {
                         return (
                             <Box sx={{ width: { sx: '100%', sm:'40%', md:'250px', lg:'20%' }, justifyContent:'center' }} key={index}>
-                                <AnimalCard descricao={value} onClick={showLoginModal} width="100%" />
+                                <AnimalCard descricao={value}  onClick={navigate(`/animal/${id}`)} width="100%" />
                             </Box>
                         )
                     })}

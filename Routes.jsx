@@ -14,6 +14,7 @@ import Chat from './src/pages/user/Chat.jsx';
 import CadastrarAnimal from './src/pages/user/CadastrarAnimal.jsx';
 import Home from './src/pages/user/Home.jsx';
 import Perfil from './src/pages/user/Perfil.jsx';
+import AnimalDetails from './src/pages/user/AnimalDetails.jsx';
 
 function AppRoutes() {
 
@@ -27,6 +28,7 @@ function AppRoutes() {
           <Route path='/auth/recuperar-senha' element={<PasswordRecovery />} />
           <Route path='/auth/redefinir-senha' element={<PasswordReset />} />
           <Route path='/cadastrar-animal' element={<CadastrarAnimal />} />
+          <Route path='/animal/:id' element={<AnimalDetails/>} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/home' element={<Home />} />
           <Route path='/perfil' element={<Perfil />} />
