@@ -29,12 +29,17 @@ const AnimalDetails = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const response = await getAnimal(id);
-            console.log(response);
+            console.log(id)
+            try {
+                const response = await getAnimal(id);
+                console.log(response);
+            } catch (err) {
+                console.log(err)
+            }
         }
         getData()
-    }, [id])
-    
+        }, [])
+
     return (
         <Card sx={{ display: 'flex', width: '100wv' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>

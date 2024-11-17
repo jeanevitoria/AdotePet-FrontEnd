@@ -63,7 +63,7 @@ export const cadastrarAnimal = async (nome, genero, tipo, raca, localizacao, des
 
 export const getAnimal = async (id_animal) => {
     const token = localStorage.getItem('token');
-    axios.get(`https://adotepet-api.vercel.app/api/animal/${id_animal}`, {
+    return axios.get(`https://adotepet-api.vercel.app/api/animal/${id_animal}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const getAnimal = async (id_animal) => {
 
 export const getPublicacoes = async (id_animal) => {
     const token = localStorage.getItem('token');
-    axios.get(`https://adotepet-api.vercel.app/api/animal/publicacoes`, {
+    return axios.get(`https://adotepet-api.vercel.app/api/animal/publicacoes`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ export const getPublicacoes = async (id_animal) => {
 
 export const getAnimaisDisponiveis = async () => {
     const token = localStorage.getItem('token');
-    axios.get(`https://adotepet-api.vercel.app/api/animal/disponiveis`, {
+    return axios.get(`https://adotepet-api.vercel.app/api/animal/disponiveis`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -99,7 +99,7 @@ export const getAnimaisDisponiveis = async () => {
 
 export const confirmarAdocao = async (id_animal) => {
     const token = localStorage.getItem('token');
-    axios.get(`https://adotepet-api.vercel.app/api/animal/confirmar-adocao`, {
+    return axios.get(`https://adotepet-api.vercel.app/api/animal/confirmar-adocao`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
