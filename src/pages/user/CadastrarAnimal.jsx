@@ -50,6 +50,8 @@ const CadastrarAnimal = () => {
             setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
             return;
         }
+        console.log(file);
+        console.log(picture) 
 
         const reader = new FileReader();
         reader.onloadend = () => {
