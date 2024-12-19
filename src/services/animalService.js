@@ -50,17 +50,18 @@ export const obterRacasGatos = async () => {
 
 export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descricao, file, peso, idade, vacinado) => {
     const formData = new FormData();
-    
+
     formData.append('nome', nome);
     formData.append('sexo', sexo);
     formData.append('tipo', tipo);
     formData.append('raca', raca);
-    formData.append('localizacao', localizacao);
+    // Convertendo o objeto localizacao para uma string JSON antes de enviá-lo
+    formData.append('localizacao', JSON.stringify(localizacao));
     formData.append('descricao', descricao);
     formData.append('peso', peso);
     formData.append('idade', idade);
     formData.append('vacinado', vacinado);
-    
+
     formData.append('foto', file);
 
     const token = localStorage.getItem('token');
@@ -71,8 +72,8 @@ export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descr
             'Authorization': `Bearer ${token}`,
         }
     })
-    .then((result) => { return result })
-    .catch((err) => { throw new Error(err.message) })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
 }
 
 
