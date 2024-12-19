@@ -17,6 +17,7 @@ import { getAnimal } from "../../services/animalService";
 const AnimalDetails = () => {
     const { id } = useParams();
     const [nome, setNome] = useState('')
+    const [foto, setFoto] = useState('');
     const [endereco, setEndereco] = useState('')
     const [raca, setRaca] = useState('');
     const [sexo, setSexo] = useState('');
@@ -32,7 +33,6 @@ const AnimalDetails = () => {
 
     useEffect(() => {
         const getData = async () => {
-            console.log(id)
             try {
                 const response = await getAnimal(id);
                 const data = response.data;
@@ -48,6 +48,7 @@ const AnimalDetails = () => {
                 setEmail(data.email);
                 setTelefone(data.telefone);
                 setDescricao(data.descricao);
+                setFoto(data.foto.toString('base64'));
             } catch (err) {
                 console.log(err)
             }
@@ -64,8 +65,8 @@ const AnimalDetails = () => {
         <Grid2 sx={{display: 'flex', flexDirection: 'column'}}>
             <Box sx={{display:'flex', flexDirection: 'row'}}>
                 <Card>
-
-                </Card>
+                    <img src={`data:image/jpeg;base64,${foto}`}></img>
+                </Card> 
                 <Typography>
                     { descricao }
                 </Typography>
