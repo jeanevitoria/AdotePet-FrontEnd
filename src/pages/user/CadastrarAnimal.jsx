@@ -327,10 +327,11 @@ const CadastrarAnimal = () => {
                             Enviar foto
                             <VisuallyHiddenInput
                                 type="file"
-                                onChange={(event) => {
-                                    console.log(event.target.files)
-                                    const filesArray = Array.from(event.target.files[0]);
+                                onChange={(event) => {                                    
+                                    const filesArray = Array.from(event.target.files);
                                     setFile(filesArray);
+                                    console.log(filesArray)
+                                    console.log('foto:' + file)
                                 }}
                             />
                         </Button>
