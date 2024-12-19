@@ -27,7 +27,7 @@ const CadastrarAnimal = () => {
     const [nomeAnimal, setNomeAnimal] = useState('');
     const [raca, setRaca] = useState('');
     const [peso, setPeso] = useState('');
-    const [genero, setGenero] = useState('');
+    const [sexo, setSexo] = useState('');
     const [tipoAnimal, setTipoAnimal] = useState('');
     const [cidade, setCidade] = useState('');
     const [vacinado, setVacinado] = useState('');
@@ -43,17 +43,23 @@ const CadastrarAnimal = () => {
     const [erro, setErro] = useState('');
 
     const sendData = () => {
-        if (!nomeAnimal, !genero, !tipoAnimal, !raca, !cidade, !estado, !descricao, !picture, !peso, !idade, !vacinado) {
+        if (!nomeAnimal, !sexo, !tipoAnimal, !raca, !cidade, !estado, !descricao, !picture, !peso, !idade, !vacinado) {
             setAlert({ type: 'warning', message: 'Há campos vazios ou inválidos.' })
             setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
             return;
         }
 
-        cadastrarAnimal(nomeAnimal, genero, tipoAnimal, raca, { cidade, estado }, descricao, picture[0], peso, idade, vacinado)
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPicture(reader.result);
+        }
+        reader.readAsDataURL(picture[0])
+
+        cadastrarAnimal(nomeAnimal, sexo, tipoAnimal, raca, { cidade, estado }, descricao, picture[0], peso, idade, vacinado)
             .then(() => {
                 setAlertVisible(true)
                 setNomeAnimal('');
-                setGenero('');
+                setSexo('');
                 setTipoAnimal('');
                 setRaca('');
                 setCidade('');
@@ -212,10 +218,10 @@ const CadastrarAnimal = () => {
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row', width: '90%', marginBottom: '16px' }}>
                         <FormControl sx={{ width: { xs: '100%', md: '65%' }, marginRight: '5%' }}>
-                            <FormLabel id="genero">Gênero</FormLabel>
-                            <RadioGroup row name="genero" value={genero} onChange={(e) => setGenero(e.target.value)}> {/* Controlando o valor pelo estado */}
-                                <FormControlLabel value="femea" control={<Radio />} label="Fêmea" />
-                                <FormControlLabel value="macho" control={<Radio />} label="Macho" />
+                            <FormLabel id="sexo">Sexo</FormLabel>
+                            <RadioGroup row name="sexo" value={sexo} onChange={(e) => setSexo(e.target.value)}> {/* Controlando o valor pelo estado */}
+                                <FormControlLabel value="Fêmea" control={<Radio />} label="Fêmea" />
+                                <FormControlLabel value="Macho" control={<Radio />} label="Macho" />
                             </RadioGroup>
                         </FormControl>
                         <FormControl size='small' sx={{ width: '30%' }} variant="outlined">
@@ -320,8 +326,7 @@ const CadastrarAnimal = () => {
                                 onChange={(event) => {
                                     console.log(event.target.files)
                                     const filesArray = Array.from(event.target.files);
-                                    setPicture(filesArray);
-                                    console.log(filesArray)
+                                    setPicture(filesArray[0]);
                                 }}
                             />
                         </Button>

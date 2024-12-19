@@ -20,7 +20,7 @@ import { getAnimaisDisponiveis, getPublicacoes } from '../../services/animalServ
 const Home = () => {
     const { sm, md, lg } = useWindowSize();
 
-    // const data = [
+    // const dataAnimais = [
     //     { nome: 'Noel', raca: 'Vira-lata', sexo: 'Fêmea', local: 'Recife, Pernambuco' },
     //     { nome: 'Rex', raca: 'Labrador', sexo: 'Macho', local: 'São Paulo, São Paulo' },
     //     { nome: 'Luna', raca: 'Golden Retriever', sexo: 'Fêmea', local: 'Curitiba, Paraná' },
@@ -53,14 +53,16 @@ const Home = () => {
     const [publicacoes, setPublicacoes] = useState([]);
     const [alignment, setAlignment] = useState('sem filtro');
     const navigate = useNavigate();
+    const [dataAnimais, setDataAnimais] = useState([])
 
     useEffect(() => {
-        const getData = async () => {
+        const getDataAnimais = async () => {
             const publicacoes = await getPublicacoes();
-            const dataAnimais = await getAnimaisDisponiveis()
-            console.table(publicacoes, dataAnimais)
+            const data = await getAnimaisDisponiveis()
+            setDataAnimais(data.data);
         }
-        getData();
+        getDataAnimais();
+        console.log(publicacoes, dataAnimais)
     }, [])
 
     const handleChange = (event, newAlignment) => {
@@ -70,20 +72,20 @@ const Home = () => {
     const handlePrev = () => {
         const newNextElement = Math.max(nextElement - itemsPerPage, 0);
         setNextElement(newNextElement);
-        setPublicacoes(data.slice(newNextElement, newNextElement + itemsPerPage));
+        setPublicacoes(dataAnimais.slice(newNextElement, newNextElement + itemsPerPage));
     };
 
     const handleNext = () => {
-        const newNextElement = Math.min(nextElement + itemsPerPage, data.length - itemsPerPage);
+        const newNextElement = Math.min(nextElement + itemsPerPage, dataAnimais.length - itemsPerPage);
         setNextElement(newNextElement);
-        setPublicacoes(data.slice(newNextElement, newNextElement + itemsPerPage));
+        setPublicacoes(dataAnimais.slice(newNextElement, newNextElement + itemsPerPage));
     };
 
     useEffect(() => {
         const newItemsPerPage = lg ? 3 : md ? 2 : sm ? 1 : 4;
         setItemsPerPage(newItemsPerPage);
         setNextElement(0);
-        setPublicacoes(data.slice(0, newItemsPerPage));
+        setPublicacoes(dataAnimais.slice(0, newItemsPerPage));
     }, [sm, md, lg]);
 
     let theme = createTheme({
@@ -126,7 +128,7 @@ const Home = () => {
                     {/* Publicações do usuário */}
                     {publicacoes.map((value, index) => (
                         <Box item sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center' }} width="250px" key={index}>
-                            <AnimalCard descricao={value} onClick={navigate(`/animal/${id}`)} />
+                            <AnimalCard descricao={value} onClick={() => navigate(`/animal/${value._id}`)} />
                         </Box>
                     ))}
                     {/* Seta para avançar */}
@@ -142,7 +144,7 @@ const Home = () => {
                         <Autocomplete
                             id="free-solo-demo"
                             freeSolo
-                            options={[...new Set([...data.map((descricao) => descricao.nome), ...data.map((descricao) => descricao.raca), ...data.map((descricao) => descricao.local)])]}
+                            options={[...new Set([...dataAnimais.map((descricao) => descricao.nome), ...dataAnimais.map((descricao) => descricao.raca), ...dataAnimais.map((descricao) => descricao.local)])]}
                             renderInput={(params) => (
                                 <Box
                                     sx={{
@@ -212,10 +214,10 @@ const Home = () => {
                     </Stack>
                 </Box>
                 <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { xs: '100%', md: '85%' }, marginX: 'auto' }}>
-                    {data.map((value, index) => {
+                    {dataAnimais.map((value, index) => {
                         return (
                             <Box sx={{ width: { sx: '100%', sm:'40%', md:'250px', lg:'20%' }, justifyContent:'center' }} key={index}>
-                                <AnimalCard descricao={value}  onClick={navigate(`/animal/${id}`)} width="100%" />
+                                <AnimalCard descricao={value} onClick={() => navigate(`/animal/${value._id}`)} width="100%" />
                             </Box>
                         )
                     })}

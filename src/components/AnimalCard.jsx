@@ -15,8 +15,10 @@ import cachorro2 from '../assets/cachorro2.jpg';
 
 
 function ActionAreaCard({descricao, onClick}) {
-    const { nome, raca, sexo, local } = descricao;
-
+    const { nome, raca, sexo, localizacao } = descricao;
+    const cidade = localizacao?.cidade
+    const estado = localizacao?.estado
+    
     return (
         <Card onClick={onClick}>
             <CardActionArea>
@@ -38,7 +40,7 @@ function ActionAreaCard({descricao, onClick}) {
                             {sexo}
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {local}
+                            {cidade}, {estado}
                         </Typography>
                     </div>
                 </CardContent>
