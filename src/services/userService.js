@@ -24,17 +24,26 @@ export const loginService = async (data) => {
 }
 
 export const getUserService = async (data) => {
-    const token = localStorage.getItem('token')
-    const id = data ? data : token;
-    return axios.get(`https://adotepet-api.vercel.app/api/user/perfil`, id, {
+    const token = localStorage.getItem('token');
+    const id = data ? data : null;
+    
+    // Se houver um ID, ele será incluído na URL como parâmetro de consulta
+    const url = id ? `https://adotepet-api.vercel.app/api/user/perfil/${id}` : `https://adotepet-api.vercel.app/api/user/perfil`;
+
+    return axios.get(url, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     })
-        .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+    .then((result) => {
+        return result;
+    })
+    .catch((err) => {
+        throw new Error(err.message);
+    });
 }
+
 
 export const atualizarPerfilService = async (data) => {
     const token = localStorage.getItem('token')
