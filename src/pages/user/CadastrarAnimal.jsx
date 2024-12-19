@@ -50,16 +50,8 @@ const CadastrarAnimal = () => {
             setTimeout(() => { setAlert({ type: 'none', message: '' }) }, 3000)
             return;
         }
-        console.log(file);
-        console.log(picture) 
 
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPicture(reader.result);
-        }
-        reader.readAsDataURL(file[0])
-
-        cadastrarAnimal(nomeAnimal, sexo, tipoAnimal, raca, { cidade, estado }, descricao, picture[0], peso, idade, vacinado)
+        cadastrarAnimal(nomeAnimal, sexo, tipoAnimal, raca, { cidade, estado }, descricao, file[0], peso, idade, vacinado)
             .then(() => {
                 setAlertVisible(true)
                 setNomeAnimal('');
@@ -330,8 +322,6 @@ const CadastrarAnimal = () => {
                                 onChange={(event) => {                                    
                                     const filesArray = Array.from(event.target.files);
                                     setFile(filesArray);
-                                    console.log(filesArray)
-                                    console.log('foto:' + file)
                                 }}
                             />
                         </Button>

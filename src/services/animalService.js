@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Form } from 'react-router-dom';
 
 // Requisições à API pública da Wikipedia para ter acesso às raças de cachorros e gatos
 
@@ -47,30 +48,33 @@ export const obterRacasGatos = async () => {
     return racaGatos;
 };
 
-export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descricao, foto, peso, idade, vacinado) => {
-    const data = {
-        nome: nome,
-        sexo: sexo,
-        tipo: tipo,
-        raca: raca,
-        localizacao: localizacao,
-        descricao: descricao,
-        peso: peso,
-        idade: idade,
-        vacinado: vacinado
-    }
-    console.log(nome, sexo, tipo, raca, localizacao, descricao, foto, peso, idade, vacinado)
+export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descricao, file, peso, idade, vacinado) => {
+    const formData = new FormData();
+    
+    formData.append('nome', nome);
+    formData.append('sexo', sexo);
+    formData.append('tipo', tipo);
+    formData.append('raca', raca);
+    formData.append('localizacao', localizacao);
+    formData.append('descricao', descricao);
+    formData.append('peso', peso);
+    formData.append('idade', idade);
+    formData.append('vacinado', vacinado);
+    
+    formData.append('foto', file);
+
     const token = localStorage.getItem('token');
 
-    return axios.post('https://adotepet-api.vercel.app/api/animal/cadastrar', data, {
+    return axios.post('https://adotepet-api.vercel.app/api/animal/cadastrar', formData, {
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`,
         }
     })
-        .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+    .then((result) => { return result })
+    .catch((err) => { throw new Error(err.message) })
 }
+
 
 export const getAnimal = async (id_animal) => {
     const token = localStorage.getItem('token');
