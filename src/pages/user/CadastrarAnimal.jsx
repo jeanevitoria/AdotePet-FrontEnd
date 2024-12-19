@@ -326,7 +326,7 @@ const CadastrarAnimal = () => {
                                 onChange={(event) => {
                                     console.log(event.target.files)
                                     const filesArray = Array.from(event.target.files);
-                                    setPicture(filesArray[0]);
+                                    setPicture(filesArray);
                                 }}
                             />
                         </Button>
