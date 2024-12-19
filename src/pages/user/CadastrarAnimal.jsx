@@ -23,7 +23,7 @@ const CadastrarAnimal = () => {
     const navigate = useNavigate();
 
     // Definindo estados para cada campo
-    const [picture, setPicture] = useState([])
+    const [picture, setPicture] = useState('')
     const [nomeAnimal, setNomeAnimal] = useState('');
     const [raca, setRaca] = useState('');
     const [peso, setPeso] = useState('');
@@ -41,6 +41,8 @@ const CadastrarAnimal = () => {
     const [alert, setAlert] = useState({ type: 'none', message: '' });
     const [alertVisible, setAlertVisible] = useState(false);
     const [erro, setErro] = useState('');
+    const [file, setFile] = useState([])
+
 
     const sendData = () => {
         if (!nomeAnimal, !sexo, !tipoAnimal, !raca, !cidade, !estado, !descricao, !picture, !peso, !idade, !vacinado) {
@@ -53,7 +55,7 @@ const CadastrarAnimal = () => {
         reader.onloadend = () => {
             setPicture(reader.result);
         }
-        reader.readAsDataURL(picture[0])
+        reader.readAsDataURL(file[0])
 
         cadastrarAnimal(nomeAnimal, sexo, tipoAnimal, raca, { cidade, estado }, descricao, picture[0], peso, idade, vacinado)
             .then(() => {
@@ -325,12 +327,12 @@ const CadastrarAnimal = () => {
                                 type="file"
                                 onChange={(event) => {
                                     console.log(event.target.files)
-                                    const filesArray = Array.from(event.target.files);
-                                    setPicture(filesArray);
+                                    const filesArray = Array.from(event.target.files[0]);
+                                    setFile(filesArray);
                                 }}
                             />
                         </Button>
-                        {Array.isArray(picture) && picture.map((file) => {
+                        {Array.isArray(file) && file.map((file) => {
                             return (
                                 <Stack direction={"row"} sx={{ borderRadius: '20px', fontSize: { xs: '13px', sm: '15px' }, justifyContent: 'space-between', paddingX: '5px' }} alignItems={'center'}>
                                     <AttachFileIcon />
