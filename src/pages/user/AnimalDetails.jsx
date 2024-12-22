@@ -65,9 +65,9 @@ const AnimalDetails = () => {
             setEmail(response.data[0].email);
             setTelefone('(' + response.data[0].celular.slice(0, 2) + ')' + response.data[0].celular.slice(2, 7) + '-' + response.data[0].celular.slice(7));
         }
-        const getSimilares = async (raca) => {
-            const response = await getAnimalFilter('raca', raca);
-            console.log("raça: " + raca)
+        const getSimilares = async (valor) => {
+            const response = await getAnimalFilter('raca', valor);
+            console.log("raça: " + valor)
             console.log(response);
             setSimilares(response.data)
         }
