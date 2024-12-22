@@ -13,8 +13,12 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { useParams } from "react-router-dom";
 import { Divider, Grid2, Paper } from "@mui/material";
 import { getAnimal } from "../../services/animalService";
+import AnimalCard from '../../components/AnimalCard';
+import { getAnimalFilter } from "../../services/animalService";
+import { useNavigate } from "react-router-dom";
 
 const AnimalDetails = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [nome, setNome] = useState('')
     const [foto, setFoto] = useState('');
@@ -30,6 +34,7 @@ const AnimalDetails = () => {
     const [telefone, setTelefone] = useState('');
     const [idResponsavel, setIdResponsavel] = useState('');
     const [descricao, setDescricao] = useState('');
+    const [similares, setSimilares] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
@@ -54,31 +59,39 @@ const AnimalDetails = () => {
         }
         const getResponsavel = async () => {
             const response = await getUserService(idResponsavel);
-            console.log('response.data')
-            setNomeResponsavel(response.data.nome)
-            setEmail(data.email);
-            setTelefone(data.telefone);
+            console.log(response)
+            setNomeResponsavel(response.data[0].nome)
+            setEmail(response.data[0].email);
+            setTelefone('(' + response.data[0].celular.slice(0, 2) + ')' + response.data[0].celular.slice(2, 7) + '-' + response.data[0].celular.slice(7));
         }
+        const getSimilares = async () => {
+            console.log("raça: " + raca)
+            const response = await getAnimalFilter('raca', raca);
+            console.log(response);
+            setSimilares(response.data)
+        }
+
         getResponsavel()
         getData()
+        getSimilares();
     }, [])
 
     return (
-        <Grid2 sx={{display: 'flex', flexDirection: 'row'}}>
-            <Box sx={{display:'flex', flexDirection: 'column', width:'40%', margin:'auto'}}>
-                <Card>
-                    <img src={`data:image/jpeg;base64,${foto}`}></img>
-                </Card> 
+        <Grid2 sx={{ display: 'flex', flexDirection: 'row', height: '100%', justifyContent: 'space-around' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '50%', height: '100%', margin: 'auto' }}>
+                <Card elevation={5} sx={{ height: '25%' }}>
+                    <img src={`data:image/jpeg;base64,${foto}`} />
+                </Card>
                 <Typography>
-                    { descricao }
+                    {descricao}
                 </Typography>
             </Box>
-            <Box sx={{display:'flex', flexDirection:'column', width:'30%', margin:'auto'}}>
-                <Card>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%', height: '40%', marginBottom: 'auto', marginRight: 'auto', justifyContent: 'space-evenly' }}>
+                <Card sx={{ padding: '5%' }}>
                     <Typography>
                         Informações do animal
                     </Typography>
-                    <Box sx={{display:'flex', flexDirection:'column'}}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Typography>
                             Raça: {raca}
                         </Typography>
@@ -102,11 +115,11 @@ const AnimalDetails = () => {
                         </Typography>
                     </Box>
                 </Card>
-                <Card>
+                <Card sx={{ padding: '5%' }}>
                     <Typography>
                         Informações do responsável
                     </Typography>
-                    <Box sx={{display:'flex', flexDirection:'column'}}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Typography>
                             Nome: {nomeResponsavel}
                         </Typography>
@@ -117,6 +130,15 @@ const AnimalDetails = () => {
                             Telefone: {telefone}
                         </Typography>
                     </Box>
+                </Card>
+                <Card>
+                    {similares && similares.map((value, index) => {
+                        return (
+                            <Box sx={{ width: { sx: '0%', sm: '40%', md: '250px', lg: '20%' }, justifyContent: 'center' }} key={index}>
+                                <AnimalCard descricao={value} onClick={() => navigate(`/animal/${value._id}`)} width="100%" />
+                            </Box>
+                        )
+                    })}
                 </Card>
             </Box>
         </Grid2>

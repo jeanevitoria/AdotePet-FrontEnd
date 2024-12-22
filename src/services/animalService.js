@@ -89,6 +89,20 @@ export const getAnimal = async (id_animal) => {
         .catch((err) => { throw new Error(err.message) })
 }
 
+export const getAnimalFilter = async (filtro, tipo) => {
+    const token = localStorage.getItem('token');
+    console.log('token: ' + token)
+    console.log(`https://adotepet-api.vercel.app/api/animal/filtrar?filtro=${filtro}&valor=${tipo}`)
+    return axios.get(`https://adotepet-api.vercel.app/api/animal/filtrar?filtro=${filtro}&valor=${tipo}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then((result) => { return result })
+        .catch((err) => { throw new Error(err.message) })
+}
+
 export const getPublicacoes = async (id_animal) => {
     const token = localStorage.getItem('token');
     return axios.get(`https://adotepet-api.vercel.app/api/animal/publicacoes`, {
