@@ -65,8 +65,8 @@ const AnimalDetails = () => {
             setTelefone('(' + response.data[0].celular.slice(0, 2) + ')' + response.data[0].celular.slice(2, 7) + '-' + response.data[0].celular.slice(7));
         }
         const getSimilares = async () => {
-            console.log("raça: " + raca)
             const response = await getAnimalFilter('raca', raca);
+            console.log("raça: " + raca)
             console.log(response);
             setSimilares(response.data)
         }
