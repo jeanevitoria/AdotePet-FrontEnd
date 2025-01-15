@@ -27,6 +27,7 @@ const Sider = ({ disabled, setDisabled }) => {
                     xs: disabled ? '0px' : '200px',
                     sm: disabled ? '50px' : '200px',
                 },
+                backgroundColor:'#ffffff',
                 transition: 'width 0.3s ease',
                 flexGrow: 1,
                 borderRight: '1px solid #f0f0f0',
