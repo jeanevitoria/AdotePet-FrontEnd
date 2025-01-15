@@ -10,6 +10,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Header = ({ siderDisabled, buttons }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { loggedOut } = location.state || {}
 
     // Definir rotas que não devem exibir o Sider
     const hideSiderRoutes = ['/', '/auth/login', '/auth/cadastro', '/auth/recuperar-senha', '/auth/redefinir-senha'];
@@ -40,18 +41,18 @@ const Header = ({ siderDisabled, buttons }) => {
     return (
         <Grid2 container sx={{
             width: '100vw',
-
+            height: '50px'
         }}>
 
             <Box sx={{
-                height: '50px',
+                height: '100%',
                 width: '100%',
                 backgroundColor: '#170D1F',
                 display: 'flex',
                 alignItems: 'center',
-                zIndex:'1000'
+                zIndex: '1000'
             }}>
-                {shouldShowSider && <Box sx={{
+                {shouldShowSider && !loggedOut && <Box sx={{
                     display: 'flex',
                     justifyContent: 'flex-start',
                     paddingX: '10px', flexGrow: 1,
@@ -62,47 +63,48 @@ const Header = ({ siderDisabled, buttons }) => {
                         :
                         <MenuOpenIcon style={{ color: '#ffffff' }} onClick={onClick} />}
                 </Box>}
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        left: { xs: location.pathname == '/' ? '0%' : '50%', md: '50%' },
-                        transform: { xs: location.pathname == '/' ? 'translateX(0%)' : 'translateX(-50%)', md: 'translateX(-50%)' },
-                        height: '100px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                    <img src={logoAdote} alt="Logo do AdotePet"
-                        style={{
-                            maxWidth: '25%',
-                            maxHeight: '100%',
-                            objectFit: 'contain'
-                        }} />
-                    <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '14px' } }}>ADOTE</Typography>
-                    <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '14px' } }}>PET</Typography>
-                </Box>
-                {location.pathname == '/' && <Box sx={{
+            <Box
+                sx={{
+                    position: 'absolute',
+                    left: { xs: (location.pathname == '/' || loggedOut) ? '0%' : '50%', md: '50%' },
+                    transform: { xs: (location.pathname == '/' || loggedOut) ? 'translateX(0%)' : 'translateX(-50%)', md: 'translateX(-50%)' },
+                    height: '100px',
                     display: 'flex',
-                    justifyContent: 'flex-end',
-                    paddingRight: {xs:'10px', md:'20px'},
-                    flexGrow: 1,
-                    position: 'relative'
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
-                    {Items.map((item, index) => {
-                        return (
-                            <Box key={index} sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                paddingRight: '5px',
-                                alignItems: 'center'
-                            }}>
-                                {item}
-                            </Box>
-                        );
-                    })}
-                </Box>}
+                <img src={logoAdote} alt="Logo do AdotePet"
+                    style={{
+                        maxWidth: '17%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',
+                        marginRight: '5px'
+                    }} />
+                <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '12px' } }}>ADOTE</Typography>
+                <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '12px' } }}>PET</Typography>
             </Box>
-        </Grid2>
+            {(location.pathname === '/' || loggedOut) && <Box sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                paddingRight: { xs: '10px', md: '20px' },
+                flexGrow: 1,
+                position: 'relative'
+            }}>
+                {Items.map((item, index) => {
+                    return (
+                        <Box key={index} sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            paddingRight: '5px',
+                            alignItems: 'center'
+                        }}>
+                            {item}
+                        </Box>
+                    );
+                })}
+            </Box>}
+        </Box>
+        </Grid2 >
     );
 }
 

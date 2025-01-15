@@ -1,52 +1,74 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Sider from './Sider';
-import { Box, Grid2 } from '@mui/material';
+import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
 
 const Layout = ({ children }) => {
-    const {sm, md, lg} = useWindowSize();
-
+    const { sm } = useWindowSize();
     const [siderDisabled, setSiderDisabled] = useState(true);
     const location = useLocation();
+    const { loggedOut } = location.state || {}
 
-    // Definir rotas que não devem exibir o Sider
+    // Rotas que escondem o Sider ou Header
     const hideRoutes = ['/auth/cadastro', '/', '/auth/login', '/auth/recuperar-senha', '/auth/redefinir-senha'];
-
-    // Verifica se a rota atual está na lista de rotas que escondem o Sider
     const shouldShowSider = !hideRoutes.includes(location.pathname);
-
-    // Esconde a header na página de login
     const shouldShowHeader = location.pathname !== '/auth/login';
 
     return (
-        <Grid2 container spacing={0} sx={{ margin: 0, padding: 0, width: '100%', overflow: 'hidden' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                {shouldShowHeader &&
-                    <Box sx={{ display: 'flex', width: '100%', position: 'fixed', zIndex: '1000' }}>
-                        <Header siderDisabled={setSiderDisabled} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh' }}>
+            {/* Header */}
+            {shouldShowHeader && (
+                <Box sx={{ position: 'fixed', marginRight: siderDisabled ? '3vw' : '10vw', top: 0, left: 0, width: '100%', zIndex: 1000 }}>
+                    <Header siderDisabled={setSiderDisabled} />
+                </Box>
+            )}
+
+            {/* Conteúdo principal */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100vw',
+                    height: '100%',
+                    marginTop: shouldShowHeader ? '50px' : '0px',
+                }}
+            >
+                {/* Sider */}
+                {shouldShowSider && !loggedOut && (
+                    <Box
+                        sx={{
+                            display: { xs: siderDisabled ? 'none' : 'block', sm: 'block' },
+                            width: siderDisabled ? '50px' : '200px',
+                            transition: 'width 0.3s ease',
+                        }}
+                    >
+                        <Sider disabled={siderDisabled} setDisabled={setSiderDisabled} />
                     </Box>
-                }
-                <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: shouldShowHeader ? '50px' : '0px' }}>
-                    {shouldShowSider &&
-                        (<>
-                            <Box sx={{ display: { xs: siderDisabled ? 'none' : 'flex', sm: 'flex' }, width: siderDisabled ? '50px' : '200px' }}>
-                                <Sider disabled={siderDisabled} setDisabled={setSiderDisabled}/>
-                            </Box>
-                            <Box onClick={() => {setSiderDisabled(prev => {return sm ? true : prev})}} sx={{ display: 'flex', width: siderDisabled ? sm ? '100vw' : 'calc(100vw - 50px)' : 'calc(100vw - 200px)', opacity:{xs: !siderDisabled ? '50%' : '100%', sm:'100%'} }}>
-                                {children}
-                            </Box>
-                        </>)
-                    }
-                    {!shouldShowSider &&
-                        (<Box sx={{ width: '100%' }}>
-                            {children}
-                        </Box>)
-                    }
+                )}
+
+                <Box
+                    sx={{
+                        flex: 1,
+                        height: shouldShowHeader ? 'calc(100vh - 50px)' : '100vh',
+                        overflowY: 'auto',
+                        width: shouldShowSider
+                            ? siderDisabled
+                                ? sm
+                                    ? 'calc(100vw - 50px)'
+                                    : 'calc(100vw - 50px)'
+                                : 'calc(100vw - 200px)'
+                            : '100vw',
+                        margin: 'auto',
+                        opacity: { xs: !siderDisabled ? 0.5 : 1, sm: 1 },
+                        transition: 'all 0.3s ease',
+                    }}
+                >
+                    {children}
                 </Box>
             </Box>
-        </Grid2>
+        </Box>
     );
 };
 
