@@ -27,7 +27,7 @@ const Sider = ({ disabled, setDisabled }) => {
                     xs: disabled ? '0px' : '200px',
                     sm: disabled ? '50px' : '200px',
                 },
-                backgroundColor:'#ffffff',
+                backgroundColor: '#ffffff',
                 transition: 'width 0.3s ease',
                 flexGrow: 1,
                 borderRight: '1px solid #f0f0f0',
@@ -44,10 +44,13 @@ const Sider = ({ disabled, setDisabled }) => {
                 <Box
                     key={index}
                     onClick={() => {
-                        {/*caso a tela seja pequena, fecha o sider. Caso contrário, permanece a forma escolhida pelo usuário*/}
-                        setDisabled(prev => {return (window.innerWidth < 768 ? true : prev)})
-                        localStorage.setItem('token', '');
-                        navigate(item.path)}}
+                        {/*caso a tela seja pequena, fecha o sider. Caso contrário, permanece a forma escolhida pelo usuário*/ }
+                        setDisabled(prev => { return (window.innerWidth < 768 ? true : prev) })
+                        if (item.label === 'Sair') {
+                            localStorage.setItem('token', '');
+                        }
+                        navigate(item.path)
+                    }}
                     sx={{
                         display: 'flex',
                         alignItems: 'center',
