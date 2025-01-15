@@ -26,7 +26,7 @@ function AppRoutes() {
           <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/cadastro' element={<SignUp />} />
           <Route path='/auth/recuperar-senha' element={<PasswordRecovery />} />
-          <Route path='/auth/redefinir-senha' element={<PasswordReset />} />
+          <Route path='/auth/redefinir-senha:token' element={<PasswordReset />} />
           <Route path='/cadastrar-animal' element={<CadastrarAnimal />} />
           <Route path='/animal/:id' element={<AnimalDetails/>} />
           <Route path='/chat' element={<Chat />} />
