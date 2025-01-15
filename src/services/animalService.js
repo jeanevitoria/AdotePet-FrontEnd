@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Form } from 'react-router-dom';
 
 // Requisições à API pública da Wikipedia para ter acesso às raças de cachorros e gatos
 
@@ -66,7 +65,7 @@ export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descr
 
     const token = localStorage.getItem('token');
 
-    return axios.post('https://adotepet-api.vercel.app/api/animal/cadastrar', formData, {
+    return axios.post('https://adotepet-backend.onrender.com/api/animal/cadastrar', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`,
@@ -79,7 +78,7 @@ export const cadastrarAnimal = async (nome, sexo, tipo, raca, localizacao, descr
 
 export const getAnimal = async (id_animal) => {
     const token = localStorage.getItem('token');
-    return axios.get(`https://adotepet-api.vercel.app/api/animal/${id_animal}`, {
+    return axios.get(`https://adotepet-backend.onrender.com/api/animal/${id_animal}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -92,8 +91,7 @@ export const getAnimal = async (id_animal) => {
 export const getAnimalFilter = async (filtro, tipo) => {
     const token = localStorage.getItem('token');
     console.log('token: ' + token)
-    console.log(`https://adotepet-api.vercel.app/api/animal/filtrar?filtro=${filtro}&valor=${tipo}`)
-    return axios.get(`https://adotepet-api.vercel.app/api/animal/filtrar?filtro=${filtro}&valor=${tipo}`, {
+    return axios.get(`https://adotepet-backend.onrender.com/api/animal/filtrar?filtro=${filtro}&valor=${tipo}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -103,9 +101,9 @@ export const getAnimalFilter = async (filtro, tipo) => {
         .catch((err) => { throw new Error(err.message) })
 }
 
-export const getPublicacoes = async (id_animal) => {
+export const getPublicacoes = async () => {
     const token = localStorage.getItem('token');
-    return axios.get(`https://adotepet-api.vercel.app/api/animal/publicacoes`, {
+    return axios.get(`https://adotepet-backend.onrender.com/api/animal/publicacoes`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -117,7 +115,7 @@ export const getPublicacoes = async (id_animal) => {
 
 export const getAnimaisDisponiveis = async () => {
     const token = localStorage.getItem('token');
-    return axios.get(`https://adotepet-api.vercel.app/api/animal/disponiveis`, {
+    return axios.get(`https://adotepet-backend.onrender.com/api/animal/disponiveis`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -127,9 +125,10 @@ export const getAnimaisDisponiveis = async () => {
         .catch((err) => { throw new Error(err.message) })
 }
 
-export const confirmarAdocao = async (id_animal) => {
+export const definirAdocao = async (idAnimal, status) => {
     const token = localStorage.getItem('token');
-    return axios.get(`https://adotepet-api.vercel.app/api/animal/confirmar-adocao`, {
+    console.log("chegou")
+    return axios.post(`https://adotepet-backend.onrender.com/api/animal/definir-adocao`, {idAnimal, status}, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,

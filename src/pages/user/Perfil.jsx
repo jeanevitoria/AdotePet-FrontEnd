@@ -134,7 +134,6 @@ const Perfil = () => {
     return (
 
         <Grid2 container sx={{
-            width: { xs: '100vw', md: '100vw' },
             height: {xs: 'screen',sm:'calc(100vh - 50px)'},
             display: 'flex',
             flexDirection: 'column',

@@ -1,31 +1,38 @@
 import axios from 'axios';
 
-export const sendMessage = (data) => {
+export const saveMessage = async (data) => {
     const token = localStorage.getItem('token')
-    axios.post('https://adotepet-api.vercel.app/api/chat/send-message', data, {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+    return axios.post('https://adotepet-backend.onrender.com/api/chat/salvar-mensagem', data, {
+        headers:  {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     })
         .then((res) => { return res })
         .catch((err) => { throw new Error(err) })
 }
 
-export const getChats = () => {
+export const getChats = async () => {
     const token = localStorage.getItem('token')
-    axios.get('https://adotepet-api.vercel.app/api/chat/channels', {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+    return axios.get('https://adotepet-backend.onrender.com/api/chat/canais', {
+        headers:  {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     })
         .then((res) => { return res })
         .catch((err) => { throw new Error(err) })
 }
 
-export const getMessagesChat = (data) => {
+export const getMessagesChat = async (data) => {
     const token = localStorage.getItem('token')
-    axios.get('https://adotepet-api.vercel.app/api/chat/channel/data', data, {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+    return axios.get('https://adotepet-backend.onrender.com/api/chat/canal/mensagens', {
+        headers:  {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        data: data
     })
         .then((res) => { return res })
-        .catch((err) => { throw new Error(err) })
+    .catch((err) => { throw new Error(err) })
 }
