@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Grid2, Button, Divider, Typography, Paper } from '@mui/material';
 import logoAdote from '../../assets/logoAdote.png';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
+import { recuperarSenha } from '../../services/userService';
 
 const PasswordRecovery = () => {
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
+
+    const handleSend = () => { 
+        recuperarSenha(email)
+        .then((res) => { console.log(res) })
+        .catch((err) => { console.log(err) })
+    }
 
     return (
         <Grid2 container sx={{
@@ -76,7 +84,7 @@ const PasswordRecovery = () => {
                         marginTop:'7.5%',
                         width: '100%'
                     }}>
-                        <TextField size='small' required id="email" label="E-mail" sx={{ width: '60%' }} />
+                        <TextField size='small' type='email' required id="email" label="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} sx={{ width: '60%' }} />
                     </Box>
                     <Button variant="contained" sx={{
                         alignItems: 'center',
@@ -85,7 +93,7 @@ const PasswordRecovery = () => {
                         backgroundColor: '#301F3E',
                         marginY: '2.5%',
                         marginX: 'auto'
-                    }}>Enviar</Button>
+                    }} onClick={handleSend}>Enviar</Button>
                 </Paper>
             </Box>
         </Grid2>
