@@ -16,7 +16,7 @@ const Sider = ({ disabled, setDisabled }) => {
         { icon: <AddCircleOutlineIcon sx={{ color: "#170D1F" }} />, label: "Publicar", path: "/cadastrar-animal" },
         { icon: <ChatIcon sx={{ color: "#170D1F" }} />, label: "Chat", path: "/chat" },
         { icon: <AccountBoxIcon sx={{ color: "#170D1F" }} />, label: "Perfil", path: "/perfil" },
-        { icon: <LogoutIcon sx={{ color: "#170D1F" }} />, label: "Logout", path: "/" },
+        { icon: <LogoutIcon sx={{ color: "#170D1F" }} />, label: "Sair", path: "/" },
     ];
 
     return (
@@ -46,6 +46,7 @@ const Sider = ({ disabled, setDisabled }) => {
                     onClick={() => {
                         {/*caso a tela seja pequena, fecha o sider. Caso contrário, permanece a forma escolhida pelo usuário*/}
                         setDisabled(prev => {return (window.innerWidth < 768 ? true : prev)})
+                        localStorage.setItem('token', '');
                         navigate(item.path)}}
                     sx={{
                         display: 'flex',
