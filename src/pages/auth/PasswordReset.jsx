@@ -24,13 +24,19 @@ const PasswordReset = () => {
 
     const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
     const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+    const [alert, setAlert] = useState({ type: 'none', message: '' })
 
     const handleSend = () => {
-        if(password1 === password2 && password1.trim()){
+        if (password1 === password2 && password1.trim()) {
             redefinirSenha(token, password1)
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err))
-        }   
+                .then((res) => {
+                    setAlert({ type: 'success', message: 'Senha redefinida com sucesso! Faça login com a nova senha para ter acesso a sua conta.' })
+                })
+                .catch((err) => {
+                    setAlert({ type: 'error', message: `Falha ao redefinir a senha: ${err}` })
+                    setTimeout(() => setAlert({ type: 'none', message: '' }), 5000)
+                })
+        }
     }
 
     const handleMouseDownPassword = (event) => {
@@ -49,7 +55,7 @@ const PasswordReset = () => {
         <Grid2 container sx={{
             width: '100vw',
             height: '100vh',
-            overflowY:'hidden',
+            overflowY: 'hidden',
             backgroundColor: '#e2e2e2',
             display: 'flex',
             flexDirection: 'column',
@@ -61,12 +67,24 @@ const PasswordReset = () => {
                 display: 'flex',
                 padding: '2%'
             }}>
-                <ArrowBackIosNewIcon  onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}/>
+                <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
+            </Box>
+            {alert.type != 'none' && (
+                <Box sx={{
+                    width: { xs: '80%', sm: '40%' },
+                    textWrap: 'wrap',
+                    marginX: 'auto',
+                    marginTop: '10px'
+                }}>
+                    <Alert severity={alert.type}
+                        onClose={() => { }}
+                    > {alert.message} </Alert>
                 </Box>
+            )}
             <Box sx={{
                 justifyContent: 'center',
                 alignContent: 'center',
-                margin:'auto',
+                margin: 'auto',
                 width: '95%',
                 display: 'flex',
                 height: 'auto', // Faz com que o Paper ocupe a altura necessária
@@ -81,7 +99,7 @@ const PasswordReset = () => {
                 }}>
                     <Box sx={{ textAlign: 'center', marginBottom: '1%' }}>
                         <Typography noWrap={false} variant="body1" sx={{
-                            fontSize: { xs:'20px', md: '25px', lg: '30px', xl: '60px' },
+                            fontSize: { xs: '20px', md: '25px', lg: '30px', xl: '60px' },
                             textAlign: 'center',
                             fontWeight: '900',
                             color: '#301F3E',
@@ -100,7 +118,7 @@ const PasswordReset = () => {
                         marginTop: '7.5%',
                         width: '100%'
                     }}>
-                        <FormControl size='small' sx={{ width: '60%', marginBottom:'2%' }} variant="outlined">
+                        <FormControl size='small' sx={{ width: '60%', marginBottom: '2%' }} variant="outlined">
                             <InputLabel htmlFor="senha" >Senha</InputLabel>
                             <OutlinedInput
                                 id="senha"
@@ -155,7 +173,7 @@ const PasswordReset = () => {
                         marginY: '2.5%',
                         marginX: 'auto'
                     }}
-                    onClick={handleSend}>Redefinir senha</Button>
+                        onClick={handleSend}>Redefinir senha</Button>
                 </Paper>
             </Box>
         </Grid2>
