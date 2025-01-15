@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
         hideRoutes.includes(location.pathname) ||
         location.pathname.startsWith('/auth/redefinir-senha/')
     );
-    const shouldShowHeader = !(location.pathname === '/auth/login' || location.pathname.startsWith('/auth/redefinir-senha'));
+    const shouldShowHeader = !(location.pathname === '/auth/login');
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh' }}>
