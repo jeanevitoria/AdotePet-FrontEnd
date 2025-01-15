@@ -15,17 +15,23 @@ import cachorro2 from '../assets/cachorro2.jpg';
 
 
 function ActionAreaCard({descricao, onClick}) {
-    const { nome, raca, sexo, localizacao } = descricao;
+    const { nome, raca, sexo, foto, localizacao } = descricao;
+    const [fotoBase64, setFotoBase64] = React.useState('');
+
+    React.useEffect(() => {
+        setFotoBase64(foto.toString('base64'))
+    }, [foto])
+
     const cidade = localizacao?.cidade
     const estado = localizacao?.estado
-    
+
     return (
         <Card onClick={onClick}>
             <CardActionArea>
                 <CardMedia
                     component="img"
+                    src={`data:image/jpeg;base64,${fotoBase64}`}
                     height="140"
-                    image={cachorro1}
                     alt="Foto do animal"
                 />
                 <CardContent>
