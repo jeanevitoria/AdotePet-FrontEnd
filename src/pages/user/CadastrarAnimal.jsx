@@ -136,7 +136,6 @@ const CadastrarAnimal = () => {
 
     return (
         <Grid2 container sx={{
-            width: '100vw',
             height: 'auto',
             display: 'flex',
             position: 'relative',
