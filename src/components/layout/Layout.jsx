@@ -13,8 +13,11 @@ const Layout = ({ children }) => {
 
     // Rotas que escondem o Sider ou Header
     const hideRoutes = ['/auth/cadastro', '/', '/auth/login', '/auth/recuperar-senha', '/auth/redefinir-senha'];
-    const shouldShowSider = !hideRoutes.includes(location.pathname);
-    const shouldShowHeader = location.pathname !== '/auth/login';
+    const shouldShowSider = !(
+        hideRoutes.includes(location.pathname) ||
+        location.pathname.startsWith('/auth/redefinir-senha/')
+    );
+    const shouldShowHeader = !(location.pathname === '/auth/login' || location.pathname.startsWith('/auth/redefinir-senha'));
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh' }}>

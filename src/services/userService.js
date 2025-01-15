@@ -104,8 +104,8 @@ export const recuperarSenha = async (email) => {
         .catch((err) => { throw new Error(err.message) })
 }
 
-export const redefinirSenha = async (token) => {
-    return axios.post('https://adotepet-backend.onrender.com/api/auth/redefinir-senha', { token }, {
+export const redefinirSenha = async (token, senha) => {
+    return axios.post('https://adotepet-backend.onrender.com/api/auth/redefinir-senha', { token, senha }, {
         headers: {
             'Content-Type': 'application/json'
         }

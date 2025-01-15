@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid2, Button, Divider, Typography, Paper } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import TextField from '@mui/material/TextField';
+import { redefinirSenha } from '../../services/userService';
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -14,6 +15,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 
 const PasswordReset = () => {
     const navigate = useNavigate();
+    const { token } = useParams();
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
     const [error, setError] = useState(false);
@@ -22,6 +24,14 @@ const PasswordReset = () => {
 
     const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
     const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+
+    const handleSend = () => {
+        if(password1 === password2 && password1.trim()){
+            redefinirSenha(token, password1)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err))
+        }   
+    }
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -37,8 +47,8 @@ const PasswordReset = () => {
 
     return (
         <Grid2 container sx={{
-            height: 'calc(100vh - 50px)',
             width: '100vw',
+            height: '100vh',
             overflowY:'hidden',
             backgroundColor: '#e2e2e2',
             display: 'flex',
@@ -69,7 +79,7 @@ const PasswordReset = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                 }}>
-                    <Box sx={{ textAlign: 'center', marginBottom: '1%' }}>
+                    <Box sx={{ textAlign: 'center', marginBottom: '1%' }} onClick={handleSend}>
                         <Typography noWrap={false} variant="body1" sx={{
                             fontSize: { xs:'20px', md: '25px', lg: '30px', xl: '60px' },
                             textAlign: 'center',
