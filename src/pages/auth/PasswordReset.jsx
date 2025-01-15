@@ -79,6 +79,11 @@ const PasswordReset = () => {
                 }}>
                     <Alert severity={alert.type}
                         onClose={() => { }}
+                        action={
+                            <Button color="inherit" size="small" onClick={() => navigate('/auth/login')}>
+                                LOGIN
+                            </Button>
+                        }
                     > {alert.message} </Alert>
                 </Box>
             )}
