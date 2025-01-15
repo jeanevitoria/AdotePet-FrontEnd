@@ -83,7 +83,7 @@ const Header = ({ siderDisabled, buttons }) => {
                 <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '12px' } }}>ADOTE</Typography>
                 <Typography sx={{ color: '#ffffff', fontWeight: '300', display: 'inline', fontFamily: 'Kumbh Sans, Roboto, sans-serif', fontSize: { xs: '12px' } }}>PET</Typography>
             </Box>
-            {(location.pathname === '/' || loggedOut || location.pathname.startsWith('/auth/redefinir-senha')) && <Box sx={{
+            {(location.pathname === '/' || loggedOut ) && <Box sx={{
                 display: 'flex',
                 justifyContent: 'flex-end',
                 paddingRight: { xs: '10px', md: '20px' },
