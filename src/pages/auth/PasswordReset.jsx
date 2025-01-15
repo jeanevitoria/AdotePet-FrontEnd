@@ -79,7 +79,7 @@ const PasswordReset = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                 }}>
-                    <Box sx={{ textAlign: 'center', marginBottom: '1%' }} onClick={handleSend}>
+                    <Box sx={{ textAlign: 'center', marginBottom: '1%' }}>
                         <Typography noWrap={false} variant="body1" sx={{
                             fontSize: { xs:'20px', md: '25px', lg: '30px', xl: '60px' },
                             textAlign: 'center',
@@ -154,7 +154,8 @@ const PasswordReset = () => {
                         backgroundColor: '#301F3E',
                         marginY: '2.5%',
                         marginX: 'auto'
-                    }}>Redefinir senha</Button>
+                    }}
+                    onClick={handleSend}>Redefinir senha</Button>
                 </Paper>
             </Box>
         </Grid2>
