@@ -55,7 +55,7 @@ const PasswordReset = () => {
     return (
         <Grid2 container sx={{
             width: '100vw',
-            height: '100vh',
+            height: 'calc(100vh - 50px)',
             overflowY: 'hidden',
             backgroundColor: '#e2e2e2',
             display: 'flex',

@@ -16,7 +16,7 @@ const Header = ({ siderDisabled, buttons }) => {
     const hideSiderRoutes = ['/', '/auth/login', '/auth/cadastro', '/auth/recuperar-senha', '/auth/redefinir-senha'];
 
     // Verifica se a rota atual está na lista de rotas que escondem o Sider
-    const shouldShowSider = !hideSiderRoutes.includes(location.pathname);
+    const shouldShowSider = !(hideSiderRoutes.includes(location.pathname) || location.pathname.startsWith('/auth/redefinir-senha'));
 
     const onClick = () => {
         siderDisabled(prev => !prev)
