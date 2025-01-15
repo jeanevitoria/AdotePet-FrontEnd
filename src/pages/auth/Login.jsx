@@ -51,13 +51,13 @@ const Login = () => {
         <Grid2 container sx={{
             height: '100vh',
             width: '100vw',
+            overflow: 'hidden'
         }}>
-            <Grid2 item xs={12} md={6} sx={{ height: '100vh', width: '40vw', background: '#7E579D', display: { xs: 'none', sm: 'flex' } }}>
+            <Grid2 item xs={12} md={6} sx={{ height: 'auto', overflow: 'hidden', width: '40vw', background: '#7E579D', display: { xs: 'none', sm: 'flex' } }}>
                 <Box sx={{
-                    height: '95%',
                     width: '100%',
                     display: 'flex',
-                    marginY: '15%',
+                    paddingY: '5%',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -127,21 +127,21 @@ const Login = () => {
                                 maxWidth: '100%',
                                 maxHeight: '100%',
                                 objectFit: 'contain',
-                                zIndex: 1, // Mantém a imagem acima do background
+                                zIndex: 1,
                             }}
                         />
                     </Box>
                 </Box>
             </Grid2>
 
-            <Grid2 item xs={12} md={6} sx={{ height: '100%', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#ffffff' } }}>
+            <Grid2 item xs={12} md={6} sx={{ height: 'auto', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#ffffff' } }}>
                 <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', width: '100%' }}>
                     <Box sx={{ position: 'absolute', width: '100%', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
                         <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
                     </Box>
                 </Box>
                 <Box sx={{
-                    height: '100%',
+                    height: '100vh',
                     width: '100%',
                     display: 'flex',
                     justifyContent: { sm: 'center' },
