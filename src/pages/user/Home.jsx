@@ -32,15 +32,11 @@ const Home = () => {
             const data = await getAnimaisDisponiveis()
             setDataAnimais(data.data);
             setDataPublicacoes(publicacoes.data)
+            const newItemsPerPage = lg ? 3 : md ? 2 : sm ? 1 : 4;
+            setPublicacoes(publicacoes.data.slice(0, newItemsPerPage));
         }
         getDataAnimais();
-        console.log(publicacoes)
-        console.log(location.state)
     }, [])
-
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
-    };
 
     const handlePrev = () => {
         const newNextElement = Math.max(nextElement - itemsPerPage, 0);
@@ -49,6 +45,9 @@ const Home = () => {
     };
 
     const handleNext = () => {
+        if(dataPublicacoes.length < itemsPerPage) {
+            return;
+        }
         const newNextElement = Math.min(nextElement + itemsPerPage, dataAnimais.length - itemsPerPage);
         setNextElement(newNextElement);
         setPublicacoes(dataPublicacoes.slice(newNextElement, newNextElement + itemsPerPage));
@@ -100,7 +99,7 @@ const Home = () => {
                             {/* Seta para voltar */}
                             <ArrowBackIosNewIcon
                                 onClick={handlePrev}
-                                sx={{ height: '100%', color: '#170d1', cursor: 'pointer' }}
+                                sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#efefef', borderRadius: '200px', padding: '5px' }}
                             />
                             {/* Publicações do usuário */}
                             {publicacoes.map((value, index) => (
@@ -111,7 +110,7 @@ const Home = () => {
                             {/* Seta para avançar */}
                             <ArrowForwardIosIcon
                                 onClick={handleNext}
-                                sx={{ height: '100%', color: '#170d1f', cursor: 'pointer' }}
+                                sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#efefef', borderRadius: '200px', padding: '5px' }}
                             />
                         </Box>
                     </>)}

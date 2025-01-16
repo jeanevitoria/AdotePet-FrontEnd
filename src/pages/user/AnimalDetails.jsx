@@ -66,7 +66,7 @@ const AnimalDetails = () => {
                 const response = await getAnimal(id);
                 const data = response.data;
                 setNome(data.nome);
-                setEndereco(data.localizacao);
+                setEndereco(data.localizacaoObject);
                 setRaca(data.raca);
                 setSexo(data.sexo);
                 setVacinado(data.vacinado);
@@ -76,6 +76,7 @@ const AnimalDetails = () => {
                 setIdResponsavel(data.user_id)
                 setDescricao(data.descricao);
                 setFoto(data.foto.toString('base64'));
+                console.log(data)
             } catch (err) {
                 console.log(err)
             }

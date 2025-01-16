@@ -14,16 +14,16 @@ import cachorro2 from '../assets/cachorro2.jpg';
 
 
 
-function ActionAreaCard({descricao, onClick}) {
-    const { nome, raca, sexo, foto, localizacao } = descricao;
+function AnimalCard({descricao, onClick}) {
+    const { nome, raca, sexo, foto, localizacaoObject } = descricao;
     const [fotoBase64, setFotoBase64] = React.useState('');
 
     React.useEffect(() => {
         setFotoBase64(foto.toString('base64'))
     }, [foto])
 
-    const cidade = localizacao?.cidade
-    const estado = localizacao?.estado
+    const cidade = localizacaoObject?.cidade
+    const estado = localizacaoObject?.estado
 
     return (
         <Card onClick={onClick}>
@@ -54,4 +54,4 @@ function ActionAreaCard({descricao, onClick}) {
         </Card>
     );
 }
-export default ActionAreaCard;
+export default AnimalCard;
