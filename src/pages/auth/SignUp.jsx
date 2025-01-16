@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid2, Button, Divider, Typography, Paper } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import bgcadastro from '../../assets/bgcadastro.jpg';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
@@ -158,10 +159,13 @@ const SignUp = () => {
             flexDirection: 'row',
             justifyContent: 'center',
             position: 'relative',
+            backgroundColor: '#7E579D50',
         }}>
             <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
                 <Box sx={{ position: 'absolute', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
-                    <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
+                    <ArrowBackIosNewIcon onClick={() => navigate('/')}
+                        sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#efefef', borderRadius: '200px', padding: '3px' }}
+                    />
                 </Box>
                 <Box sx={{ margin: 'auto', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert)}</Box>
             </Box>
@@ -270,6 +274,19 @@ const SignUp = () => {
                         <Button onClick={handleSignUp} variant="contained" sx={{ alignItems: 'center', justifyContent: 'center', width: '70%', marginBottom: '10px', backgroundColor: '#301F3E' }}>Cadastrar</Button>
                     </Box>
                 </Paper>
+                <Box
+                    component={'img'}
+                    src={bgcadastro}
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        objectFit: 'cover',
+                        width: '100%',
+                        height: '100%',
+                        zIndex: -1
+                    }}
+                />
             </Box>
         </Grid2>
     );

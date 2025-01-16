@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid2, Button, Divider, Typography, Paper } from '@mui/material';
-import logo from '../../assets/logo.png';
+import logoComNome from '../../assets/logoComNome.png';
 import { ActionAlerts } from '../../components/Alert';
-import imgLogin2 from '../../assets/imgLogin2.png';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TextField from '@mui/material/TextField';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import GoogleIcon from '@mui/icons-material/Google';
-import XIcon from '@mui/icons-material/X';
+import loginbackground from '../../assets/loginbackground.jpg'
 import { useNavigate } from 'react-router-dom';
 import logoAdote from '../../assets/logoAdote.png';
 import { loginService } from '../../services/userService';
@@ -45,91 +42,155 @@ const Login = () => {
             width: '100vw',
             overflow: 'hidden'
         }}>
-            <Grid2 item xs={12} md={6} sx={{ height: 'auto', overflow: 'hidden', width: '40vw', background: '#7E579D', display: { xs: 'none', sm: 'flex' } }}>
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    paddingY: '5%',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    {/* Logo */}
-                    <Box sx={{
+            <Grid2
+                item
+                xs={12}
+                md={6}
+                sx={{
+                    height: 'auto',
+                    overflow: 'hidden',
+                    width: '40vw',
+                    background: '#7E579D30',
+                    display: { xs: 'none', sm: 'flex' },
+                    position: 'relative', // Garante o contexto para o absolute
+                }}
+            >
+                {/* Fundo */}
+                <Box
+                    component="img"
+                    src={loginbackground}
+                    sx={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover', // Garante que o fundo cobre todo o espaço
+                        position: 'absolute',
+                        zIndex: -1, // Coloca atrás do conteúdo
+                        top: 0,
+                        left: 0,
+                    }}
+                />
+
+                {/* Conteúdo */}
+                <Box
+                    sx={{
                         width: '100%',
                         display: 'flex',
+                        flexDirection: 'column',
                         justifyContent: 'center',
-                    }}>
-                        <img src={logo} style={{
-                            maxWidth: '20%',
-                            maxHeight: '100%',
-                            objectFit: 'contain'
-                        }} />
+                        alignItems: 'center',
+                        position: 'relative', // Garante que o conteúdo fique acima do fundo
+                        paddingY: '5%',
+                    }}
+                >
+                    {/* Logo */}
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <img
+                            src={logoComNome}
+                            style={{
+                                maxWidth: '20%',
+                                maxHeight: '100%',
+                                objectFit: 'contain',
+                            }}
+                        />
                     </Box>
+
+                    {/* Caixa de texto */}
                     <Box
                         sx={{
                             width: '55%',
                             height: '95%',
                             marginY: '5%',
                             borderTopLeftRadius: {
-                                xs: '20px', // Para telas extra pequenas
-                                sm: '30px', // Para telas pequenas
-                                md: '30px', // Para telas médias
-                                lg: '60px', // Para telas grandes
-                                xl: '100px', // Para telas extra grandes
+                                xs: '20px',
+                                sm: '30px',
+                                md: '30px',
+                                lg: '60px',
+                                xl: '100px',
                             },
                             borderTopRightRadius: {
-                                xs: '20px', // Para telas extra pequenas
-                                sm: '30px', // Para telas pequenas
-                                md: '30px', // Para telas médias
-                                lg: '60px', // Para telas grandes
-                                xl: '100px', // Para telas extra grandes
+                                xs: '20px',
+                                sm: '30px',
+                                md: '30px',
+                                lg: '60px',
+                                xl: '100px',
                             },
                             maxWidth: {
-                                xs: '250px',  // Tamanhos menores para telas pequenas (celulares)
-                                sm: '350px',  // Tamanhos intermediários (tablets)
-                                md: '450px',  // Tamanhos médios (notebooks)
-                                lg: '500px',  // Tamanhos grandes (desktops)
-                                xl: '600px',  // Tamanhos extras (telas maiores que lg)
+                                xs: '250px',
+                                sm: '350px',
+                                md: '450px',
+                                lg: '500px',
+                                xl: '600px',
                             },
                             maxHeight: {
-                                xs: '200px',  // Altura menor para celulares
-                                sm: '300px',  // Altura para tablets
-                                md: '350px',  // Altura para notebooks
-                                lg: '600px',  // Altura para desktops
-                                xl: '1000px',  // Altura extra para telas maiores que lg
+                                xs: '200px',
+                                sm: '300px',
+                                md: '350px',
+                                lg: '600px',
+                                xl: '1000px',
                             },
                             display: 'flex',
                             justifyContent: 'center',
-                            alignItems: 'flex-start', // Alinha ao topo
+                            alignItems: 'flex-start',
                             flexDirection: 'column',
-                            background: 'linear-gradient(to bottom, #bfa9d4 55%, #7E579D 55%)',
+                            position: 'relative', // Garante que fique acima do fundo
                         }}
                     >
                         <Container sx={{ paddingTop: '0%', display: 'flex', flexDirection: 'column' }}>
-                            <Typography variant="body1" sx={{ fontSize: { md: '20px', lg: '30px', xl: '60px' }, fontWeight: '900', color: '#ffffff', fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>AMOR QUE</Typography>
-                            <Typography variant="body1" sx={{ fontSize: { md: '20px', lg: '30px', xl: '60px' }, fontWeight: '900', color: '#301F3E', textAlign: 'center', fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>NÃO</Typography>
-                            <Typography variant="body1" sx={{ fontSize: { md: '20px', lg: '30px', xl: '60px' }, fontWeight: '900', color: '#ffffff', textAlign: 'right', width: '100%', fontFamily: 'Kumbh Sans, Roboto, sans-serif' }}>TEM PREÇO</Typography>
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                                    fontWeight: '900',
+                                    color: '#ffffff',
+                                    fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                                }}
+                            >
+                                AMOR QUE
+                            </Typography>
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                                    fontWeight: '900',
+                                    color: '#301F3E',
+                                    textAlign: 'center',
+                                    fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                                    backgroundColor: '#ffffff',
+                                    marginX: '25%'
+                                }}
+                            >
+                                NÃO
+                            </Typography>
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    fontSize: { md: '20px', lg: '30px', xl: '60px' },
+                                    fontWeight: '900',
+                                    color: '#ffffff',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                                }}
+                            >
+                                TEM PREÇO
+                            </Typography>
                         </Container>
-                        <Box
-                            component="img"
-                            src={imgLogin2}
-                            sx={{
-                                width: '100%',
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                objectFit: 'contain',
-                                zIndex: 1,
-                            }}
-                        />
                     </Box>
                 </Box>
             </Grid2>
 
-            <Grid2 item xs={12} md={6} sx={{ height: 'auto', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#ffffff' } }}>
+            <Grid2 item xs={12} md={6} sx={{ height: 'auto', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { xs: '#dfd5ea', md: '#7E579D100' } }}>
                 <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', width: '100%' }}>
                     <Box sx={{ position: 'absolute', width: '100%', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
-                        <ArrowBackIosNewIcon onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} />
+                        <ArrowBackIosNewIcon onClick={() => navigate('/')}
+                            sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#efefef', borderRadius: '200px', padding: '3px' }}
+                        />
                     </Box>
                 </Box>
                 <Box sx={{
