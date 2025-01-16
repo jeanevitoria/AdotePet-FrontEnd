@@ -318,7 +318,7 @@ const AnimalDetails = () => {
                             Local: {`${endereco.cidade}, ${endereco.estado}`}
                         </Typography>
                         <Typography>
-                            Peso: {peso}
+                            Peso: {peso} kgs
                         </Typography>
                         <Typography>
                             Idade: {idade}
