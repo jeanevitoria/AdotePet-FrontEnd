@@ -14,7 +14,7 @@ import cachorro2 from '../assets/cachorro2.jpg';
 
 
 
-function AnimalCard({descricao, onClick}) {
+function AnimalCard({ descricao, onClick }) {
     const { nome, raca, sexo, foto, localizacaoObject } = descricao;
     const [fotoBase64, setFotoBase64] = React.useState('');
 
@@ -26,32 +26,33 @@ function AnimalCard({descricao, onClick}) {
     const estado = localizacaoObject?.estado
 
     return (
-        <Card onClick={onClick}>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    src={`data:image/jpeg;base64,${fotoBase64}`}
-                    height="140"
-                    alt="Foto do animal"
-                />
-                <CardContent>
-                    <div className='flex flex-row'>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {nome}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {raca}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {sexo}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {cidade}, {estado}
-                        </Typography>
-                    </div>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+        <Card onClick={onClick} sx={{ width: '230px', height: '280px' }}>
+            <CardActionArea sx={{ height: '100%', width: '100%'}}>
+            <CardMedia
+                component="img"
+                src={`data:image/jpeg;base64,${fotoBase64}`}
+                height="140"
+                sx={{ objectFit: 'cover' }}
+                alt="Foto do animal"
+            />
+            <CardContent sx={{ height: 'auto' }}>
+                <div className='flex flex-row'>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {nome}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {raca}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {sexo}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {cidade}, {estado}
+                    </Typography>
+                </div>
+            </CardContent>
+        </CardActionArea>
+        </Card >
     );
 }
 export default AnimalCard;

@@ -18,14 +18,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [alert, setAlert] = useState({ type: 'none', message: '' });
 
-    const providers = [
-        { id: 'github', name: 'GitHub' },
-        { id: 'google', name: 'Google' },
-        { id: 'facebook', name: 'Facebook' },
-        { id: 'twitter', name: 'Twitter' },
-        { id: 'linkedin', name: 'LinkedIn' },
-    ];
-
     const sendData = () => {
         if (!email || !password) {
             setAlert({ type: 'warning', message: 'Informe o e-mail e senha.' })
@@ -195,26 +187,20 @@ const Login = () => {
                                     e.preventDefault()
                                     sendData()
                                 }
-                            }} onChange={(e) => setEmail(e.target.value)} required sx={{ width: '80%', marginBottom: '2%' }} />
+                            }} onChange={(e) => setEmail(e.target.value)} required sx={{ width: '70%', marginBottom: '2%' }} />
                             <TextField size='small' id="senha" label="Senha" onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                     e.preventDefault()
                                     sendData()
                                 }
-                            }} onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '80%' }} />
-                            <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '80%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
+                            }} onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '70%' }} />
+                            <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '70%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
                             <Button variant="contained" onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                     e.preventDefault()
                                     sendData()
                                 }
-                            }} onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '80%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
-                        </Box>
-                        <Divider sx={{ color: '#8e8e8e', marginY: '2%' }}>ou</Divider>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', marginY: '2%', justifyContent: 'center' }} >
-                            <FacebookIcon sx={{ color: '#3C5A9A', border: '1px solid #cccac9', fontSize: 40, borderRadius: '10%' }} />
-                            <GoogleIcon sx={{ color: '#EA4335', border: '1px solid #cccac9', marginX: '10%', fontSize: 40, borderRadius: '10%' }} />
-                            <XIcon sx={{ border: '1px solid #cccac9', fontSize: 40, borderRadius: '10%' }} />
+                            }} onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '70%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
                         </Box>
                     </Paper>
                 </Box>

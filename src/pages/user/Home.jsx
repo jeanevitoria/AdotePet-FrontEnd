@@ -9,6 +9,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Loading from '../../components/Loading';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
@@ -45,7 +46,7 @@ const Home = () => {
     };
 
     const handleNext = () => {
-        if(publicacoes.length <= itemsPerPage) {
+        if (publicacoes.length <= itemsPerPage) {
             return;
         }
         const newNextElement = Math.min(nextElement + itemsPerPage, dataAnimais.length - itemsPerPage);
@@ -114,39 +115,23 @@ const Home = () => {
                             />
                         </Box>
                     </>)}
-                <Box sx={{ display: 'flex', maxWidth: { xs: '100%', md: '85%' }, marginX: 'auto', marginY: '30px' }}>
-                    <Stack spacing={2} sx={{
-                        width: '100%', margin: 'auto'
-                    }}>
-                        <Autocomplete
-                            id="free-solo-demo"
-                            freeSolo
-                            options={[...new Set([...dataAnimais.map((descricao) => descricao.nome), ...dataAnimais.map((descricao) => descricao.raca), ...dataAnimais.map((descricao) => descricao.local)])]}
-                            renderInput={(params) => (
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: sm ? 'column' : 'row',
-                                        justifyContent: 'space-between',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h1"
-                                        sx={{
-                                            fontSize: { xs: '1em', md: '1.5em' },
-                                            fontFamily: 'Kumbh Sans, Roboto, sans-serif',
-                                            textWrap: 'nowrap',
-                                            marginBottom: '10px',
-                                            width: '50%'
-                                        }}>
-                                        ANIMAIS DISPONÍVEIS PARA ADOÇÃO
-                                    </Typography>
-                                </Box>
-                            )}
-                        />
-                    </Stack>
-                </Box>
+                {dataAnimais.length ?
+                    (<Box sx={{ display: 'flex', maxWidth: { xs: '100%', md: '85%' }, marginX: 'auto', marginY: '30px' }}>
+                        <Typography
+                            variant="h1"
+                            sx={{
+                                fontSize: { xs: '1em', md: '1.5em' },
+                                fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                                textWrap: 'nowrap',
+                                marginBottom: '10px',
+                                width: '50%'
+                            }}>
+                            ANIMAIS DISPONÍVEIS PARA ADOÇÃO
+                        </Typography>
+                    </Box>)
+                    :
+                    (<Loading />)
+                }
                 <Grid2 container spacing={3} justifyContent={sm ? 'center' : "space-between"} alignItems="center" sx={{ width: { xs: '100%', md: '85%' }, marginX: 'auto' }}>
                     {dataAnimais.map((value, index) => {
                         return (
