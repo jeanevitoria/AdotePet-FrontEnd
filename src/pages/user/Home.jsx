@@ -45,7 +45,7 @@ const Home = () => {
     };
 
     const handleNext = () => {
-        if(dataPublicacoes.length < itemsPerPage) {
+        if(publicacoes.length <= itemsPerPage) {
             return;
         }
         const newNextElement = Math.min(nextElement + itemsPerPage, dataAnimais.length - itemsPerPage);
