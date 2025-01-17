@@ -101,9 +101,11 @@ const Chat = () => {
 
                 if (chats.length > 0) {
                     chats.forEach((value, index) => {
-                        if (value.user_1._id === responsavelData._id || value.user_2._id === responsavelData._id) {
+                        if (value.user_1 === responsavelData._id || value.user_2 === responsavelData._id) {
                             setSelectedIndex(index);
-                            chatExists(true);
+                            setMensagensChat(chats[index]?.messages || [])
+                            chatExists = true;
+                            console.log("achou o chat")
                         }
                     });
 
