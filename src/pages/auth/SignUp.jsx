@@ -164,7 +164,7 @@ const SignUp = () => {
             <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
                 <Box sx={{ position: 'absolute', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
                     <ArrowBackIosNewIcon onClick={() => navigate('/')}
-                        sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#efefef', borderRadius: '200px', padding: '3px' }}
+                        sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#f2f2f2', borderRadius: '200px', padding: '3px' }}
                     />
                 </Box>
                 <Box sx={{ margin: 'auto', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert)}</Box>
@@ -283,7 +283,7 @@ const SignUp = () => {
                         left: 0,
                         objectFit: 'cover',
                         width: '100%',
-                        height: '100%',
+                        height: 'calc(100vh - 50px)',
                         zIndex: -1
                     }}
                 />
