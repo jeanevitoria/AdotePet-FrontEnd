@@ -254,7 +254,7 @@ const Chat = () => {
                         key={index}
                         nome={item.emissor?.[0]?.nome || "Desconhecido"}
                         mensagem={item.messages[item.messages.length - 1].text}
-                        selected={selectedIndex === index}
+                        selected={selectedIndex === index }
                         onClick={() => {
                             setSelectedIndex(index)
                             setChatsVisible(prev => !prev)
@@ -296,6 +296,18 @@ const Chat = () => {
                             }}>
                                 <Stack direction="row" spacing={2} alignItems="center" // Alinha verticalmente ao centro
                                 >
+                                    <ArrowBackIosNewIcon
+                                        onClick={() => setChatsVisible(true)}
+                                        sx={{
+                                            height: '100%',
+                                            display: { sm: 'none' },
+                                            color: '#170d1f',
+                                            cursor: 'pointer',
+                                            backgroundColor: '#f2f2f2',
+                                            borderRadius: '200px',
+                                            padding: '3px',
+                                        }}
+                                    />
                                     <Avatar>{responsavel.nome[0]}</Avatar>
                                     <Typography
                                         sx={{
@@ -315,7 +327,7 @@ const Chat = () => {
                             <Box ref={chatContainerRef} sx={{
                                 width: '100%',
                                 display: 'flex',
-                                height: '70%',
+                                height: {xs: '75%', sm: '70%'},
                                 flexDirection: 'column',
                                 marginTop: { xs: '60px', sm: '100px' },
                                 overflowY: 'auto',
@@ -345,6 +357,7 @@ const Chat = () => {
                     </Box>
                     <Box sx={{
                         width: '100%',
+                        height: '9%',
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
