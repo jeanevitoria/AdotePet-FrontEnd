@@ -38,7 +38,7 @@ const Login = () => {
 
     return (
         <Grid2 container sx={{
-            height: '100vh',
+            height: '100%',
             width: '100vw',
             overflow: 'hidden'
         }}>
@@ -278,7 +278,7 @@ const Login = () => {
                         src={logoComNome}
                         sx={{
                             display: { xs: 'flex', sm: 'none' },
-                            height: '100px',
+                            height: {xs: '70px', sm: '100px'},
                             justifyContent: 'center',
                             alignItems: 'center',
                             top: 20,
@@ -292,7 +292,7 @@ const Login = () => {
                             width: { xs: '80vw', sm: '35vw' },
                             paddingTop: '15px',
                             top: '50%',
-                            transform: {xs: 'translateY(-35%)', sm: 'translateY(-50%)'},
+                            transform: 'translateY(-50%)',
                             position: 'absolute'
                         }}
                     >

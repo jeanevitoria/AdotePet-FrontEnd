@@ -4,12 +4,27 @@ import Sider from './Sider';
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
+import { useEffect } from 'react';
 
 const Layout = ({ children }) => {
     const { sm } = useWindowSize();
     const [siderDisabled, setSiderDisabled] = useState(true);
     const location = useLocation();
     const { loggedOut } = location.state || {}
+    const [vh, setVh] = useState(window.innerHeight * 0.01);
+
+    useEffect(() => {
+        const updateVh = () => {
+            setVh(window.innerHeight * 0.01); // Atualiza o valor de vh
+        };
+
+        updateVh();
+        window.addEventListener('resize', updateVh);
+
+        return () => {
+            window.removeEventListener('resize', updateVh);
+        };
+    }, []);
 
     // Rotas que escondem o Sider ou Header
     const hideRoutes = ['/auth/cadastro', '/', '/auth/login', '/auth/recuperar-senha', '/auth/redefinir-senha'];
@@ -20,7 +35,7 @@ const Layout = ({ children }) => {
     const shouldShowHeader = !(location.pathname === '/auth/login');
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: `calc(${vh * 100}px)` }}>
             {/* Header */}
             {shouldShowHeader && (
                 <Box sx={{ position: 'fixed', marginRight: siderDisabled ? '3vw' : '10vw', top: 0, left: 0, width: '100%', zIndex: 1000 }}>
@@ -54,7 +69,7 @@ const Layout = ({ children }) => {
                 <Box
                     sx={{
                         flex: 1,
-                        height: shouldShowHeader ? 'calc(100vh - 50px)' : '100vh',
+                        height: shouldShowHeader ? `calc(${vh * 100}px - 50px)` : `calc(${vh * 100}px)`,
                         overflowY: 'auto',
                         width: shouldShowSider
                             ? siderDisabled
