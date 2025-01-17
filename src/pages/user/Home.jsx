@@ -46,13 +46,14 @@ const Home = () => {
     };
 
     const handleNext = () => {
-        if (publicacoes.length <= itemsPerPage) {
+        if (nextElement + itemsPerPage >= dataPublicacoes.length) {
             return;
         }
-        const newNextElement = Math.min(nextElement + itemsPerPage, dataAnimais.length - itemsPerPage);
+        const newNextElement = nextElement + itemsPerPage;
         setNextElement(newNextElement);
         setPublicacoes(dataPublicacoes.slice(newNextElement, newNextElement + itemsPerPage));
     };
+
 
     useEffect(() => {
         const newItemsPerPage = lg ? 3 : md ? 2 : sm ? 1 : 4;
