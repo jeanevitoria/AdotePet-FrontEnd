@@ -153,7 +153,7 @@ const SignUp = () => {
 
     return (
         <Grid2 container sx={{
-            height: 'calc(100vh - 50px)',
+            height: '100%',
             width: '100vw',
             display: 'flex',
             flexDirection: 'row',
@@ -162,7 +162,7 @@ const SignUp = () => {
             overflow: 'hidden',
             backgroundColor: '#7E579D50',
         }}>
-            <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
+            <Box sx={{ zIndex: 1, position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
                 <Box sx={{ position: 'absolute', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
                     <ArrowBackIosNewIcon onClick={() => navigate('/')}
                         sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#f2f2f2', borderRadius: '200px', padding: '3px' }}
