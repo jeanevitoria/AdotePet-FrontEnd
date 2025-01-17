@@ -25,11 +25,12 @@ const PasswordRecovery = () => {
 
     return (
         <Grid2 container sx={{
-            height: 'calc(100vh - 50px)', // Preenche toda a altura da tela
+            height: '100%',
             width: '100vw',
             backgroundColor: '#e2e2e2',
             display: 'flex',
             position: 'relative',
+            overflow: 'hidden',
             flexDirection: 'column',
         }}>
             <Box sx={{
