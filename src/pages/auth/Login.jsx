@@ -39,7 +39,7 @@ const Login = () => {
     return (
         <Grid2 container sx={{
             height: '100%',
-            width: '100vw',
+            width: '100%',
             overflow: 'hidden'
         }}>
             <Grid2
@@ -49,7 +49,7 @@ const Login = () => {
                 sx={{
                     height: 'auto',
                     overflow: 'hidden',
-                    width: '40vw',
+                    width: '40%',
                     background: '#7E579D30',
                     display: { xs: 'none', sm: 'flex' },
                     position: 'relative',
@@ -190,9 +190,9 @@ const Login = () => {
                 xs={12}
                 md={6}
                 sx={{
-                    height: '100vh', // Garantir altura máxima do viewport
-                    overflowY: 'auto', // Adicionar rolagem se o conteúdo exceder
-                    width: { xs: '100vw', sm: '60vw', md: '60vw' },
+                    height: '100%', // Garantir altura máxima do viewport
+                    overflow: 'hidden', // Adicionar rolagem se o conteúdo exceder
+                    width: { xs: '100%', sm: '60%', md: '60%' },
                     backgroundColor: { sm: '#ffffff' },
                     display: 'flex',
                     alignContent: 'center',
