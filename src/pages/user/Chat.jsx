@@ -104,6 +104,7 @@ const Chat = () => {
                         if (value.user_1 === responsavelData._id || value.user_2 === responsavelData._id) {
                             setSelectedIndex(index);
                             setMensagensChat(chats[index]?.messages || [])
+                            setChatsVisible(false);
                             chatExists = true;
                         }
                     });
