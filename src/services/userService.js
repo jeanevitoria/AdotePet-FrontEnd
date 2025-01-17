@@ -7,7 +7,7 @@ export const cadastroService = async (data) => {
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }
 
 export const loginService = async (data) => {
@@ -20,7 +20,8 @@ export const loginService = async (data) => {
             console.log(result)
             return result
         })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { 
+            throw new Error(err.response.data) })
 }
 
 export const getResponsavelService = async (data) => {
@@ -35,7 +36,7 @@ export const getResponsavelService = async (data) => {
             return result;
         })
         .catch((err) => {
-            throw new Error(err.message);
+            throw new Error(err.response.data);
         });
 }
 
@@ -52,7 +53,7 @@ export const getUserService = async () => {
             return result;
         })
         .catch((err) => {
-            throw new Error(err.message);
+            throw new Error(err.response.data);
         });
 }
 
@@ -66,7 +67,7 @@ export const compararUsers = async (id) => {
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }
 
 export const deletarPublicacao = async (idAnimal) => {
@@ -79,7 +80,7 @@ export const deletarPublicacao = async (idAnimal) => {
         data: { idAnimal }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }
 
 export const atualizarPerfilService = async (data) => {
@@ -91,7 +92,7 @@ export const atualizarPerfilService = async (data) => {
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }
 
 export const recuperarSenha = async (email) => {
@@ -101,7 +102,7 @@ export const recuperarSenha = async (email) => {
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }
 
 export const redefinirSenha = async (token, senha) => {
@@ -111,5 +112,5 @@ export const redefinirSenha = async (token, senha) => {
         }
     })
         .then((result) => { return result })
-        .catch((err) => { throw new Error(err.message) })
+        .catch((err) => { throw new Error(err.response.data) })
 }  

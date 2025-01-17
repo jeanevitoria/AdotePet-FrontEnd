@@ -25,10 +25,22 @@ const Login = () => {
 
         loginService(data)
             .then((result) => {
-                localStorage.setItem('token', result.data.token)
-                navigate('/home')
+                console.log(result)
+
+                if (result.data.token) {
+                    localStorage.setItem('token', result.data.token)
+                    navigate('/home')
+                } else {
+                    console.log(result)
+                    setAlert({ type: 'error', message: result.data.message });
+                    setTimeout(() => {
+                        setAlert({ type: 'none', message: '' })
+                    }, 3000);
+                }
             })
             .catch((error) => {
+                console.log(error.message)
+
                 setAlert({ type: 'error', message: error.message });
                 setTimeout(() => {
                     setAlert({ type: 'none', message: '' })
@@ -271,17 +283,18 @@ const Login = () => {
                             position: 'relative'
                         }}
                     >
-                        <ActionAlerts alert={alert} setAlert={setAlert} />
+                        <ActionAlerts alert={alert} setAlert={setAlert} sx={{ zIndex: 1 }} />
                     </Box>
                     <Box
                         component={'img'}
                         src={logoComNome}
                         sx={{
                             display: { xs: 'flex', sm: 'none' },
-                            height: {xs: '70px', sm: '100px'},
+                            height: { xs: '70px', sm: '100px' },
                             justifyContent: 'center',
                             alignItems: 'center',
                             top: 20,
+                            zIndex: -1,
                             position: 'absolute'
                         }}
                     />
