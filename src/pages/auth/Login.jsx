@@ -185,14 +185,56 @@ const Login = () => {
                 </Box>
             </Grid2>
 
-            <Grid2 item xs={12} md={6} sx={{ height: 'auto', width: { xs: '100vw', sm: '60vw', md: '60vw' }, backgroundColor: { sm: '#ffffff' } }}>
-                <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', width: '100%' }}>
-                    <Box sx={{ position: 'absolute', width: '100%', marginLeft: '2%', color: '#301F3E', marginTop: '2%', justifyContent: 'flex-start', display: 'flex', height: 'auto' }}>
-                        <ArrowBackIosNewIcon onClick={() => navigate('/')}
-                            sx={{ height: '100%', color: '#170d1f', cursor: 'pointer', backgroundColor: '#f2f2f2', borderRadius: '200px', padding: '3px' }}
+            <Grid2
+                item
+                xs={12}
+                md={6}
+                sx={{
+                    height: '100vh', // Garantir altura máxima do viewport
+                    overflowY: 'auto', // Adicionar rolagem se o conteúdo exceder
+                    width: { xs: '100vw', sm: '60vw', md: '60vw' },
+                    backgroundColor: { sm: '#ffffff' },
+                    display: 'flex',
+                    alignContent: 'center',
+                    flexDirection: 'column',
+                }}
+            >
+                <Box
+                    sx={{
+                        position: 'relative',
+                        left: 0,
+                        top: 0,
+                        marginY: '5px',
+                        display: 'flex',
+                        width: '100%',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            width: '100%',
+                            marginLeft: '2%',
+                            color: '#301F3E',
+                            marginTop: '2%',
+                            justifyContent: 'flex-start',
+                            display: 'flex',
+                            height: 'auto',
+                        }}
+                    >
+                        <ArrowBackIosNewIcon
+                            onClick={() => navigate('/')}
+                            sx={{
+                                height: '100%',
+                                color: '#170d1f',
+                                cursor: 'pointer',
+                                backgroundColor: '#f2f2f2',
+                                borderRadius: '200px',
+                                padding: '3px',
+                            }}
                         />
                     </Box>
                 </Box>
+
                 {/* Fundo */}
                 <Box
                     component="img"
@@ -208,77 +250,179 @@ const Login = () => {
                         left: 0,
                     }}
                 />
-                <Box sx={{
-                    height: '100vh',
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: { sm: 'center' },
-                    alignContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', position: 'fixed', height: '100%', alignContent: 'center', marginTop: { xs: '2%', sm: '5%' } }}><ActionAlerts alert={alert} setAlert={setAlert} /></Box>
+
+                <Box
+                    sx={{
+                        flex: 1, // Permitir que o conteúdo se ajuste dentro da altura de 100vh
+                        display: 'flex',
+                        justifyContent: { sm: 'center' },
+                        alignContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            position: 'fixed',
+                            height: '100%',
+                            alignContent: 'center',
+                            position: 'relative'
+                        }}
+                    >
+                        <ActionAlerts alert={alert} setAlert={setAlert} />
+                    </Box>
                     <Box
                         component={'img'}
                         src={logoComNome}
                         sx={{
                             display: { xs: 'flex', sm: 'none' },
-                            top: '50%',
-                            left: '50%',
                             height: '100px',
                             justifyContent: 'center',
-                            alignItems: 'center'
-                        }}/>
-                    <Paper elevation={3} sx={{ height: 'auto', width: { xs: '90%', md: '50%' }, margin: 'auto', paddingTop: '15px' }}>
-                        <Box sx={{ paddingTop: { xs: '0%', md: '7.5%' }, textAlign: 'center' }}>
-                            <Typography variant="body1" sx={{
-                                fontSize: { xs: '20px', md: '20px', lg: '30px', xl: '60px' },
+                            alignItems: 'center',
+                            top: 20,
+                            position: 'absolute'
+                        }}
+                    />
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            height: 'auto',
+                            width: { xs: '80vw', sm: '35vw' },
+                            paddingTop: '15px',
+                            top: '50%',
+                            transform: {xs: 'translateY(-35%)', sm: 'translateY(-50%)'},
+                            position: 'absolute'
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                paddingTop: { xs: '0%', md: '7.5%' },
                                 textAlign: 'center',
-                                fontWeight: '900',
-                                color: '#301F3E',
-                                marginBottom: '2.5%',
-                                width: '100%',
-                                fontFamily: 'Kumbh Sans, Roboto, sans-serif'
-                            }}>
+                            }}
+                        >
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    fontSize: { xs: '20px', md: '20px', lg: '30px', xl: '60px' },
+                                    textAlign: 'center',
+                                    fontWeight: '900',
+                                    color: '#301F3E',
+                                    marginBottom: '2.5%',
+                                    width: '100%',
+                                    fontFamily: 'Kumbh Sans, Roboto, sans-serif',
+                                }}
+                            >
                                 LOGIN
                             </Typography>
-                            <Box sx={{
-                                width: '100%', marginY: '2%', display: { sx: 'none', md: 'flex' }, justifyContent: 'center'
-                            }}>
-                                <Typography variant='caption' sx={{ display: 'inline-block', marginRight: '2px' }}>
+                            <Box
+                                sx={{
+                                    width: '100%',
+                                    marginY: '2%',
+                                    display: { sx: 'none', md: 'flex' },
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <Typography
+                                    variant="caption"
+                                    sx={{ display: 'inline-block', marginRight: '2px' }}
+                                >
                                     Não possui uma conta?
                                 </Typography>
                                 <br />
-                                <Typography variant="caption" sx={{ display: 'inline-block', color: '#13AAFF', cursor: 'pointer' }} onClick={() => navigate('/auth/cadastro')}>
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        display: 'inline-block',
+                                        color: '#13AAFF',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={() => navigate('/auth/cadastro')}
+                                >
                                     Cadastre-se aqui
                                 </Typography>
                             </Box>
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', marginX: 'auto', marginY: '5%' }}>
-                            <TextField size='small' id="email" label="E-mail" onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault()
-                                    sendData()
-                                }
-                            }} onChange={(e) => setEmail(e.target.value)} required sx={{ width: '70%', marginBottom: '2%' }} />
-                            <TextField size='small' id="senha" label="Senha" onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault()
-                                    sendData()
-                                }
-                            }} onChange={(e) => setPassword(e.target.value)} type="password" sx={{ width: '70%' }} />
-                            <Typography variant="subtitle2" sx={{ display: 'inline-block', color: '#13AAFF', letterSpacing: -1, textAlign: 'end', width: '70%', cursor: 'pointer' }} onClick={() => navigate('/auth/recuperar-senha')}>Esqueceu sua senha?</Typography>
-                            <Button variant="contained" onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault()
-                                    sendData()
-                                }
-                            }} onClick={sendData} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30px', width: '70%', marginX: 'auto', marginY: '2%', backgroundColor: '#301F3E' }}>Entrar</Button>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '100%',
+                                marginX: 'auto',
+                                marginY: '5%',
+                            }}
+                        >
+                            <TextField
+                                size="small"
+                                id="email"
+                                label="E-mail"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        sendData();
+                                    }
+                                }}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                sx={{ width: '70%', marginBottom: '2%' }}
+                            />
+                            <TextField
+                                size="small"
+                                id="senha"
+                                label="Senha"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        sendData();
+                                    }
+                                }}
+                                onChange={(e) => setPassword(e.target.value)}
+                                type="password"
+                                sx={{ width: '70%' }}
+                            />
+                            <Typography
+                                variant="subtitle2"
+                                sx={{
+                                    display: 'inline-block',
+                                    color: '#13AAFF',
+                                    letterSpacing: -1,
+                                    textAlign: 'end',
+                                    width: '70%',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={() => navigate('/auth/recuperar-senha')}
+                            >
+                                Esqueceu sua senha?
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        sendData();
+                                    }
+                                }}
+                                onClick={sendData}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: '30px',
+                                    width: '70%',
+                                    marginX: 'auto',
+                                    marginY: '2%',
+                                    backgroundColor: '#301F3E',
+                                }}
+                            >
+                                Entrar
+                            </Button>
                         </Box>
                     </Paper>
                 </Box>
             </Grid2>
-
         </Grid2 >
     );
 }
