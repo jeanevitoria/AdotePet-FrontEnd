@@ -105,7 +105,6 @@ const Chat = () => {
                             setSelectedIndex(index);
                             setMensagensChat(chats[index]?.messages || [])
                             chatExists = true;
-                            console.log("achou o chat")
                         }
                     });
 
