@@ -159,6 +159,7 @@ const SignUp = () => {
             flexDirection: 'row',
             justifyContent: 'center',
             position: 'relative',
+            overflow: 'hidden',
             backgroundColor: '#7E579D50',
         }}>
             <Box sx={{ position: 'relative', left: 0, top: 0, marginY: '5px', display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, width: '100%' }}>
@@ -169,16 +170,38 @@ const SignUp = () => {
                 </Box>
                 <Box sx={{ margin: 'auto', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>{ActionAlerts(alert)}</Box>
             </Box>
+            <Box
+                component={'img'}
+                src={bgcadastro}
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: -1
+                }}
+            />
             <Box sx={{
                 width: '100%',
-                marginY: '5px',
+                height: '100%',
                 justifyContent: 'center',
                 alignContent: 'center',
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
+                position: 'relative',
             }}>
-                <Paper elevation={2} sx={{ margin: 'auto', width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' }, display: 'flex', flexDirection: 'column' }}>
+                <Paper elevation={2}
+                    sx={{
+                        position: 'absolute',
+                        top: '25%',
+                        transform: 'translateY(-25%)',
+                        width: { sx: '100%', sm: '80%', md: '70%', lg: '40%' },
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
                     <Box sx={{ textAlign: 'center', margin: '5%' }}>
                         <Typography variant="body1" sx={{
                             fontSize: { xs: '23px', md: '30px', lg: '30px', xl: '60px' },
@@ -274,19 +297,6 @@ const SignUp = () => {
                         <Button onClick={handleSignUp} variant="contained" sx={{ alignItems: 'center', justifyContent: 'center', width: '70%', marginBottom: '10px', backgroundColor: '#301F3E' }}>Cadastrar</Button>
                     </Box>
                 </Paper>
-                <Box
-                    component={'img'}
-                    src={bgcadastro}
-                    sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: 'calc(100vh - 50px)',
-                        zIndex: -1
-                    }}
-                />
             </Box>
         </Grid2>
     );
