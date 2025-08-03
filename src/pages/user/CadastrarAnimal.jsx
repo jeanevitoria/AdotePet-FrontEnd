@@ -145,9 +145,9 @@ const CadastrarAnimal = () => {
             alignItems: 'center',
             marginY: { xs: '0%', md: '1%' },
         }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', position: 'fixed', top:0, alignContent: 'center', marginTop: { xs: '2%', sm: '5%' } }}><ActionAlerts alert={alert} setAlert={setAlert} /></Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, alignContent: 'center', marginTop: { xs: '2%', sm: '5%' } }}><ActionAlerts alert={alert} setAlert={setAlert} /></Box>
             {alertVisible && (<Box sx={{ position: 'fixed', zIndex: 1000, justifySelf: 'center', marginTop: '50%', width: '100%', display: alert.type != 'none' ? 'flex' : 'none' }}>
-                {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible} id_animal={idAnimal} sx={{ zIndex: 1 }}/>}
+                {< AlertDialog alertVisible={alertVisible} setAlertVisible={setAlertVisible} id_animal={idAnimal} sx={{ zIndex: 1 }} />}
             </Box>
             )}
             <Paper elevation={3} sx={{ width: { xs: '100%', sm: '80%', md: '70%', lg: '50%' }, display: 'flex', flexDirection: 'column', padding: '16px' }}>
@@ -320,9 +320,9 @@ const CadastrarAnimal = () => {
                             Enviar foto
                             <VisuallyHiddenInput
                                 type="file"
-                                onChange={(event) => {                                    
-                                    const filesArray = Array.from(event.target.files);
-                                    setFile(filesArray);
+                                onChange={(event) => {
+                                    const prevFiles = prev || [];
+                                    return [...prevFiles, newFile];
                                 }}
                             />
                         </Button>
